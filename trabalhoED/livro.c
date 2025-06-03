@@ -1,8 +1,51 @@
-#include <stdio.h>
+//
+// Autoria de Marina Bragatto e Thais Brandao
+//
+// Realizado dia 02/06/2025
+//
 
-int main(){
-    int teste2 = 4;
-    if(teste2 == 4){
-        printf("certo!");
+#include "livro.h"
+
+typedef struct livro Livro;
+
+struct livro{
+    int id;
+    char* titulo;
+    char* autor;
+    char* genero;
+    int ano;
+};
+
+Livro* criaLivro(int idLivro, char* tituloLivro, char* autorLivro, char* generoLivro, int anoLivro){
+    Livro* livro = malloc(sizeof(struct livro));
+    if(livro == NULL){
+        printf("Erro ao alocar memoria!\n");
+        exit(1);
+    }
+
+    livro->id = idLivro;
+    livro->titulo = strdup(tituloLivro);
+    livro->autor = strdup(autorLivro);
+    livro->genero = strdup(generoLivro);
+    livro->ano = anoLivro;
+
+    return livro;
+}
+
+int retornaIdLivro(Livro* livro){
+    return livro->id;
+}
+
+void imprimeNomeLivro(Livro* livro){
+    printf(" \"%s\" ", livro->titulo);
+    // tenho que imprimir no arquivo
+}
+
+void liberaLivro(Livro* livro){
+    if(livro != NULL){
+        if(livro->titulo != NULL) free(livro->titulo);
+        if(livro->autor != NULL) free(livro->autor);
+        if(livro->genero != NULL) free(livro->genero);
+        free(livro);
     }
 }

@@ -1,9 +1,7 @@
-//oioioio
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-int main(){
-    int teste = 2;
-    if(teste == 2){
-        printf("teste");
-    }
+int main(int argc, char *argv[]) {  
+    return 0;
 }
