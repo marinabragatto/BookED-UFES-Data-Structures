@@ -32,8 +32,21 @@ Livro* criaLivro(int idLivro, char* tituloLivro, char* autorLivro, char* generoL
     return livro;
 }
 
+int comparaId(Livro* livro, int id){
+    return (retornaIdLivro(livro) == id);
+}
+
 int retornaIdLivro(Livro* livro){
     return livro->id;
+}
+
+void imprimeLivro(Livro* livro){
+    printf("\nId: %d\n", livro->id);
+    printf("Titulo:");
+    imprimeNomeLivro(livro);
+    printf("\nAutor: %s\n", livro->autor);
+    printf("Genero: %s\n", livro->genero);
+    printf("Ano: %d", livro->ano);
 }
 
 void imprimeNomeLivro(Livro* livro){

@@ -21,6 +21,14 @@ typedef struct livro Livro;
  */
 Livro* criaLivro(int idLivro, char* tituloLivro, char* autorLivro, char* generoLivro, int anoLivro);
 
+/**Compara se um id pertence a um livro
+ * inputs: livro e id 
+ * output: 1 se o id pertence ao livro, 0, caso contrario
+ * pre-condicao: livro passado como parametro deve existir
+ * pos-condicao: deve retornar um inteiro
+ */
+int comparaId(Livro* livro, int id);
+
 /**Retorna o id do livro passado como parametro
  * inputs: livro
  * output: um inteiro representando o id do livro 
@@ -28,6 +36,9 @@ Livro* criaLivro(int idLivro, char* tituloLivro, char* autorLivro, char* generoL
  * pos-condicao: deve retornar um inteiro
  */
 int retornaIdLivro(Livro* livro);
+
+//imprime todas as informacoes de um livro (nao sera utilizada)
+void imprimeLivro(Livro* livro);
 
 /**Imprime o nome do livro passado como parametro
  * inputs: livro
