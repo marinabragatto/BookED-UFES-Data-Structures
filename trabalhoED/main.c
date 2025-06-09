@@ -31,5 +31,6 @@ void testaFuncionalidadesListaLivros(){
 
 void testaFuncionalidadesListaLeitores(){
     ListaLeitores * lista = leArquivoLeitores();
-
+    imprimeLeitoresDaLista(lista);
+    liberaListaLeitores(lista);
 }

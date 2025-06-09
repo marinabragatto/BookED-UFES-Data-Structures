@@ -62,4 +62,13 @@ void imprimeLivrosDaLista(ListaLivros* lista);
  */
 void liberaListaLivros(ListaLivros* lista);
 
+
+/**Libera a listaLivros passada como parametro, mas não libera o Livro em si
+ * inputs: listaLivros
+ * output: nenhum 
+ * pre-condicao: listaLivros passada como parametro deve existir
+ * pos-condicao: tipo listaLivros deve ser liberada
+ */
+void liberaListaLivrosParcialmente(ListaLivros* lista);
+
 #endif

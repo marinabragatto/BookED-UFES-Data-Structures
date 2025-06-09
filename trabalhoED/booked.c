@@ -1,1 +1,6 @@
-//oi iiii eita vc ve oq eu escrevo na hora?
+#include "booked.h"
+
+struct booked{
+    ListaLeitores * leitores; // Todos os leitores da plataforma
+    ListaLivros * livros; // Todos os livros da plataforma
+};

@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e  # interrompe se der erro
+set -x  # mostra os comandos executados
+
+gcc -o prog *.c
+valgrind ./prog > saidas/saida1.txt

@@ -123,4 +123,18 @@ void liberaListaLivros(ListaLivros* lista){
     free(lista);
 }
 
+void liberaListaLivrosParcialmente(ListaLivros* lista){
+    Celula* atual = lista->prim;
+    Celula* seguinte;
+
+    while (atual != NULL) {
+        seguinte = atual->prox;
+        //liberaLivro(atual->livro); Não Libera o Livro em si
+        free(atual);
+        atual = seguinte;
+    }
+
+    free(lista);
+}
+
 
