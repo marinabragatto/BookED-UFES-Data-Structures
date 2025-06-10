@@ -19,6 +19,8 @@ struct listaLivros{
     Celula* ult;
 };
 
+
+
 //So um teste de como eu leria cada um dos livros e colocaria eles na lista de livros
 ListaLivros* leArquivoLivros(){
     ListaLivros* lista = criaListaLivros(); //cria a lista de livros
@@ -26,7 +28,7 @@ ListaLivros* leArquivoLivros(){
     //abrindo o arquivo pra leitura
     FILE* livrosArq;
     char lerlivro[1000];
-    sprintf(lerlivro, "testes/test1-20250602T172935Z-1-001/test1/livros.txt"); //aqui eh preciso pensar como nos vamos chegar ate o livros.txt de cada caso de teste
+    sprintf(lerlivro, "testes/test0/test0/livros.txt"); //aqui eh preciso pensar como nos vamos chegar ate o livros.txt de cada caso de teste
 
     livrosArq = fopen(lerlivro, "r");
     if (livrosArq == NULL) {
@@ -34,29 +36,25 @@ ListaLivros* leArquivoLivros(){
         exit(1);
     }
 
-    int primeiraLinha = 0;
+    fscanf(livrosArq,"%*[^\n]\n"); // Descarta o cabeçalho
+
     while(1){
-        if(primeiraLinha == 0){
-            fscanf(livrosArq, "%*[^;];%*[^;];%*[^;];%*[^;];%*[^\n]\n"); //joga fora o cabecalho
-            primeiraLinha++;
-        }
-        else{
-            char titulo[100], autor[100], genero[100];
-            int id, ano;
-            
-            int resultado = fscanf(livrosArq, "%d;%[^;];%[^;];%[^;];%d\n", &id, titulo, autor, genero, &ano); //da pra ler isso de forma mais eficiente tbm
-            if (resultado != 5) break;
+        char titulo[100], autor[100], genero[100];
+        int id, ano;
+        
+        int resultado = fscanf(livrosArq, "%d;%[^;];%[^;];%[^;];%d\n", &id, titulo, autor, genero, &ano); //da pra ler isso de forma mais eficiente tbm
+        if (resultado != 5) break;
 
-            Livro* novoLivro = criaLivro(id, titulo, autor, genero, ano);
-            insereLivroNoFimDaLista(lista, novoLivro);
-        }
-
+        Livro* novoLivro = criaLivro(id, titulo, autor, genero, ano);
+        insereLivroNoFimDaLista(lista, novoLivro);
     }
 
     fclose(livrosArq);
 
     return lista;
 }
+
+
 
 ListaLivros* criaListaLivros(){
     ListaLivros* lista = malloc(sizeof(struct listaLivros));
@@ -70,6 +68,8 @@ ListaLivros* criaListaLivros(){
 
     return lista;
 }
+
+
 
 void insereLivroNoFimDaLista(ListaLivros* lista, Livro* livroNovo){
     Celula* nova = malloc(sizeof(struct celula));
@@ -93,6 +93,8 @@ void insereLivroNoFimDaLista(ListaLivros* lista, Livro* livroNovo){
     }
 }
 
+
+
 Livro* retornaLivroComMesmoId(ListaLivros* lista, int id){
     Celula* aux;
     for(aux = lista->prim; aux != NULL; aux = aux->prox){
@@ -102,12 +104,17 @@ Livro* retornaLivroComMesmoId(ListaLivros* lista, int id){
     return NULL; //caso o id nao pertenca a nenhum livro
 }
 
+
+
 void imprimeLivrosDaLista(ListaLivros* lista){
     Celula* aux;
     for(aux = lista->prim; aux != NULL; aux = aux->prox){
-        imprimeLivro(aux->livro);
+        //imprimeLivro(aux->livro);
+        imprimeNomeLivro(aux->livro);
     }
 }
+
+
 
 void liberaListaLivros(ListaLivros* lista){
     Celula* atual = lista->prim;
@@ -123,13 +130,15 @@ void liberaListaLivros(ListaLivros* lista){
     free(lista);
 }
 
+
+
 void liberaListaLivrosParcialmente(ListaLivros* lista){
     Celula* atual = lista->prim;
     Celula* seguinte;
 
     while (atual != NULL) {
         seguinte = atual->prox;
-        //liberaLivro(atual->livro); Não Libera o Livro em si
+        //liberaLivro(atual->livro); //Não Libera o Livro em si
         free(atual);
         atual = seguinte;
     }

@@ -14,6 +14,7 @@
 #define listaLeitores_h
 
 #include "leitor.h"
+#include "livro.h"
 
 // Tipo opaco ListaLeitores.
 typedef struct listaLeitores ListaLeitores;
@@ -86,5 +87,20 @@ void liberaListaLeitoresParcialmente(ListaLeitores * lista);
  * @pre lista != NULL
  */
 void imprimeLeitoresDaLista(ListaLeitores * lista);
+
+
+/**
+ * @brief Funcao que navega pela lista de leitores ate encontrar o leitor ao qual o id passado como parametro pertence e adiciona um livro a lista especificada desse leitor.
+ *
+ * @param leitores Ponteiro para lista de leitores.
+ * @param livro Ponteiro para o livro.
+ * @param idLeitor inteiro que identifica o id do leitor.
+ * @param idLivro inteiro que identifica o id do livro.
+ * @param idLista inteiro que identifica se eh lista de lidos ou de desejados.
+ * 
+ * @pre lista de livros existir, livro != NULL
+ * @post retorna a lista de leitores atualizada
+ */
+ListaLeitores* AdicionaLivroListaLeitor(ListaLeitores* leitores, Livro* livro, int idLeitor, int idLivro, int idLista);
 
 #endif

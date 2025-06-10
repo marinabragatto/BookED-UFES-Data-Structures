@@ -101,6 +101,7 @@ Afinidades: Alice, Clara
     
     printf("Leitor: %s\n", leitor->nome);
     printf("Lidos: ");
+    imprimeLivrosDaLista(leitor->lidos);
     // função Thais de imprimir os livros
     printf("\n");
     printf("Recomendacoes: ");
@@ -138,5 +139,20 @@ void liberaleitor(Leitor* leitor){
             liberaListaLivrosParcialmente(leitor->recomendacoes);
         }
         free(leitor);
+    }
+}
+
+
+void insereLivroNaListaLeitor(Leitor* leitor, Livro* livro, int lista){
+    switch (lista){
+    case LIDOS:
+        insereLivroNoFimDaLista(leitor->lidos, livro);
+        break;
+    
+    case DESEJADOS:
+        break;
+
+    default:
+        break;
     }
 }

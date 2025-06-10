@@ -15,6 +15,7 @@
 #define leitor_h
 
 #include "listaLivros.h"
+#include "livro.h"
 
 /// Tipo opaco Leitor.
 typedef struct leitor Leitor;
@@ -80,5 +81,17 @@ void imprimeleitor(Leitor * leitor);
  */
 void liberaleitor(Leitor* leitor);
 
+
+/**
+ * @brief Insere um livro em uma lista especifica do leitor.
+ *
+ * @param leitor Ponteiro para o leitor.
+ * @param livro Ponteiro para o livro.
+ * @param lista inteiro que identifica se eh lista de lidos ou de desejados.
+ * 
+ * @pre leitor != NULL, livro != NULL
+ * @post Livro inserido na lista especificada.
+ */
+void insereLivroNaListaLeitor(Leitor* leitor, Livro* livro, int lista);
 
 #endif

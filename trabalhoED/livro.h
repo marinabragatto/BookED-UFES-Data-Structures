@@ -7,6 +7,9 @@
 #ifndef livro_h
 #define livro_h
 
+#define LIDOS 1
+#define DESEJADOS 2
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

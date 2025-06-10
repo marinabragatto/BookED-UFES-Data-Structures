@@ -4,6 +4,7 @@
 #include "listaLivros.h"
 #include "listaLeitores.h"
 #include "livro.h"
+#include "booked.h"
 
 //testando se a lista de livros foi alocada e removida corretamente (sucesso (0-0) valgrind deu certo tbm)
 
@@ -13,7 +14,13 @@ void testaFuncionalidadesListaLivros();
 
 int main(int argc, char *argv[]){
     //testaFuncionalidadesListaLivros(); //vai ficar no booked.c
-    testaFuncionalidadesListaLeitores();
+    //testaFuncionalidadesListaLeitores();
+
+    Booked* booked = InicializaBooked();
+    FuncionaBooked(booked);
+    ImprimeBooked(booked);
+    LiberaBooked(booked);
+
     return 0;
 }
 
