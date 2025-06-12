@@ -104,7 +104,11 @@ Afinidades: Alice, Clara
     imprimeLivrosDaLista(leitor->lidos);
     // função Thais de imprimir os livros
     printf("\n");
+    printf("Desejados:");
+    imprimeLivrosDaLista(leitor->desejados);
+    printf("\n");
     printf("Recomendacoes: ");
+    imprimeLivrosDaLista(leitor->recomendacoes);
     // função Thais de imprimir os livros
     printf("\n");
     printf("Afinidades: ");
@@ -143,6 +147,17 @@ void liberaleitor(Leitor* leitor){
 }
 
 
+
+/**
+ * @brief Insere um livro em uma lista especifica do leitor.
+ *
+ * @param leitor Ponteiro para o leitor.
+ * @param livro Ponteiro para o livro.
+ * @param lista inteiro que identifica se eh lista de lidos ou de desejados.
+ * 
+ * @pre leitor != NULL, livro != NULL
+ * @post Livro inserido na lista especificada.
+ */
 void insereLivroNaListaLeitor(Leitor* leitor, Livro* livro, int lista){
     switch (lista){
     case LIDOS:
@@ -150,6 +165,11 @@ void insereLivroNaListaLeitor(Leitor* leitor, Livro* livro, int lista){
         break;
     
     case DESEJADOS:
+        insereLivroNoFimDaLista(leitor->desejados, livro);
+        break;
+
+    case RECOMENDADOS:
+        insereLivroNoFimDaLista(leitor->recomendacoes, livro);
         break;
 
     default:

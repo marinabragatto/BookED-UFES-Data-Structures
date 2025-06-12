@@ -1,6 +1,8 @@
 #include "booked.h"
 
 #define ADICIONA_LIVRO_LIDO 1
+#define ADICIONA_LIVRO_DESEJADO 2
+#define ADICIONA_LIVRO_RECOMENDADO 3
 
 struct booked{
     ListaLeitores * leitores; // Todos os leitores da plataforma
@@ -69,13 +71,16 @@ void LeArquivoComandos(Booked* booked){
 
 void ExecutaComando(Booked* booked, int idComando, int param1, int param2, int param3){
     switch (idComando){
-    case ADICIONA_LIVRO_LIDO:
+        case ADICIONA_LIVRO_LIDO:
+        case ADICIONA_LIVRO_DESEJADO:
         Livro* livro = retornaLivroComMesmoId(booked->livros, param2);
         booked->leitores = AdicionaLivroListaLeitor(booked->leitores, livro, param1, param2, idComando);
         break;
-    
-    default:
-        break;
+        
+        case ADICIONA_LIVRO_RECOMENDADO:
+
+        default:
+            break;
     }
 }
 

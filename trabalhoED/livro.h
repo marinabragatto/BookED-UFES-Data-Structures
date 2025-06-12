@@ -9,6 +9,7 @@
 
 #define LIDOS 1
 #define DESEJADOS 2
+#define RECOMENDADOS 3
 
 #include <stdio.h>
 #include <stdlib.h>
