@@ -15,6 +15,7 @@
 
 #include "leitor.h"
 #include "livro.h"
+#include "funcionalidades.h"
 
 // Tipo opaco ListaLeitores.
 typedef struct listaLeitores ListaLeitores;

@@ -19,7 +19,7 @@ struct leitor {
     ListaLivros * desejados;
     ListaLivros * recomendacoes;
     // ListaLeitores * afinidades;
-    // LISTA AFINIDADES CHAR *
+    char *afinidades[100];
 };
 
 
