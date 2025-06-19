@@ -8,9 +8,9 @@ struct VetorGostos {
     int tamanho; // Esse tamanho é fixo
 };
 
-VetorAfinidades *  CriaVetorGostos(int tamanho){
-    VetorAfinidades * afinidades;
-    afinidades = (VetorAfinidades*)malloc(sizeof(VetorAfinidades));
+VetorGostos *  CriaVetorGostos(int tamanho){
+    VetorGostos * afinidades;
+    afinidades = (VetorGostos*)malloc(sizeof(VetorGostos));
     if(afinidades == NULL){
         printf("Erro ao alocar memória\n");
         exit(1);
@@ -32,7 +32,7 @@ VetorAfinidades *  CriaVetorGostos(int tamanho){
 
 }
 
-VetorAfinidades * AdicionaGostos(VetorAfinidades * afinidades, char * elemento){
+VetorGostos * AdicionaGostos(VetorGostos * afinidades, char * elemento){
 
     for(int i  = 0; i < afinidades->tamanho; i++){
         if(afinidades->vetor[i] == NULL){
@@ -44,7 +44,7 @@ VetorAfinidades * AdicionaGostos(VetorAfinidades * afinidades, char * elemento){
     return afinidades;
 }
 
-VetorAfinidades * LiberaGostos(VetorAfinidades * afinidades){
+VetorGostos * LiberaGostos(VetorGostos * afinidades){
     if(afinidades){
         if(afinidades->vetor){
             for(int i = 0; i < afinidades->tamanho; i++){
@@ -58,7 +58,7 @@ VetorAfinidades * LiberaGostos(VetorAfinidades * afinidades){
     }
 }
 
-void ImprimeGostos(VetorAfinidades * afinidades){
+void ImprimeGostos(VetorGostos * afinidades){
     for(int i = 0; i < afinidades->tamanho; i++){
         printf("%s", afinidades->vetor[i]);
         if(i != afinidades->tamanho -1){

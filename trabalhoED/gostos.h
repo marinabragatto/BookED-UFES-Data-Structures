@@ -3,7 +3,7 @@
 
 #define TAM_AFINIDADES 70
 
-typedef struct VetorGosto VetorGostos;
+typedef struct VetorGostos VetorGostos;
 
 VetorGostos *  CriaVetorGostos(int tamanho);
 VetorGostos * AdicionaGostos(VetorGostos * afinidades, char * elemento);

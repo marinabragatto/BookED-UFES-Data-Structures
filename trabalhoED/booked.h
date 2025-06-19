@@ -12,5 +12,6 @@ void LiberaBooked(Booked* booked);
 void ExecutaComando(Booked* booked, int idComando, int param1, int param2, int param3);
 void AdicionaLivroLidoLeitor(Booked* booked, int idLeitor, int idLivro);
 void ImprimeBooked(Booked* booked);
+void ImprimeComando(Booked* booked, int idComando, int param1, int param2, int param3, FILE* saida);
 
 #endif

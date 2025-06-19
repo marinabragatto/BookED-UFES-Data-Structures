@@ -23,9 +23,11 @@ Booked* InicializaBooked(){
     return booked;
 }
 
-
-
 void FuncionaBooked(Booked* booked){
+    FILE* saida;
+
+    saida = fopen("saidas/saida.txt", "w");
+
     FILE* ComandosArq;
     char leComandos[1000];
     sprintf(leComandos, "testes/test0/test0/comandos.txt");
@@ -45,9 +47,11 @@ void FuncionaBooked(Booked* booked){
         if (resultado != 4) break;
 
         ExecutaComando(booked, idComando, param1, param2, param3);
+        ImprimeComando(booked, idComando, param1, param2, param3, saida);
     }
 
     fclose(ComandosArq);
+    fclose(saida);
 }
 
 
@@ -71,16 +75,48 @@ void ExecutaComando(Booked* booked, int idComando, int param1, int param2, int p
         break;
         
         case ADICIONA_LIVRO_RECOMENDADO:
+        break;
 
         default:
-            break;
+        break;
     }
 }
 
 
 
+void ImprimeComando(Booked* booked, int idComando, int param1, int param2, int param3, FILE* saida){
+    Leitor* leitor1; //retorna o leitor 1 com mesmo id
+    Leitor* leitor2;
+    Livro* livro = retornaLivroComMesmoId(booked->livros, param2);
+
+    switch (idComando){
+        case ADICIONA_LIVRO_LIDO:
+            fprintf(saida, "Fulano leu");
+            imprimeNomeLivro(livro, saida);
+        break;
+    
+        case ADICIONA_LIVRO_DESEJADO:
+            fprintf(saida, "Fulano deseja ler");
+            imprimeNomeLivro(livro, saida);
+        break;
+
+        case ADICIONA_LIVRO_RECOMENDADO:
+            fprintf(saida, "Fulano recomenda");
+            imprimeNomeLivro(livro, saida);
+            fprintf(saida, "para ciclano");
+        break;
+
+        default:
+        break;
+    }
+
+    fprintf(saida, "\n");
+
+}
+
+
 
 void ImprimeBooked(Booked* booked){
     //teste pra ver se o livro foi adicionado a lista de lidos dos leitores
-    imprimeLeitoresDaLista(booked->leitores);
+    imprimeLeitoresDaLista(booked->leitores); //colocar o arquivo de saida aqui tbm 
 }

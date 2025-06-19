@@ -50,7 +50,7 @@ void imprimeLivro(Livro* livro);
  * pre-condicao: livro passado como parametro deve existir
  * pos-condicao: titulo do livro deve ser impresso no arquivo de saida
  */
-void imprimeNomeLivro(Livro* livro);
+void imprimeNomeLivro(Livro* livro, FILE* saida);
 
 /**Libera o livro passado como parametro
  * inputs: livro

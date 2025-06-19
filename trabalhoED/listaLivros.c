@@ -106,13 +106,13 @@ Livro* retornaLivroComMesmoId(ListaLivros* lista, int id){
 
 
 
-void imprimeLivrosDaLista(ListaLivros* lista){
-    Celula* aux;
-    for(aux = lista->prim; aux != NULL; aux = aux->prox){
-        //imprimeLivro(aux->livro);
-        imprimeNomeLivro(aux->livro);
-    }
-}
+// void imprimeLivrosDaLista(ListaLivros* lista){
+//     Celula* aux;
+//     for(aux = lista->prim; aux != NULL; aux = aux->prox){
+//         //imprimeLivro(aux->livro);
+//         imprimeNomeLivro(aux->livro);
+//     }
+// }
 
 
 

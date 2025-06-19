@@ -40,17 +40,17 @@ int retornaIdLivro(Livro* livro){
     return livro->id;
 }
 
-void imprimeLivro(Livro* livro){
-    printf("\nId: %d\n", livro->id);
-    printf("Titulo:");
-    imprimeNomeLivro(livro);
-    printf("\nAutor: %s\n", livro->autor);
-    printf("Genero: %s\n", livro->genero);
-    printf("Ano: %d", livro->ano);
-}
+// void imprimeLivro(Livro* livro){
+//     printf("\nId: %d\n", livro->id);
+//     printf("Titulo:");
+//     imprimeNomeLivro(livro);
+//     printf("\nAutor: %s\n", livro->autor);
+//     printf("Genero: %s\n", livro->genero);
+//     printf("Ano: %d", livro->ano);
+// }
 
-void imprimeNomeLivro(Livro* livro){
-    printf(" \"%s\" ", livro->titulo);
+void imprimeNomeLivro(Livro* livro, FILE* saida){
+    fprintf(saida, " \"%s\" ", livro->titulo);
     // tenho que imprimir no arquivo
 }
 

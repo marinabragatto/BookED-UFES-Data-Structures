@@ -18,26 +18,26 @@ int main(int argc, char *argv[]){
 
     Booked* booked = InicializaBooked();
     FuncionaBooked(booked);
-    ImprimeBooked(booked);
+    //ImprimeBooked(booked);
     LiberaBooked(booked);
 
     return 0;
 }
 
 
-void testaFuncionalidadesListaLivros(){
-    ListaLivros* listaLivros = leArquivoLivros();
-    Livro* livro = retornaLivroComMesmoId(listaLivros, 16);
+// void testaFuncionalidadesListaLivros(){
+//     ListaLivros* listaLivros = leArquivoLivros();
+//     Livro* livro = retornaLivroComMesmoId(listaLivros, 16);
 
-    if(livro != NULL) imprimeLivro(livro);
-    else printf("Id solicitado nao corresponde a um livro\n");
+//     if(livro != NULL) imprimeLivro(livro);
+//     else printf("Id solicitado nao corresponde a um livro\n");
 
-    imprimeLivrosDaLista(listaLivros);
-    liberaListaLivros(listaLivros);
-}
+//     //imprimeLivrosDaLista(listaLivros);
+//     liberaListaLivros(listaLivros);
+// }
 
-void testaFuncionalidadesListaLeitores(){
-    ListaLeitores * lista = leArquivoLeitores();
-    imprimeLeitoresDaLista(lista);
-    liberaListaLeitores(lista);
-}
+// void testaFuncionalidadesListaLeitores(){
+//     ListaLeitores * lista = leArquivoLeitores();
+//     //imprimeLeitoresDaLista(lista);
+//     liberaListaLeitores(lista);
+// }
