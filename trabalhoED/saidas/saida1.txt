@@ -2,17 +2,20 @@ Leitor: Alice
 Lidos:  "O Iluminado"  "Garota Exemplar" 
 Desejados: "Orgulho e Preconceito" 
 Recomendacoes: 
-Afinidades: 
+Afinidades: Romance, Terror
+
 
 Leitor: Bob
 Lidos:  "O Nome da Rosa"  "Garota Exemplar" 
 Desejados: "Drácula" 
 Recomendacoes: 
-Afinidades: 
+Afinidades: Terror, Mistério
+
 
 Leitor: Clara
 Lidos:  "Drácula" 
 Desejados: "Assassinato no Expresso Oriente" 
 Recomendacoes: 
-Afinidades: 
+Afinidades: Mistério
+
 

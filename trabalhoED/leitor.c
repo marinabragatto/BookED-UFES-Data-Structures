@@ -19,7 +19,7 @@ struct leitor {
     ListaLivros * desejados;
     ListaLivros * recomendacoes;
     // ListaLeitores * afinidades;
-    char *afinidades[100];
+    VetorAfinidades * afinidades;
 };
 
 
@@ -35,11 +35,13 @@ struct leitor {
  * @pre idleitor >= 0, nome != NULL
  * @post Leitor criado e inicializado.
  */
-Leitor* criaLeitor(int idleitor, char * nome){// PASSAR COMO PARAMETRO TAMBEM A LISTA CHAR DE AFINIDADES?
+Leitor* criaLeitor(int idleitor, char * nome, VetorAfinidades * VetorAfinidades){// PASSAR COMO PARAMETRO TAMBEM A LISTA CHAR DE AFINIDADES?
 
     Leitor * leitor = (Leitor*)malloc(sizeof(Leitor));
     leitor->id = idleitor;
     leitor->nome = strdup(nome);
+    
+    leitor->afinidades = VetorAfinidades;
 
     leitor->recomendacoes = criaListaLivros();
     leitor->desejados = criaListaLivros();
@@ -112,6 +114,7 @@ Afinidades: Alice, Clara
     // função Thais de imprimir os livros
     printf("\n");
     printf("Afinidades: ");
+    ImprimeAfinidades(leitor->afinidades);
     //  função Marina de imprimir pessoas
     printf("\n\n");
 
@@ -141,6 +144,9 @@ void liberaleitor(Leitor* leitor){
         if(leitor->recomendacoes){
             // funçao thais de liberar parcialmente uma lista
             liberaListaLivrosParcialmente(leitor->recomendacoes);
+        }
+        if(leitor->afinidades){
+            LiberaAfinidades(leitor->afinidades);
         }
         free(leitor);
     }
