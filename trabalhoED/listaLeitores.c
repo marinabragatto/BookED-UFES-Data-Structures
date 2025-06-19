@@ -89,7 +89,7 @@ ListaLeitores * leArquivoLeitores(){
 
     // Coisas a serem lidas:
     int id, qtdAfin;
-    VetorAfinidades * listaAfinidades;
+    VetorGostos * VetorGostos;
     char afinididade[TAM_AFINIDADES];
     char nome[TAM_MAX_NOME_LEITOR];
     Leitor * novo;
@@ -99,7 +99,7 @@ ListaLeitores * leArquivoLeitores(){
             fscanf(arquivoLeitores, "%[^;];", nome);
 
             fscanf(arquivoLeitores,"%d;",&qtdAfin);
-            listaAfinidades = CriaVetorAfinidades(qtdAfin);
+            VetorGostos = CriaVetorGostos(qtdAfin);
 
             for(int i = 0; i < qtdAfin; i++){
                 if(i != qtdAfin-1){
@@ -110,11 +110,11 @@ ListaLeitores * leArquivoLeitores(){
                 }
                 //printf("(%s)", afinididade);
                 char * pontAfinidade = strdup(afinididade);
-                listaAfinidades = AdicionaAfinidade(listaAfinidades, pontAfinidade);
+                VetorGostos = AdicionaGostos(VetorGostos, pontAfinidade);
             }
             
              // Descarta TEMPORARIAMENTE as afinidades
-            novo = criaLeitor(id, nome, listaAfinidades);
+            novo = criaLeitor(id, nome, VetorGostos);
             //imprimeleitor(novo);
             insereLeitorNoFimDaLista(lista, novo);
         }

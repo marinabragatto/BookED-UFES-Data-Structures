@@ -35,7 +35,7 @@ typedef struct leitor Leitor;
  * @pre idleitor >= 0, nome != NULL
  * @post Leitor criado e inicializado.
  */
-Leitor* criaLeitor(int idleitor, char * nome, VetorAfinidades * VetorAfinidades);  // PASSAR COMO PARAMETRO TAMBEM A LISTA CHAR DE AFINIDADES?
+Leitor* criaLeitor(int idleitor, char * nome, VetorGostos * VetorAfinidades);  // PASSAR COMO PARAMETRO TAMBEM A LISTA CHAR DE AFINIDADES?
 
 /**
  * @brief Compara o ID fornecido com o ID de um leitor.
