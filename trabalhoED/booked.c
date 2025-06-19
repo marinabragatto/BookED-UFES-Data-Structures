@@ -17,8 +17,8 @@ Booked* InicializaBooked(){
         exit(1);
     }
     
-    booked->leitores = NULL;
-    booked->livros = NULL;
+    booked->livros = leArquivoLivros();
+    booked->leitores = leArquivoLeitores();   
 
     return booked;
 }
@@ -26,24 +26,6 @@ Booked* InicializaBooked(){
 
 
 void FuncionaBooked(Booked* booked){
-    booked->livros = leArquivoLivros();
-    booked->leitores = leArquivoLeitores();   
-
-    LeArquivoComandos(booked);
-}
-
-
-
-void LiberaBooked(Booked* booked){
-    if(booked != NULL){
-        liberaListaLeitores(booked->leitores);
-        liberaListaLivros(booked->livros);
-        free(booked);
-    }
-}
-
-
-void LeArquivoComandos(Booked* booked){
     FILE* ComandosArq;
     char leComandos[1000];
     sprintf(leComandos, "testes/test0/test0/comandos.txt");
@@ -67,6 +49,17 @@ void LeArquivoComandos(Booked* booked){
 
     fclose(ComandosArq);
 }
+
+
+
+void LiberaBooked(Booked* booked){
+    if(booked != NULL){
+        liberaListaLeitores(booked->leitores);
+        liberaListaLivros(booked->livros);
+        free(booked);
+    }
+}
+
 
 
 void ExecutaComando(Booked* booked, int idComando, int param1, int param2, int param3){

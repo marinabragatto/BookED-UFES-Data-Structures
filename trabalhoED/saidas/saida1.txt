@@ -1,75 +1,18 @@
-Leitor: Amanda
-Lidos: 
+Leitor: Alice
+Lidos:  "O Iluminado"  "Garota Exemplar" 
+Desejados: "Orgulho e Preconceito" 
 Recomendacoes: 
 Afinidades: 
 
-Leitor: Bruno
-Lidos: 
+Leitor: Bob
+Lidos:  "O Nome da Rosa"  "Garota Exemplar" 
+Desejados: "Drácula" 
 Recomendacoes: 
 Afinidades: 
 
-Leitor: Carla
-Lidos: 
-Recomendacoes: 
-Afinidades: 
-
-Leitor: Diego
-Lidos: 
-Recomendacoes: 
-Afinidades: 
-
-Leitor: Elena
-Lidos: 
-Recomendacoes: 
-Afinidades: 
-
-Leitor: Felipe
-Lidos: 
-Recomendacoes: 
-Afinidades: 
-
-Leitor: Gabriela
-Lidos: 
-Recomendacoes: 
-Afinidades: 
-
-Leitor: Henrique
-Lidos: 
-Recomendacoes: 
-Afinidades: 
-
-Leitor: Isabela
-Lidos: 
-Recomendacoes: 
-Afinidades: 
-
-Leitor: João
-Lidos: 
-Recomendacoes: 
-Afinidades: 
-
-Leitor: Karen
-Lidos: 
-Recomendacoes: 
-Afinidades: 
-
-Leitor: Leonardo
-Lidos: 
-Recomendacoes: 
-Afinidades: 
-
-Leitor: Mariana
-Lidos: 
-Recomendacoes: 
-Afinidades: 
-
-Leitor: Nicolas
-Lidos: 
-Recomendacoes: 
-Afinidades: 
-
-Leitor: Olivia
-Lidos: 
+Leitor: Clara
+Lidos:  "Drácula" 
+Desejados: "Assassinato no Expresso Oriente" 
 Recomendacoes: 
 Afinidades: 
 

@@ -9,7 +9,6 @@ typedef struct booked Booked;
 Booked* InicializaBooked();
 void FuncionaBooked(Booked* booked);
 void LiberaBooked(Booked* booked);
-void LeArquivoComandos(Booked* booked);
 void ExecutaComando(Booked* booked, int idComando, int param1, int param2, int param3);
 void AdicionaLivroLidoLeitor(Booked* booked, int idLeitor, int idLivro);
 void ImprimeBooked(Booked* booked);
