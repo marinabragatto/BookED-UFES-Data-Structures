@@ -101,14 +101,14 @@ Afinidades: Alice, Clara
     
     printf("Leitor: %s\n", leitor->nome);
     printf("Lidos: ");
-    imprimeLivrosDaLista(leitor->lidos);
+    //imprimeLivrosDaLista(leitor->lidos);
     // função Thais de imprimir os livros
     printf("\n");
     printf("Desejados:");
-    imprimeLivrosDaLista(leitor->desejados);
+    //imprimeLivrosDaLista(leitor->desejados);
     printf("\n");
     printf("Recomendacoes: ");
-    imprimeLivrosDaLista(leitor->recomendacoes);
+    //imprimeLivrosDaLista(leitor->recomendacoes);
     // função Thais de imprimir os livros
     printf("\n");
     printf("Afinidades: ");
