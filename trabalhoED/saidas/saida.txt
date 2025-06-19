@@ -1,0 +1,20 @@
+Fulano leu "O Iluminado" 
+Fulano leu "Garota Exemplar" 
+Fulano leu "O Nome da Rosa" 
+Fulano leu "Garota Exemplar" 
+Fulano leu "Drácula" 
+Fulano deseja ler "Assassinato no Expresso Oriente" 
+Fulano deseja ler "Orgulho e Preconceito" 
+Fulano deseja ler "Drácula" 
+Fulano recomenda "O Iluminado" para ciclano
+Fulano recomenda "O Nome da Rosa" para ciclano
+Fulano recomenda "O Senhor dos Anéis: A Sociedade do Anel" para ciclano
+Fulano recomenda "A Culpa é das Estrelas" para ciclano
+
+
+
+
+
+
+
+

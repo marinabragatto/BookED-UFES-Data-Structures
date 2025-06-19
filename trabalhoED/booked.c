@@ -75,9 +75,10 @@ void ExecutaComando(Booked* booked, int idComando, int param1, int param2, int p
         break;
         
         case ADICIONA_LIVRO_RECOMENDADO:
+        break;
 
         default:
-            break;
+        break;
     }
 }
 
@@ -90,18 +91,32 @@ void ImprimeComando(Booked* booked, int idComando, int param1, int param2, int p
 
     switch (idComando){
         case ADICIONA_LIVRO_LIDO:
-        fprintf(saida, "Fulano leu");
-        imprimeNomeLivro(livro, saida);
+            fprintf(saida, "Fulano leu");
+            imprimeNomeLivro(livro, saida);
         break;
     
-    default:
+        case ADICIONA_LIVRO_DESEJADO:
+            fprintf(saida, "Fulano deseja ler");
+            imprimeNomeLivro(livro, saida);
+        break;
+
+        case ADICIONA_LIVRO_RECOMENDADO:
+            fprintf(saida, "Fulano recomenda");
+            imprimeNomeLivro(livro, saida);
+            fprintf(saida, "para ciclano");
+        break;
+
+        default:
         break;
     }
+
+    fprintf(saida, "\n");
+
 }
 
 
 
 void ImprimeBooked(Booked* booked){
     //teste pra ver se o livro foi adicionado a lista de lidos dos leitores
-    imprimeLeitoresDaLista(booked->leitores);
+    imprimeLeitoresDaLista(booked->leitores); //colocar o arquivo de saida aqui tbm 
 }
