@@ -11,6 +11,10 @@
 #define DESEJADOS 2
 #define RECOMENDADOS 3
 
+#define SEM_ASPAS 0
+#define COM_ASPAS 1
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -50,7 +54,7 @@ void imprimeLivro(Livro* livro);
  * pre-condicao: livro passado como parametro deve existir
  * pos-condicao: titulo do livro deve ser impresso no arquivo de saida
  */
-void imprimeNomeLivro(Livro* livro, FILE* saida);
+void imprimeNomeLivro(Livro* livro, FILE* saida, int aspas);
 
 /**Libera o livro passado como parametro
  * inputs: livro

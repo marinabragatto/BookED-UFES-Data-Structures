@@ -90,7 +90,7 @@ int retornaIdleitor(Leitor * leitor){
  * 
  * @pre leitor != NULL
  */
-void imprimeleitor(Leitor * leitor){
+void imprimeleitor(Leitor * leitor, FILE* saida){
 /*
 Leitor: Bob
 Lidos: O Nome da Rosa, Garota Exemplar
@@ -101,24 +101,39 @@ Afinidades: Alice, Clara
 
     // VAI SER PARA PRINTAR EM UM ARQUIVO... a implementar
     
-    printf("Leitor: %s\n", leitor->nome);
-    printf("Lidos: ");
-    //imprimeLivrosDaLista(leitor->lidos);
+    fprintf(saida, "Leitor: %s\n", leitor->nome);
+    fprintf(saida, "Lidos: ");
+    imprimeLivrosDaLista(leitor->lidos, saida);
     // função Thais de imprimir os livros
-    printf("\n");
-    printf("Desejados:");
-    //imprimeLivrosDaLista(leitor->desejados);
-    printf("\n");
-    printf("Recomendacoes: ");
-    //imprimeLivrosDaLista(leitor->recomendacoes);
+    fprintf(saida, "\n");
+    fprintf(saida, "Desejados: ");
+    imprimeLivrosDaLista(leitor->desejados, saida);
+    fprintf(saida, "\n");
+    fprintf(saida, "Recomendacoes: ");
+    imprimeLivrosDaLista(leitor->recomendacoes, saida);
     // função Thais de imprimir os livros
-    printf("\n");
-    printf("Afinidades: ");
-    ImprimeGostos(leitor->gostos);
+    fprintf(saida, "\n");
+    fprintf(saida, "Afinidades: ");
+    ImprimeGostos(leitor->gostos, saida);
     //  função Marina de imprimir pessoas
-    printf("\n\n");
+    fprintf(saida, "\n\n");
 
 }
+
+
+
+/**
+ * @brief Imprime o nome do leitor no arquivo de saida.
+ *
+ * @param leitor Ponteiro para o leitor.
+ * 
+ * @pre leitor != NULL
+ */
+void imprimeNomeLeitor(Leitor* leitor, FILE* saida){
+    fprintf(saida, "%s", leitor->nome);
+}
+
+
 
 /**
  * @brief Libera a memória alocada para o leitor.
@@ -181,4 +196,52 @@ void insereLivroNaListaLeitor(Leitor* leitor, Livro* livro, int lista){
     default:
         break;
     }
+}
+
+
+/**
+ * @brief Retira um livro de uma lista de recomendacoes do leitor.
+ *
+ * @param leitor Ponteiro para o leitor.
+ * @param livro Ponteiro para o livro.
+ * 
+ * @pre leitor != NULL, livro != NULL
+ * @post Livro inserido na lista especificada.
+ */
+void retiraLivroDaListaLeitor(Leitor* leitor, Livro* livro){
+    retiraLivroLista(leitor->recomendacoes, retornaIdLivro(livro));
+}
+
+
+
+/**
+ * @brief Verifica se um livro ja se encontra em uma lista especifica do leitor.
+ *
+ * @param leitor Ponteiro para o leitor.
+ * @param livro Ponteiro para o livro.
+ * @param lista inteiro que identifica qual a lista.
+ * 
+ * @pre leitor != NULL, livro != NULL
+ * @post inteiro indicando ou nao a existencia do livro na lista.
+ */
+int verificaLivroEstaNaListaLeitor(Leitor* leitor, Livro* livro, int lista){
+    Livro* l;
+    switch (lista){
+    case LIDOS:
+        l = retornaLivroComMesmoId(leitor->lidos, retornaIdLivro(livro));
+        break;
+    
+    case DESEJADOS:
+        l = retornaLivroComMesmoId(leitor->desejados, retornaIdLivro(livro));
+        break;
+
+    case RECOMENDADOS:
+        l = retornaLivroComMesmoId(leitor->recomendacoes, retornaIdLivro(livro));
+        break;
+
+    default:
+        break;
+    }
+
+    return (l != NULL);
 }

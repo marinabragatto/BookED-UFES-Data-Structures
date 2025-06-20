@@ -52,7 +52,7 @@ Livro* retornaLivroComMesmoId(ListaLivros* lista, int id);
  * pre-condicao: listaLivros passada como parametro deve existir
  * pos-condicao: livros apontados pelo tipo listaLivros devem ser impressos
  */
-void imprimeLivrosDaLista(ListaLivros* lista);
+void imprimeLivrosDaLista(ListaLivros* lista, FILE* saida);
 
 /**Libera a listaLivros passada como parametro
  * inputs: listaLivros
@@ -70,5 +70,13 @@ void liberaListaLivros(ListaLivros* lista);
  * pos-condicao: tipo listaLivros deve ser liberada
  */
 void liberaListaLivrosParcialmente(ListaLivros* lista);
+
+/**Retira um livro especifico da lista passada como parametro
+ * inputs: listaLivros, idLivro
+ * output: nenhum 
+ * pre-condicao: listaLivros passada como parametro deve existir
+ * pos-condicao: livro deve ser retirado da lista
+ */
+void retiraLivroLista(ListaLivros* lista, int idLivro);
 
 #endif

@@ -3,6 +3,10 @@
 #define ADICIONA_LIVRO_LIDO 1
 #define ADICIONA_LIVRO_DESEJADO 2
 #define ADICIONA_LIVRO_RECOMENDADO 3
+#define ACEITAR_RECOMENDACAO 4
+#define REJEITAR_RECOMENDACAO 5
+#define IMPRIME_BOOKED 8
+
 
 struct booked{
     ListaLeitores * leitores; // Todos os leitores da plataforma
@@ -30,7 +34,7 @@ void FuncionaBooked(Booked* booked){
 
     FILE* ComandosArq;
     char leComandos[1000];
-    sprintf(leComandos, "testes/test0/test0/comandos.txt");
+    sprintf(leComandos, "testes/test1/test1/comandos.txt");
 
     ComandosArq = fopen(leComandos, "r");
     if (ComandosArq == NULL) {
@@ -46,8 +50,7 @@ void FuncionaBooked(Booked* booked){
         int resultado = fscanf(ComandosArq, "%d;%d;%d;%d\n", &idComando, &param1, &param2, &param3); 
         if (resultado != 4) break;
 
-        ExecutaComando(booked, idComando, param1, param2, param3);
-        ImprimeComando(booked, idComando, param1, param2, param3, saida);
+        ExecutaComando(booked, idComando, param1, param2, param3, saida);
     }
 
     fclose(ComandosArq);
@@ -66,15 +69,52 @@ void LiberaBooked(Booked* booked){
 
 
 
-void ExecutaComando(Booked* booked, int idComando, int param1, int param2, int param3){
+void ExecutaComando(Booked* booked, int idComando, int param1, int param2, int param3, FILE* saida){
+    Leitor* leitor1 = retornaLeitorComMesmoId(booked->leitores, param1);
+    Leitor* leitor2 = retornaLeitorComMesmoId(booked->leitores, param3);
+    Livro* livro = retornaLivroComMesmoId(booked->livros, param2);
+
     switch (idComando){
         case ADICIONA_LIVRO_LIDO:
-        case ADICIONA_LIVRO_DESEJADO:
-        Livro* livro = retornaLivroComMesmoId(booked->livros, param2);
-        booked->leitores = AdicionaLivroListaLeitor(booked->leitores, livro, param1, param2, idComando);
+            if(!verificaLivroEstaNaListaLeitor(leitor1, livro, LIDOS)){
+                insereLivroNaListaLeitor(leitor1, livro, LIDOS);
+                ImprimeComandoRealizado(booked, idComando, param1, param2, param3, saida);
+            }
+            else ImprimeComandoNaoRealizado(booked, idComando, param1, param2, param3, saida);
         break;
         
+        case ADICIONA_LIVRO_DESEJADO:
+            if(!verificaLivroEstaNaListaLeitor(leitor1, livro, DESEJADOS)){
+                insereLivroNaListaLeitor(leitor1, livro, DESEJADOS);
+                ImprimeComandoRealizado(booked, idComando, param1, param2, param3, saida);
+            }
+            else ImprimeComandoNaoRealizado(booked, idComando, param1, param2, param3, saida);
+        break;
+
         case ADICIONA_LIVRO_RECOMENDADO:
+            if(param1 == param3) ImprimeComandoNaoRealizado(booked, idComando, param1, param2, param3, saida);
+            else{
+                if(!verificaLivroEstaNaListaLeitor(leitor2, livro, LIDOS)){
+                    insereLivroNaListaLeitor(leitor2, livro, RECOMENDADOS);
+                    ImprimeComandoRealizado(booked, idComando, param1, param2, param3, saida);
+                }
+                else ImprimeComandoNaoRealizado(booked, idComando, param1, param2, param3, saida);
+            }
+        break;
+
+        case ACEITAR_RECOMENDACAO:
+        insereLivroNaListaLeitor(leitor1, livro, DESEJADOS);
+        retiraLivroDaListaLeitor(leitor1, livro);
+        ImprimeComandoRealizado(booked, idComando, param1, param2, param3, saida);
+        break;
+
+        case REJEITAR_RECOMENDACAO:
+        retiraLivroDaListaLeitor(leitor1, livro);
+        ImprimeComandoRealizado(booked, idComando, param1, param2, param3, saida);
+        break;
+
+        case IMPRIME_BOOKED:
+        ImprimeComandoRealizado(booked, idComando, param1, param2, param3, saida);
         break;
 
         default:
@@ -84,26 +124,111 @@ void ExecutaComando(Booked* booked, int idComando, int param1, int param2, int p
 
 
 
-void ImprimeComando(Booked* booked, int idComando, int param1, int param2, int param3, FILE* saida){
-    Leitor* leitor1; //retorna o leitor 1 com mesmo id
-    Leitor* leitor2;
+void ImprimeComandoRealizado(Booked* booked, int idComando, int param1, int param2, int param3, FILE* saida){
+    Leitor* leitor1 = retornaLeitorComMesmoId(booked->leitores, param1);
+    Leitor* leitor2 = retornaLeitorComMesmoId(booked->leitores, param3);
     Livro* livro = retornaLivroComMesmoId(booked->livros, param2);
 
     switch (idComando){
         case ADICIONA_LIVRO_LIDO:
-            fprintf(saida, "Fulano leu");
-            imprimeNomeLivro(livro, saida);
+            imprimeNomeLeitor(leitor1, saida);
+            fprintf(saida, " leu");
+            imprimeNomeLivro(livro, saida, COM_ASPAS);
         break;
     
         case ADICIONA_LIVRO_DESEJADO:
-            fprintf(saida, "Fulano deseja ler");
-            imprimeNomeLivro(livro, saida);
+            imprimeNomeLeitor(leitor1, saida);
+            fprintf(saida, " deseja ler");
+            imprimeNomeLivro(livro, saida, COM_ASPAS);
         break;
 
         case ADICIONA_LIVRO_RECOMENDADO:
-            fprintf(saida, "Fulano recomenda");
-            imprimeNomeLivro(livro, saida);
-            fprintf(saida, "para ciclano");
+            imprimeNomeLeitor(leitor1, saida);
+            fprintf(saida, " recomenda");
+            imprimeNomeLivro(livro, saida, COM_ASPAS);
+            fprintf(saida, "para ");
+            imprimeNomeLeitor(leitor2, saida);
+        break;
+
+        case ACEITAR_RECOMENDACAO:
+            imprimeNomeLeitor(leitor1, saida);
+            fprintf(saida, " aceita recomendação");
+            imprimeNomeLivro(livro, saida, COM_ASPAS);
+            fprintf(saida, "de ");
+            imprimeNomeLeitor(leitor2, saida);
+        break; 
+
+        case REJEITAR_RECOMENDACAO:
+            imprimeNomeLeitor(leitor1, saida);
+            fprintf(saida, " rejeita recomendação");
+            imprimeNomeLivro(livro, saida, COM_ASPAS);
+            fprintf(saida, "de ");
+            imprimeNomeLeitor(leitor2, saida);
+        break;
+
+        case IMPRIME_BOOKED:
+            fprintf(saida, "\n");
+            ImprimeBooked(booked, saida);
+        break;
+
+        default:
+        break;
+    }
+
+    fprintf(saida, "\n");
+
+}
+
+
+void ImprimeComandoNaoRealizado(Booked* booked, int idComando, int param1, int param2, int param3, FILE* saida){
+    Leitor* leitor1 = retornaLeitorComMesmoId(booked->leitores, param1);
+    Leitor* leitor2 = retornaLeitorComMesmoId(booked->leitores, param3);
+    Livro* livro = retornaLivroComMesmoId(booked->livros, param2);
+
+    switch (idComando){
+        case ADICIONA_LIVRO_LIDO: 
+            imprimeNomeLeitor(leitor1, saida);
+            fprintf(saida, " já leu");
+            imprimeNomeLivro(livro, saida, COM_ASPAS);
+        break;
+    
+        case ADICIONA_LIVRO_DESEJADO:
+            imprimeNomeLeitor(leitor1, saida);
+            fprintf(saida, " já deseja ler");
+            imprimeNomeLivro(livro, saida, COM_ASPAS);
+        break;
+
+        case ADICIONA_LIVRO_RECOMENDADO: 
+            if(param1 == param3){
+                imprimeNomeLeitor(leitor2, saida);
+                fprintf(saida, " não pode recomendar livros para si mesmo");
+            }
+            else{
+                imprimeNomeLeitor(leitor2, saida);
+                fprintf(saida, " não precisa da recomendação de");
+                imprimeNomeLivro(livro, saida, COM_ASPAS);
+                fprintf(saida, "pois já leu este livro ");
+            }
+        break;
+
+        case ACEITAR_RECOMENDACAO:
+            imprimeNomeLeitor(leitor1, saida);
+            fprintf(saida, " aceita recomendação");
+            imprimeNomeLivro(livro, saida, COM_ASPAS);
+            fprintf(saida, "de ");
+            imprimeNomeLeitor(leitor2, saida);
+        break; 
+
+        case REJEITAR_RECOMENDACAO:
+            imprimeNomeLeitor(leitor1, saida);
+            fprintf(saida, " rejeita recomendação");
+            imprimeNomeLivro(livro, saida, COM_ASPAS);
+            fprintf(saida, "de ");
+            imprimeNomeLeitor(leitor2, saida);
+        break;
+
+        case IMPRIME_BOOKED:
+            ImprimeBooked(booked, saida);
         break;
 
         default:
@@ -116,7 +241,6 @@ void ImprimeComando(Booked* booked, int idComando, int param1, int param2, int p
 
 
 
-void ImprimeBooked(Booked* booked){
-    //teste pra ver se o livro foi adicionado a lista de lidos dos leitores
-    imprimeLeitoresDaLista(booked->leitores); //colocar o arquivo de saida aqui tbm 
+void ImprimeBooked(Booked* booked, FILE* saida){
+    imprimeLeitoresDaLista(booked->leitores, saida); //colocar o arquivo de saida aqui tbm 
 }

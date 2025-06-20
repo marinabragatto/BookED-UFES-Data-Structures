@@ -77,7 +77,7 @@ ListaLeitores * leArquivoLeitores(){
 
     // Abre efetivamente o arquivo
     FILE * arquivoLeitores;
-    char nomeArquivo[200] = "testes/test0/test0/leitores.txt";
+    char nomeArquivo[200] = "testes/test1/test1/leitores.txt";
     arquivoLeitores = fopen(nomeArquivo, "r");
     if(arquivoLeitores == NULL){
         printf("Erro ao Abrir arquivo Leitores");
@@ -222,31 +222,26 @@ void liberaListaLeitoresParcialmente(ListaLeitores * lista){
  *
  * @pre lista != NULL
  */
-void imprimeLeitoresDaLista(ListaLeitores * lista){
+void imprimeLeitoresDaLista(ListaLeitores * lista, FILE* saida){
     // VAI SER EM ARQUIVO
     Celula * atual;
     atual = lista->prim;
 
     while(atual){
-        imprimeleitor(atual->leitor);
+        imprimeleitor(atual->leitor, saida);
         atual = atual->prox;
     }
 }
 
 
 
+Leitor* retornaLeitorComMesmoId(ListaLeitores* leitores, int idLeitor){
+    Celula* leitor;
 
-ListaLeitores* AdicionaLivroListaLeitor(ListaLeitores* leitores, Livro* livro, int idLeitor, int idLivro, int idLista){
-    Celula* leitor; // aux
-
-    //idLista eh pra evitar repetir a funcao pra lista de desejados e de lidos, definido no livro.h 
-    
     for(leitor = leitores->prim; leitor != NULL; leitor = leitor->prox){
         if(comparaIdLeitor(leitor->leitor, idLeitor)){
-            insereLivroNaListaLeitor(leitor->leitor, livro, idLista);
-            break;
+            return leitor->leitor;
         }
     }
-
-    return leitores;
+    return NULL;
 }

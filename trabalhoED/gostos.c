@@ -1,7 +1,4 @@
 #include "gostos.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 struct VetorGostos {
     char ** vetor;
@@ -58,14 +55,14 @@ VetorGostos * LiberaGostos(VetorGostos * afinidades){
     }
 }
 
-void ImprimeGostos(VetorGostos * afinidades){
+void ImprimeGostos(VetorGostos * afinidades, FILE* saida){
     for(int i = 0; i < afinidades->tamanho; i++){
-        printf("%s", afinidades->vetor[i]);
+        fprintf(saida, "%s", afinidades->vetor[i]);
         if(i != afinidades->tamanho -1){
-            printf(", ");
+            fprintf(saida, ", ");
         }
         else{
-            printf("\n");
+            fprintf(saida, "\n");
         }
        
     }

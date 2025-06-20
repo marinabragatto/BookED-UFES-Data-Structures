@@ -28,7 +28,7 @@ ListaLivros* leArquivoLivros(){
     //abrindo o arquivo pra leitura
     FILE* livrosArq;
     char lerlivro[1000];
-    sprintf(lerlivro, "testes/test0/test0/livros.txt"); //aqui eh preciso pensar como nos vamos chegar ate o livros.txt de cada caso de teste
+    sprintf(lerlivro, "testes/test1/test1/livros.txt"); //aqui eh preciso pensar como nos vamos chegar ate o livros.txt de cada caso de teste
 
     livrosArq = fopen(lerlivro, "r");
     if (livrosArq == NULL) {
@@ -106,13 +106,15 @@ Livro* retornaLivroComMesmoId(ListaLivros* lista, int id){
 
 
 
-// void imprimeLivrosDaLista(ListaLivros* lista){
-//     Celula* aux;
-//     for(aux = lista->prim; aux != NULL; aux = aux->prox){
-//         //imprimeLivro(aux->livro);
-//         imprimeNomeLivro(aux->livro);
-//     }
-// }
+void imprimeLivrosDaLista(ListaLivros* lista, FILE* saida){
+    Celula* aux;
+    for(aux = lista->prim; aux != NULL; aux = aux->prox){
+        imprimeNomeLivro(aux->livro, saida, SEM_ASPAS);
+        if(aux->prox != NULL){
+            fprintf(saida, ", ");
+        }
+    }
+}
 
 
 
@@ -147,3 +149,34 @@ void liberaListaLivrosParcialmente(ListaLivros* lista){
 }
 
 
+void retiraLivroLista(ListaLivros* lista, int idLivro){
+    Celula* aux;
+    for(aux = lista->prim; aux != NULL; aux = aux->prox){
+        if(comparaId(aux->livro, idLivro)) break;
+    }
+
+    if(aux == lista->prim && aux == lista->ult){
+        lista->prim = NULL;
+        lista->ult = NULL;
+        free(aux);
+        return;
+    }
+    
+    if(aux == lista->prim){
+        lista->prim = aux->prox;
+        lista->prim->ant = NULL;
+        free(aux);
+        return;
+    }
+    
+    if(aux == lista->ult){
+        lista->ult = aux->ant;
+        lista->ult->prox = NULL;
+        free(aux);
+        return;
+    }
+
+    aux->prox->ant = aux->ant;
+    aux->ant->prox = aux->prox;
+    free(aux);
+}

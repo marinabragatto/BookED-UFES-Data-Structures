@@ -49,8 +49,18 @@ int retornaIdLivro(Livro* livro){
 //     printf("Ano: %d", livro->ano);
 // }
 
-void imprimeNomeLivro(Livro* livro, FILE* saida){
-    fprintf(saida, " \"%s\" ", livro->titulo);
+void imprimeNomeLivro(Livro* livro, FILE* saida, int aspas){
+    switch (aspas){
+    case COM_ASPAS:
+        fprintf(saida, " \"%s\" ", livro->titulo);
+    break;
+    
+    case SEM_ASPAS:
+        fprintf(saida, "%s" , livro->titulo);
+        break;
+    default:
+        break;
+    }
     // tenho que imprimir no arquivo
 }
 

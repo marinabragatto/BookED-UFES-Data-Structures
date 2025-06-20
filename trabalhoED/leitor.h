@@ -69,8 +69,16 @@ int retornaIdleitor(Leitor * leitor);
  * 
  * @pre leitor != NULL
  */
-void imprimeleitor(Leitor * leitor);
+void imprimeleitor(Leitor * leitor, FILE* saida);
 
+/**
+ * @brief Imprime o nome do leitor no arquivo de saida.
+ *
+ * @param leitor Ponteiro para o leitor.
+ * 
+ * @pre leitor != NULL
+ */
+void imprimeNomeLeitor(Leitor* leitor, FILE* saida);
 
 /**
  * @brief Libera a memória alocada para o leitor.
@@ -94,5 +102,31 @@ void liberaleitor(Leitor* leitor);
  * @post Livro inserido na lista especificada.
  */
 void insereLivroNaListaLeitor(Leitor* leitor, Livro* livro, int lista);
+
+
+/**
+ * @brief Retira um livro de uma lista de recomendacoes do leitor.
+ *
+ * @param leitor Ponteiro para o leitor.
+ * @param livro Ponteiro para o livro.
+ * 
+ * @pre leitor != NULL, livro != NULL
+ * @post Livro inserido na lista especificada.
+ */
+void retiraLivroDaListaLeitor(Leitor* leitor, Livro* livro);
+
+
+/**
+ * @brief Verifica se um livro ja se encontra em uma lista especifica do leitor.
+ *
+ * @param leitor Ponteiro para o leitor.
+ * @param livro Ponteiro para o livro.
+ * @param lista inteiro que identifica qual a lista.
+ * 
+ * @pre leitor != NULL, livro != NULL
+ * @post inteiro indicando ou nao a existencia do livro na lista.
+ */
+int verificaLivroEstaNaListaLeitor(Leitor* leitor, Livro* livro, int lista);
+
 
 #endif
