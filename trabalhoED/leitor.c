@@ -15,11 +15,11 @@
 struct leitor {
     int id;
     char * nome;
-    ListaLivros * lidos;
-    ListaLivros * desejados;
-    ListaLivros * recomendacoes;
+    Lista * lidos;
+    Lista * desejados;
+    Lista * recomendacoes;
     // ListaLeitores * afinidades;
-    VetorGostos * gostos;
+    Lista * gostos;
 };
 
 
@@ -35,17 +35,17 @@ struct leitor {
  * @pre idleitor >= 0, nome != NULL
  * @post Leitor criado e inicializado.
  */
-Leitor* criaLeitor(int idleitor, char * nome, VetorGostos * VetorGostos){// PASSAR COMO PARAMETRO TAMBEM A LISTA CHAR DE AFINIDADES?
+Leitor* criaLeitor(int idleitor, char * nome, Lista * Gostos){// PASSAR COMO PARAMETRO TAMBEM A LISTA CHAR DE AFINIDADES?
 
     Leitor * leitor = (Leitor*)malloc(sizeof(Leitor));
     leitor->id = idleitor;
     leitor->nome = strdup(nome);
     
-    leitor->gostos = VetorGostos;
+    leitor->gostos = Gostos;
 
-    leitor->recomendacoes = criaListaLivros();
-    leitor->desejados = criaListaLivros();
-    leitor->lidos = criaListaLivros();
+    leitor->recomendacoes = criaLista();
+    leitor->desejados = criaLista();
+    leitor->lidos = criaLista();
     
     
     return leitor;
@@ -63,8 +63,10 @@ Leitor* criaLeitor(int idleitor, char * nome, VetorGostos * VetorGostos){// PASS
  * @pre leitor != NULL
  * @post Retorna 0 ou 1.
  */
-int comparaIdLeitor(Leitor * leitor, int id){
-    if(leitor->id== id){
+int comparaIdLeitor(void * leitor, int id){
+
+   
+    if( (((Leitor*)leitor)->id) == id ){
         return 1;
     }
     return 0;
@@ -90,7 +92,7 @@ int retornaIdleitor(Leitor * leitor){
  * 
  * @pre leitor != NULL
  */
-void imprimeleitor(Leitor * leitor, FILE* saida){
+void imprimeleitor(void * leitor, FILE* saida){
 /*
 Leitor: Bob
 Lidos: O Nome da Rosa, Garota Exemplar
@@ -100,21 +102,22 @@ Afinidades: Alice, Clara
 */
 
     // VAI SER PARA PRINTAR EM UM ARQUIVO... a implementar
-    
-    fprintf(saida, "Leitor: %s\n", leitor->nome);
+    Leitor * l = (Leitor*)leitor;
+
+    fprintf(saida, "Leitor: %s\n", l->nome);
     fprintf(saida, "Lidos: ");
-    imprimeLivrosDaLista(leitor->lidos, saida);
+    imprimirLivrosLeitor(l->lidos, saida);
     // função Thais de imprimir os livros
     fprintf(saida, "\n");
     fprintf(saida, "Desejados: ");
-    imprimeLivrosDaLista(leitor->desejados, saida);
+    imprimirLivrosLeitor(l->desejados, saida);
     fprintf(saida, "\n");
     fprintf(saida, "Recomendacoes: ");
-    imprimeLivrosDaLista(leitor->recomendacoes, saida);
+    imprimirLivrosLeitor(l->recomendacoes, saida);
     // função Thais de imprimir os livros
     fprintf(saida, "\n");
     fprintf(saida, "Afinidades: ");
-    ImprimeGostos(leitor->gostos, saida);
+    ImprimeGostos(l->gostos, saida);
     //  função Marina de imprimir pessoas
     fprintf(saida, "\n");
 
@@ -129,7 +132,8 @@ Afinidades: Alice, Clara
  * 
  * @pre leitor != NULL
  */
-void imprimeNomeLeitor(Leitor* leitor, FILE* saida){
+void imprimeNomeLeitor(Leitor * leitor, FILE* saida){
+
     fprintf(saida, "%s", leitor->nome);
 }
 
@@ -143,27 +147,30 @@ void imprimeNomeLeitor(Leitor* leitor, FILE* saida){
  * @pre leitor != NULL
  * @post Memória liberada.
  */
-void liberaleitor(Leitor* leitor){
-    if(leitor){
-        if(leitor->nome){
-            free(leitor->nome);
+void liberaleitor(void * leitor){
+
+    Leitor * l = (Leitor*)leitor;
+
+    if(l){
+        if(l->nome){
+            free(l->nome);
         }
-        if(leitor->desejados){
+        if(l->desejados){
             // funçao thais de liberar parcialmente uma lista
-            liberaListaLivrosParcialmente(leitor->desejados);
+            liberaListaParcialmente(l->desejados);
         }
-        if(leitor->lidos){
+        if(l->lidos){
             // funçao thais de liberar parcialmente uma lista
-            liberaListaLivrosParcialmente(leitor->lidos);
+            liberaListaParcialmente(l->lidos);
         }
-        if(leitor->recomendacoes){
+        if(l->recomendacoes){
             // funçao thais de liberar parcialmente uma lista
-            liberaListaLivrosParcialmente(leitor->recomendacoes);
+            liberaListaParcialmente(l->recomendacoes);
         }
-        if(leitor->gostos){
-            LiberaGostos(leitor->gostos);
+        if(l->gostos){
+            liberaLista(l->gostos, free);
         }
-        free(leitor);
+        free(l);
     }
 }
 
@@ -182,15 +189,15 @@ void liberaleitor(Leitor* leitor){
 void insereLivroNaListaLeitor(Leitor* leitor, Livro* livro, int lista){
     switch (lista){
     case LIDOS:
-        insereLivroNoFimDaLista(leitor->lidos, livro);
+        insereElemNoFimDaLista(leitor->lidos, livro);
         break;
     
     case DESEJADOS:
-        insereLivroNoFimDaLista(leitor->desejados, livro);
+        insereElemNoFimDaLista(leitor->desejados, livro);
         break;
 
     case RECOMENDADOS:
-        insereLivroNoFimDaLista(leitor->recomendacoes, livro);
+        insereElemNoFimDaLista(leitor->recomendacoes, livro);
         break;
 
     default:
@@ -209,7 +216,7 @@ void insereLivroNaListaLeitor(Leitor* leitor, Livro* livro, int lista){
  * @post Livro inserido na lista especificada.
  */
 void retiraLivroDaListaLeitor(Leitor* leitor, Livro* livro){
-    retiraLivroLista(leitor->recomendacoes, retornaIdLivro(livro));
+    retiraElemLista(leitor->recomendacoes, retornaIdLivro(livro), comparaIdLivro);
 }
 
 
@@ -228,15 +235,15 @@ int verificaLivroEstaNaListaLeitor(Leitor* leitor, Livro* livro, int lista){
     Livro* l;
     switch (lista){
     case LIDOS:
-        l = retornaLivroComMesmoId(leitor->lidos, retornaIdLivro(livro));
+        l = retornaElemComMesmoId(leitor->lidos, retornaIdLivro(livro), comparaIdLivro);
         break;
     
     case DESEJADOS:
-        l = retornaLivroComMesmoId(leitor->desejados, retornaIdLivro(livro));
+        l = retornaElemComMesmoId(leitor->desejados, retornaIdLivro(livro), comparaIdLivro);
         break;
 
     case RECOMENDADOS:
-        l = retornaLivroComMesmoId(leitor->recomendacoes, retornaIdLivro(livro));
+        l = retornaElemComMesmoId(leitor->recomendacoes, retornaIdLivro(livro), comparaIdLivro);
         break;
 
     default:
@@ -246,7 +253,32 @@ int verificaLivroEstaNaListaLeitor(Leitor* leitor, Livro* livro, int lista){
     return (l != NULL);
 }
 
-ListaLivros * LivrosEmComumLeitores(Leitor * leitor1, Leitor * leitor2){
+Lista* LivrosEmComumLeitores(Leitor * leitor1, Leitor * leitor2){
     
    // verificaLivroEstaNaListaLeitor(leitor2, Livro* livro, LIDOS);
+}
+
+void imprimirLivrosLeitor(Lista * lista, FILE * saida){
+
+    Celula* aux = retornaPrimeiraCelulaLista(lista);
+
+    for(; aux != NULL; aux = aux->prox){
+        imprimeNomeLivro(aux->elemento, saida, SEM_ASPAS);
+        if(aux->prox != NULL){
+            fprintf(saida, ", ");
+        }
+    }
+}
+
+void ImprimeGostos(Lista * gostos, FILE* saida){ 
+    Celula* aux = retornaPrimeiraCelulaLista(gostos);
+
+    for(; aux != NULL; aux = aux->prox){
+        fprintf(saida,"%s", (char*)aux->elemento);
+        //(aux->elemento, saida, SEM_ASPAS);
+        if(aux->prox != NULL){
+            fprintf(saida, ", ");
+        }
+    }
+    printf("\n");
 }

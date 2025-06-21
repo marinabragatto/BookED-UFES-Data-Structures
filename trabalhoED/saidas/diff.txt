@@ -11,43 +11,53 @@
 > Não existe afinidade entre Ana e Júlia
 > Não existe afinidade entre Diana e Gabriel
 > Não existe afinidade entre Bruno e Helena
-50c61
+50c61,62
 < Afinidades: Ficção Científica, Tecnologia
 ---
 > Afinidades: Bruno, Carlos
-56c67
+> 
+55c67,68
 < Afinidades: Ficção Científica
 ---
 > Afinidades: Ana
-62c73
+> 
+60c73,74
 < Afinidades: Tecnologia, Ciência
 ---
 > Afinidades: Ana
-68c79
+> 
+65c79,80
 < Afinidades: Romance, Drama
 ---
 > Afinidades: Eduardo, Fernanda
-74c85
+> 
+70c85,86
 < Afinidades: Romance
 ---
 > Afinidades: Diana
-80c91
+> 
+75c91,92
 < Afinidades: Drama, Literatura
 ---
 > Afinidades: Diana
-86c97
+> 
+80c97,98
 < Afinidades: Terror
 ---
 > Afinidades: Helena
-92c103
+> 
+85c103,104
 < Afinidades: Terror, Suspense
 ---
 > Afinidades: Gabriel, Igor
-98c109
+> 
+90c109,110
 < Afinidades: Suspense
 ---
 > Afinidades: Helena
-104c115
+> 
+95c115,116
 < Afinidades: Biografia
 ---
 > Afinidades: 
+> 

@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "listaLivros.h"
-#include "listaLeitores.h"
 #include "livro.h"
 #include "booked.h"
 

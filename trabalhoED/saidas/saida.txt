@@ -48,58 +48,48 @@ Lidos: Duna, Fundação
 Desejados: Sapiens
 Recomendacoes: 
 Afinidades: Ficção Científica, Tecnologia
-
 Leitor: Bruno
 Lidos: Duna
 Desejados: 
 Recomendacoes: 
 Afinidades: Ficção Científica
-
 Leitor: Carlos
 Lidos: Neuromancer
 Desejados: 
 Recomendacoes: 
 Afinidades: Tecnologia, Ciência
-
 Leitor: Diana
 Lidos: Orgulho e Preconceito
 Desejados: Como Eu Era Antes de Você
 Recomendacoes: 
 Afinidades: Romance, Drama
-
 Leitor: Eduardo
 Lidos: Como Eu Era Antes de Você
 Desejados: Orgulho e Preconceito
 Recomendacoes: 
 Afinidades: Romance
-
 Leitor: Fernanda
 Lidos: Hamlet
 Desejados: 
 Recomendacoes: 
 Afinidades: Drama, Literatura
-
 Leitor: Gabriel
 Lidos: O Iluminado
 Desejados: A Garota no Trem
 Recomendacoes: 
 Afinidades: Terror
-
 Leitor: Helena
 Lidos: Drácula
 Desejados: O Iluminado
 Recomendacoes: 
 Afinidades: Terror, Suspense
-
 Leitor: Igor
 Lidos: Psicose
 Desejados: 
 Recomendacoes: Drácula
 Afinidades: Suspense
-
 Leitor: Júlia
 Lidos: Steve Jobs
 Desejados: Einstein
 Recomendacoes: 
 Afinidades: Biografia
-

@@ -35,7 +35,7 @@ Livro* criaLivro(int idLivro, char* tituloLivro, char* autorLivro, char* generoL
  * pre-condicao: livro passado como parametro deve existir
  * pos-condicao: deve retornar um inteiro
  */
-int comparaId(Livro* livro, int id);
+int comparaIdLivro(void * livro, int id);
 
 /**Retorna o id do livro passado como parametro
  * inputs: livro
@@ -46,7 +46,7 @@ int comparaId(Livro* livro, int id);
 int retornaIdLivro(Livro* livro);
 
 //imprime todas as informacoes de um livro (nao sera utilizada)
-void imprimeLivro(Livro* livro);
+void imprimeLivro(void * livro, FILE * saida);
 
 /**Imprime o nome do livro passado como parametro
  * inputs: livro
@@ -62,6 +62,6 @@ void imprimeNomeLivro(Livro* livro, FILE* saida, int aspas);
  * pre-condicao: livro passado como parametro deve existir
  * pos-condicao: tipo livro deve ser liberado
  */
-void liberaLivro(Livro* livro);
+void liberaLivro(void * livro);
 
 #endif

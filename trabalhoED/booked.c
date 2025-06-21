@@ -11,8 +11,8 @@
 
 
 struct booked{
-    ListaLeitores * leitores; // Todos os leitores da plataforma
-    ListaLivros * livros; // Todos os livros da plataforma
+    Lista * leitores; // Todos os leitores da plataforma
+    Lista * livros; // Todos os livros da plataforma
 };
 
 
@@ -69,8 +69,8 @@ void FuncionaBooked(Booked* booked){
 
 void LiberaBooked(Booked* booked){
     if(booked != NULL){
-        liberaListaLeitores(booked->leitores);
-        liberaListaLivros(booked->livros);
+        liberaLista(booked->leitores, liberaleitor);
+        liberaLista(booked->livros, liberaLivro);
         free(booked);
     }
 }
@@ -119,12 +119,12 @@ void ExecutaComando(Booked* booked, int idComando, int param1, int param2, int p
 
 void ImprimeBooked(Booked* booked, FILE* saida){
     fprintf(saida,"Imprime toda a BookED\n\n");
-    imprimeLeitoresDaLista(booked->leitores, saida); //colocar o arquivo de saida aqui tbm 
+    imprimeLista(booked->leitores, imprimeleitor, saida); //colocar o arquivo de saida aqui tbm 
 }
 
 static void AdicionaLivroLido(Booked * booked, int idLeitor, int idLivro, FILE* saida){
-    Leitor* leitor = retornaLeitorComMesmoId(booked->leitores, idLeitor);
-    Livro* livro = retornaLivroComMesmoId(booked->livros, idLivro);
+    Leitor* leitor = retornaElemComMesmoId(booked->leitores, idLeitor, comparaIdLeitor);
+    Livro* livro = retornaElemComMesmoId(booked->livros, idLivro, comparaIdLivro);
 
     if(leitor == NULL){
         fprintf(saida,"Erro: Leitor com ID %d não encontrado\n", idLeitor);
@@ -156,8 +156,8 @@ static void AdicionaLivroLido(Booked * booked, int idLeitor, int idLivro, FILE* 
 }
 
 static void AdicionaLivroDesejado(Booked * booked, int idLeitor, int idLivro,FILE* saida){
-    Leitor* leitor = retornaLeitorComMesmoId(booked->leitores, idLeitor);
-    Livro* livro = retornaLivroComMesmoId(booked->livros, idLivro);
+    Leitor* leitor = retornaElemComMesmoId(booked->leitores, idLeitor, comparaIdLeitor);
+    Livro* livro = retornaElemComMesmoId(booked->livros, idLivro, comparaIdLivro);
 
     if(leitor == NULL){
         fprintf(saida,"Erro: Leitor com ID %d não encontrado\n", idLeitor);
@@ -188,9 +188,9 @@ static void AdicionaLivroDesejado(Booked * booked, int idLeitor, int idLivro,FIL
 }
 
 static void RecomendarUmLivro(Booked * booked,  int idRec, int idDes, int idLivro, FILE* saida){
-    Leitor* recomendador = retornaLeitorComMesmoId(booked->leitores, idRec);
-    Leitor* destinatario = retornaLeitorComMesmoId(booked->leitores, idDes);
-    Livro* livro = retornaLivroComMesmoId(booked->livros, idLivro);
+    Leitor* recomendador = retornaElemComMesmoId(booked->leitores, idRec, comparaIdLeitor);
+    Leitor* destinatario = retornaElemComMesmoId(booked->leitores, idDes, comparaIdLeitor);
+    Livro* livro = retornaElemComMesmoId(booked->livros, idLivro, comparaIdLivro);
 
     if(recomendador == NULL){
         fprintf(saida,"Erro: Leitor recomendador com ID %d não encontrado\n", idRec);
@@ -240,9 +240,9 @@ static void RecomendarUmLivro(Booked * booked,  int idRec, int idDes, int idLivr
 }
 
 static void  AceitarRecomendacao(Booked * booked, int idRec, int idDes, int idLivro,FILE* saida){
-    Leitor* recomendador = retornaLeitorComMesmoId(booked->leitores, idRec);
-    Leitor* destinatario = retornaLeitorComMesmoId(booked->leitores, idDes);
-    Livro* livro = retornaLivroComMesmoId(booked->livros, idLivro);
+    Leitor* recomendador = retornaElemComMesmoId(booked->leitores, idRec, comparaIdLeitor);
+    Leitor* destinatario = retornaElemComMesmoId(booked->leitores, idDes, comparaIdLeitor);
+    Livro* livro = retornaElemComMesmoId(booked->livros, idLivro, comparaIdLivro);
 
     if(recomendador == NULL){
         fprintf(saida,"Erro: Leitor recomendador com ID %d não encontrado\n", idRec);
@@ -288,9 +288,9 @@ static void  AceitarRecomendacao(Booked * booked, int idRec, int idDes, int idLi
 } 
 
 static void RejeitarRecomendacao(Booked * booked, int idRec, int idDes, int idLivro,FILE* saida){
-    Leitor* recomendador = retornaLeitorComMesmoId(booked->leitores, idRec);
-    Leitor* destinatario = retornaLeitorComMesmoId(booked->leitores, idDes);
-    Livro* livro = retornaLivroComMesmoId(booked->livros, idLivro);
+    Leitor* recomendador = retornaElemComMesmoId(booked->leitores, idRec, comparaIdLeitor);
+    Leitor* destinatario = retornaElemComMesmoId(booked->leitores, idDes, comparaIdLeitor);
+    Livro* livro = retornaElemComMesmoId(booked->livros, idLivro, comparaIdLivro);
 
     if(recomendador == NULL){
         fprintf(saida,"Erro: Leitor recomendador com ID %d não encontrado\n", idRec);
@@ -334,8 +334,8 @@ static void RejeitarRecomendacao(Booked * booked, int idRec, int idDes, int idLi
 }
 
 static void DescobrirLivrosEmComum(Booked * booked, int idLeitor1, int idLeitor2, FILE * saida){
-    Leitor* Leitor1 = retornaLeitorComMesmoId(booked->leitores, idLeitor1);
-    Leitor* Leitor2 = retornaLeitorComMesmoId(booked->leitores, idLeitor2);
+    Leitor* Leitor1 = retornaElemComMesmoId(booked->leitores, idLeitor1, comparaIdLeitor);
+    Leitor* Leitor2 = retornaElemComMesmoId(booked->leitores, idLeitor2, comparaIdLeitor);
     if(Leitor1 == NULL){
         fprintf(saida,"Erro: Leitor com ID %d não encontrado\n", idLeitor1);
         return;
@@ -347,8 +347,8 @@ static void DescobrirLivrosEmComum(Booked * booked, int idLeitor1, int idLeitor2
 }
 
 static void VerificaAfinidade(Booked * booked, int idLeitor1, int idLeitor2, FILE * saida){
-    Leitor* Leitor1 = retornaLeitorComMesmoId(booked->leitores, idLeitor1);
-    Leitor* Leitor2 = retornaLeitorComMesmoId(booked->leitores, idLeitor2);
+    Leitor* Leitor1 = retornaElemComMesmoId(booked->leitores, idLeitor1, comparaIdLeitor);
+    Leitor* Leitor2 = retornaElemComMesmoId(booked->leitores, idLeitor2,comparaIdLeitor);
     if(Leitor1 == NULL){
         fprintf(saida,"Erro: Leitor com ID %d não encontrado\n", idLeitor1);
         return;
@@ -357,4 +357,102 @@ static void VerificaAfinidade(Booked * booked, int idLeitor1, int idLeitor2, FIL
        fprintf(saida,"Erro: Leitor com ID %d não encontrado\n", idLeitor2);
         return;
     }
+}
+
+Lista * leArquivoLeitores(){
+    /*
+    Id;nome;n_afinidades; afinidades
+    1;Alice;2;Romance; Terror
+    2;Bob;2;Terror;Mistério
+    3;Clara;1;Mistério
+    */
+    Lista  * lista = criaLista();
+    if(lista == NULL){
+        printf("Erro ao Alocar Memória");
+        exit(1);
+    }
+
+    // Abre efetivamente o arquivo
+    FILE * arquivoLeitores;
+    char nomeArquivo[200] = "testes/test2/test2/leitores.txt";
+    arquivoLeitores = fopen(nomeArquivo, "r");
+    if(arquivoLeitores == NULL){
+        printf("Erro ao Abrir arquivo Leitores");
+        exit(1);
+    }
+
+    // Le efetivamente o arquivo
+    fscanf(arquivoLeitores,"%*[^\n]\n"); // Descarta o cabeçalho
+
+    // Coisas a serem lidas:
+    int id, qtdAfin;
+    Lista * Gostos;
+    char afinididade[TAM_GOSTO];
+    char nome[TAM_MAX_NOME_LEITOR];
+    Leitor * novo;
+
+    while(1){
+        if(fscanf(arquivoLeitores, "%d;", &id) == 1){
+            fscanf(arquivoLeitores, "%[^;];", nome);
+
+            fscanf(arquivoLeitores,"%d;",&qtdAfin);
+            Gostos = criaLista();
+
+            for(int i = 0; i < qtdAfin; i++){
+                if(i != qtdAfin-1){
+                    fscanf(arquivoLeitores,"%[^;];", afinididade);
+                }
+                else{
+                    fscanf(arquivoLeitores,"%[^\n]\n", afinididade);
+                }
+                //printf("(%s)", afinididade);
+                char * pontAfinidade = strdup(afinididade);
+                insereElemNoFimDaLista(Gostos, pontAfinidade);
+            }
+            
+             // Descarta TEMPORARIAMENTE as afinidades
+            novo = criaLeitor(id, nome, Gostos);
+            //imprimeleitor(novo);
+            insereElemNoFimDaLista(lista, novo);
+        }
+        else{ 
+            break;
+        }
+    }
+    fclose(arquivoLeitores);
+
+    return lista;
+
+}
+
+Lista * leArquivoLivros(){
+    Lista * lista = criaLista(); //cria a lista de livros
+
+    //abrindo o arquivo pra leitura
+    FILE* livrosArq;
+    char lerlivro[1000];
+    sprintf(lerlivro, "testes/test2/test2/livros.txt"); //aqui eh preciso pensar como nos vamos chegar ate o livros.txt de cada caso de teste
+
+    livrosArq = fopen(lerlivro, "r");
+    if (livrosArq == NULL) {
+        perror("Erro ao abrir o arquivo");
+        exit(1);
+    }
+
+    fscanf(livrosArq,"%*[^\n]\n"); // Descarta o cabeçalho
+
+    while(1){
+        char titulo[100], autor[100], genero[100];
+        int id, ano;
+        
+        int resultado = fscanf(livrosArq, "%d;%[^;];%[^;];%[^;];%d\n", &id, titulo, autor, genero, &ano); //da pra ler isso de forma mais eficiente tbm
+        if (resultado != 5) break;
+
+        Livro* novoLivro = criaLivro(id, titulo, autor, genero, ano);
+        insereElemNoFimDaLista(lista, novoLivro);
+    }
+
+    fclose(livrosArq);
+
+    return lista;
 }

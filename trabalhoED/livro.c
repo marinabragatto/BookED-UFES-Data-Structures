@@ -32,22 +32,22 @@ Livro* criaLivro(int idLivro, char* tituloLivro, char* autorLivro, char* generoL
     return livro;
 }
 
-int comparaId(Livro* livro, int id){
-    return (retornaIdLivro(livro) == id);
+int comparaIdLivro(void * livro, int id){
+    Livro * l = (Livro*)livro;
+
+    return (retornaIdLivro(l) == id);
 }
 
 int retornaIdLivro(Livro* livro){
     return livro->id;
 }
 
-// void imprimeLivro(Livro* livro){
-//     printf("\nId: %d\n", livro->id);
-//     printf("Titulo:");
-//     imprimeNomeLivro(livro);
-//     printf("\nAutor: %s\n", livro->autor);
-//     printf("Genero: %s\n", livro->genero);
-//     printf("Ano: %d", livro->ano);
-// }
+void imprimeLivro(void * livro, FILE * saida){
+    Livro * l = (Livro *)livro;
+
+    imprimeNomeLivro(l, saida, SEM_ASPAS);
+    printf(" ");
+}
 
 void imprimeNomeLivro(Livro* livro, FILE* saida, int aspas){
     switch (aspas){
@@ -64,11 +64,12 @@ void imprimeNomeLivro(Livro* livro, FILE* saida, int aspas){
     // tenho que imprimir no arquivo
 }
 
-void liberaLivro(Livro* livro){
-    if(livro != NULL){
-        if(livro->titulo != NULL) free(livro->titulo);
-        if(livro->autor != NULL) free(livro->autor);
-        if(livro->genero != NULL) free(livro->genero);
+void liberaLivro(void * livro){
+    Livro * l = (Livro *)livro;
+    if(l != NULL){
+        if(l->titulo != NULL) free(l->titulo);
+        if(l->autor != NULL) free(l->autor);
+        if(l->genero != NULL) free(l->genero);
         free(livro);
     }
 }

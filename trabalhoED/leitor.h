@@ -10,13 +10,14 @@
  * @date 09/06/2025
  */
 
+#define TAM_GOSTO 130
 
 #ifndef leitor_h
 #define leitor_h
 
-#include "listaLivros.h"
+#include "lista.h"
 #include "livro.h"
-#include "gostos.h"
+
 
 /// Tipo opaco Leitor.
 typedef struct leitor Leitor;
@@ -35,7 +36,7 @@ typedef struct leitor Leitor;
  * @pre idleitor >= 0, nome != NULL
  * @post Leitor criado e inicializado.
  */
-Leitor* criaLeitor(int idleitor, char * nome, VetorGostos * VetorAfinidades);  // PASSAR COMO PARAMETRO TAMBEM A LISTA CHAR DE AFINIDADES?
+Leitor* criaLeitor(int idleitor, char * nome, Lista * gostos);  // PASSAR COMO PARAMETRO TAMBEM A LISTA CHAR DE AFINIDADES?
 
 /**
  * @brief Compara o ID fornecido com o ID de um leitor.
@@ -49,7 +50,7 @@ Leitor* criaLeitor(int idleitor, char * nome, VetorGostos * VetorAfinidades);  /
  * @pre leitor != NULL
  * @post Retorna 0 ou 1.
  */
-int comparaIdLeitor(Leitor * leitor, int id);
+int comparaIdLeitor(void * leitor, int id);
 
 /**
  * @brief Retorna o ID de um leitor.
@@ -69,7 +70,7 @@ int retornaIdleitor(Leitor * leitor);
  * 
  * @pre leitor != NULL
  */
-void imprimeleitor(Leitor * leitor, FILE* saida);
+void imprimeleitor(void * leitor, FILE* saida);
 
 /**
  * @brief Imprime o nome do leitor no arquivo de saida.
@@ -88,7 +89,7 @@ void imprimeNomeLeitor(Leitor* leitor, FILE* saida);
  * @pre leitor != NULL
  * @post Memória liberada.
  */
-void liberaleitor(Leitor* leitor);
+void liberaleitor(void * leitor);
 
 
 /**
@@ -128,6 +129,8 @@ void retiraLivroDaListaLeitor(Leitor* leitor, Livro* livro);
  */
 int verificaLivroEstaNaListaLeitor(Leitor* leitor, Livro* livro, int lista);
 
-ListaLivros * LivrosEmComumLeitores(Leitor * leitor1, Leitor * leitor2);
+Lista * LivrosEmComumLeitores(Leitor * leitor1, Leitor * leitor2);
+void imprimirLivrosLeitor(Lista * lista, FILE * saida);
+void ImprimeGostos(Lista * gostos, FILE* saida);
 
 #endif

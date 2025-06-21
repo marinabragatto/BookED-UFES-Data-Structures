@@ -3,13 +3,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-typedef struct celula Celula;
-
-struct celula {
-    void * elemento;    ///< Ponteiro para o elemento armazenado
-    Celula * ant;       ///< Ponteiro para a célula anterior
-    Celula * prox;      ///< Ponteiro para a próxima célula
-};
 
 struct lista{
     Celula * prim;      ///< Ponteiro para a primeira célula
@@ -70,17 +63,18 @@ void liberaLista(Lista * lista, void (*libera)(void*)){
 }
 
 void liberaListaParcialmente(Lista * lista){
-    if(lista){
-        Celula * atual;
-        atual = lista->prim;
-        while(atual){
-            // NÃO LIBERA O ELEMENTO (leitor), só a célula
-            free(atual);
-            atual = atual->prox;
-        }
+    Celula* atual = lista->prim;
+    Celula* seguinte;
 
-        free(lista);
+    while (atual != NULL) {
+        seguinte = atual->prox;
+        //liberaLivro(atual->livro); //Não Libera o Livro em si
+        free(atual);
+        atual = seguinte;
     }
+
+    free(lista);
+
 }
 
 void imprimeLista(Lista * lista, void (*imprime)(void*, FILE*), FILE* saida){
@@ -104,4 +98,41 @@ void * retornaElemComMesmoId(Lista* lista, int id, int (*compara)(void *, int)){
     }
   
     return NULL;
+}
+
+void retiraElemLista(Lista * lista, int idLivro, int (*compara)(void *, int)){
+    Celula* aux;
+
+    for(aux = lista->prim; aux != NULL; aux = aux->prox){
+        if(compara(aux->elemento, idLivro)) break;
+    }
+
+    if(aux == lista->prim && aux == lista->ult){
+        lista->prim = NULL;
+        lista->ult = NULL;
+        free(aux);
+        return;
+    }
+    
+    if(aux == lista->prim){
+        lista->prim = aux->prox;
+        lista->prim->ant = NULL;
+        free(aux);
+        return;
+    }
+    
+    if(aux == lista->ult){
+        lista->ult = aux->ant;
+        lista->ult->prox = NULL;
+        free(aux);
+        return;
+    }
+
+    aux->prox->ant = aux->ant;
+    aux->ant->prox = aux->prox;
+    free(aux);
+}
+
+Celula * retornaPrimeiraCelulaLista(Lista * lista){
+    return lista->prim;
 }

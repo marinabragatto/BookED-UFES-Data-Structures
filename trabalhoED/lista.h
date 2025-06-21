@@ -3,6 +3,14 @@
 
 #include <stdio.h>
 
+typedef struct celula Celula;
+
+struct celula {
+    void * elemento;    ///< Ponteiro para o elemento armazenado
+    Celula * ant;       ///< Ponteiro para a célula anterior
+    Celula * prox;      ///< Ponteiro para a próxima célula
+};
+
 typedef struct lista Lista;
 
 Lista * criaLista();
@@ -16,5 +24,9 @@ void liberaListaParcialmente(Lista * lista);
 void imprimeLista(Lista * lista, void (*imprime)(void*, FILE*), FILE* saida);
 
 void * retornaElemComMesmoId(Lista* lista, int id, int (*compara)(void *, int));
+
+void retiraElemLista(Lista * lista, int idLivro, int (*compara)(void *, int));
+
+Celula * retornaPrimeiraCelulaLista(Lista * lista);
 
 #endif
