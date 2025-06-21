@@ -44,7 +44,7 @@ void FuncionaBooked(Booked* booked){
 
     FILE* ComandosArq;
     char leComandos[1000];
-    sprintf(leComandos, "testes/test2/test2/comandos.txt");
+    sprintf(leComandos, "testes/test1/test1/comandos.txt");
 
     ComandosArq = fopen(leComandos, "r");
     if (ComandosArq == NULL) {
@@ -344,6 +344,23 @@ static void DescobrirLivrosEmComum(Booked * booked, int idLeitor1, int idLeitor2
        fprintf(saida,"Erro: Leitor com ID %d não encontrado\n", idLeitor2);
         return;
     }
+    
+    Lista * comum = LivrosEmComumLeitores(Leitor1, Leitor2);
+        fprintf(saida, "Livros em comum entre ");
+        imprimeNomeLeitor(Leitor1, saida);
+        fprintf(saida, " e ");
+        imprimeNomeLeitor(Leitor2, saida);
+        fprintf(saida,": ");
+    if(comum){
+        imprimirLivrosLeitor(comum, saida);
+        fprintf(saida,"\n");
+        liberaListaParcialmente(comum);
+    }
+    else{
+        fprintf(saida,"Nenhum livro em comum\n");
+    }
+   
+    
 }
 
 static void VerificaAfinidade(Booked * booked, int idLeitor1, int idLeitor2, FILE * saida){
@@ -374,7 +391,7 @@ Lista * leArquivoLeitores(){
 
     // Abre efetivamente o arquivo
     FILE * arquivoLeitores;
-    char nomeArquivo[200] = "testes/test2/test2/leitores.txt";
+    char nomeArquivo[200] = "testes/test1/test1/leitores.txt";
     arquivoLeitores = fopen(nomeArquivo, "r");
     if(arquivoLeitores == NULL){
         printf("Erro ao Abrir arquivo Leitores");
@@ -431,7 +448,7 @@ Lista * leArquivoLivros(){
     //abrindo o arquivo pra leitura
     FILE* livrosArq;
     char lerlivro[1000];
-    sprintf(lerlivro, "testes/test2/test2/livros.txt"); //aqui eh preciso pensar como nos vamos chegar ate o livros.txt de cada caso de teste
+    sprintf(lerlivro, "testes/test1/test1/livros.txt"); //aqui eh preciso pensar como nos vamos chegar ate o livros.txt de cada caso de teste
 
     livrosArq = fopen(lerlivro, "r");
     if (livrosArq == NULL) {

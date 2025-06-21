@@ -1,63 +1,48 @@
-23a24,27
-> Livros em comum entre Ana e Bruno: Duna
-> Livros em comum entre Diana e Eduardo: Nenhum livro em comum
-> Livros em comum entre Gabriel e Helena: Nenhum livro em comum
-> Livros em comum entre Ana e Diana: Nenhum livro em comum
-24a29,35
-> Existe afinidade entre Ana e Bruno
-> Existe afinidade entre Diana e Eduardo
-> Existe afinidade entre Gabriel e Helena
-> Não existe afinidade entre Ana e Diana
-> Não existe afinidade entre Ana e Júlia
-> Não existe afinidade entre Diana e Gabriel
-> Não existe afinidade entre Bruno e Helena
-50c61,62
-< Afinidades: Ficção Científica, Tecnologia
+17a18,22
+> Existe afinidade entre Marcus e Gaius
+> Existe afinidade entre Marcus e Lucius
+> Existe afinidade entre Lucius e Julia
+> Existe afinidade entre Julia e Claudia
+> Existe afinidade entre Claudia e Livia
+41a47,48
+> Existe afinidade entre Marcus e Gaius
+> Existe afinidade entre Lucius e Julia
+52a60,67
+> Existe afinidade entre Marcus e Lucius
+> Existe afinidade entre Julia e Claudia
+> Existe afinidade entre Lucius e Julia
+> Existe afinidade entre Claudia e Livia
+> Existe afinidade entre Marcus e Livia
+> Existe afinidade entre Marcus e Julia
+> Existe afinidade entre Gaius e Claudia
+> Existe afinidade entre Lucius e Livia
+59c74,75
+< Afinidades: Romance, Terror
 ---
-> Afinidades: Bruno, Carlos
+> Afinidades: Lucius, Gaius
 > 
-55c67,68
-< Afinidades: Ficção Científica
+64c80,81
+< Afinidades: Terror, Mistério
 ---
-> Afinidades: Ana
+> Afinidades: Marcus, Julia, Gaius, Claudia
 > 
-60c73,74
-< Afinidades: Tecnologia, Ciência
+69c86,87
+< Afinidades: Mistério
 ---
-> Afinidades: Ana
+> Afinidades: Lucius, Claudia
 > 
-65c79,80
-< Afinidades: Romance, Drama
+74c92,93
+< Afinidades: Romance, Terror
 ---
-> Afinidades: Eduardo, Fernanda
+> Afinidades: Marcus, Lucius
 > 
-70c85,86
-< Afinidades: Romance
+79c98,99
+< Afinidades: Mistério, História
 ---
-> Afinidades: Diana
+> Afinidades: Lucius, Julia, Livia
 > 
-75c91,92
-< Afinidades: Drama, Literatura
+84c104,105
+< Afinidades: História
 ---
-> Afinidades: Diana
-> 
-80c97,98
-< Afinidades: Terror
----
-> Afinidades: Helena
-> 
-85c103,104
-< Afinidades: Terror, Suspense
----
-> Afinidades: Gabriel, Igor
-> 
-90c109,110
-< Afinidades: Suspense
----
-> Afinidades: Helena
-> 
-95c115,116
-< Afinidades: Biografia
----
-> Afinidades: 
+> Afinidades: Claudia
 > 

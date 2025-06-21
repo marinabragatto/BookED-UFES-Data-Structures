@@ -254,6 +254,30 @@ int verificaLivroEstaNaListaLeitor(Leitor* leitor, Livro* livro, int lista){
 }
 
 Lista* LivrosEmComumLeitores(Leitor * leitor1, Leitor * leitor2){
+
+    Celula * lidosL1 = retornaPrimeiraCelulaLista(leitor1->lidos);
+    Livro * livro = lidosL1->elemento;
+    int qtd = 0;
+
+    // Criação de uma lista (apenas para fim de printar ela) que contém os livros lidos em comum
+    Lista * comum = criaLista();
+
+    while(lidosL1){
+        livro = lidosL1->elemento;
+        if(verificaLivroEstaNaListaLeitor(leitor2, livro, LIDOS)){
+            insereElemNoFimDaLista(comum, livro);
+            qtd++;
+        }
+        lidosL1 = lidosL1->prox;  
+    }
+
+
+    if(qtd > 0){
+        return comum;
+    }
+    liberaListaParcialmente(comum);
+    return NULL;
+    
     
    // verificaLivroEstaNaListaLeitor(leitor2, Livro* livro, LIDOS);
 }
