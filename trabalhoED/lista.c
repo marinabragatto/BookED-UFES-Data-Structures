@@ -25,7 +25,6 @@ void insereElemNoFimDaLista(Lista * lista, void * elemNovo){
     Celula * nova;
     nova = (Celula*)malloc(sizeof(Celula));
     if(nova == NULL){
-        printf("Erro ao alocar memoria!\n");
         exit(1);
     }
     nova->elemento = elemNovo;
@@ -100,11 +99,11 @@ void * retornaElemComMesmoId(Lista* lista, void * chave, int (*compara)(void *, 
     return NULL;
 }
 
-void retiraElemLista(Lista * lista, int idLivro, int (*compara)(void *, int)){
+void retiraElemLista(Lista * lista, void * chave, int (*compara)(void *, void *)){
     Celula* aux;
 
     for(aux = lista->prim; aux != NULL; aux = aux->prox){
-        if(compara(aux->elemento, idLivro)) break;
+        if(compara(aux->elemento, chave)) break;
     }
 
     if(aux == lista->prim && aux == lista->ult){

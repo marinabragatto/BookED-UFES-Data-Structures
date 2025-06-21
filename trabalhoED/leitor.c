@@ -105,20 +105,23 @@ Afinidades: Alice, Clara
     Leitor * l = (Leitor*)leitor;
 
     fprintf(saida, "Leitor: %s\n", l->nome);
+
     fprintf(saida, "Lidos: ");
     imprimirLivrosLeitor(l->lidos, saida);
-    // função Thais de imprimir os livros
     fprintf(saida, "\n");
+
     fprintf(saida, "Desejados: ");
     imprimirLivrosLeitor(l->desejados, saida);
     fprintf(saida, "\n");
+
     fprintf(saida, "Recomendacoes: ");
     imprimirLivrosLeitor(l->recomendacoes, saida);
-    // função Thais de imprimir os livros
     fprintf(saida, "\n");
+
     fprintf(saida, "Afinidades: ");
-    ImprimeGostos(l->gostos, saida);
-    //  função Marina de imprimir pessoas
+    imprimirLeitores(l->afinidadesDiretas, saida);
+    fprintf(saida, "\n");
+   // ImprimeGostos(l->gostos, saida);
     fprintf(saida, "\n");
 
 }
@@ -220,7 +223,7 @@ void insereLivroNaListaLeitor(Leitor* leitor, Livro* livro, int lista){
  */
 void retiraLivroDaListaLeitor(Leitor* leitor, Livro* livro){
     int id = retornaIdLivro(livro);
-    retiraElemLista(leitor->recomendacoes,&id , comparaIdLivro);
+    retiraElemLista(leitor->recomendacoes, &id , comparaIdLivro);
 }
 
 
@@ -261,7 +264,7 @@ int verificaLivroEstaNaListaLeitor(Leitor* leitor, Livro* livro, int lista){
 Lista* LivrosEmComumLeitores(Leitor * leitor1, Leitor * leitor2){
 
     Celula * lidosL1 = retornaPrimeiraCelulaLista(leitor1->lidos);
-    Livro * livro = lidosL1->elemento;
+    Livro * livro;
     int qtd = 0;
 
     // Criação de uma lista (apenas para fim de printar ela) que contém os livros lidos em comum
@@ -309,25 +312,84 @@ void ImprimeGostos(Lista * gostos, FILE* saida){
             fprintf(saida, ", ");
         }
     }
-    printf("\n");
+    fprintf(saida,"\n");
 }
 
 void ConectaAfinidadesDireta(Lista * leitores){
-    Celula * leitorCel = retornaPrimeiraCelulaLista(leitores); // Recebe célula do primeiro leitor da lista 
-    Leitor * leitor = ((Leitor*)leitorCel->elemento); // Recebe o primeiro leitor
+    Celula * leitorCel1 = retornaPrimeiraCelulaLista(leitores); // Recebe célula do primeiro leitor da lista 
+    Leitor * leitor1; // Recebe o primeiro leitor
 
-    Celula * gostoCel = retornaPrimeiraCelulaLista(leitor->gostos); // Recebe a célula da lista de gostos, do primeiro leitor
     
-    char * gosto = gostoCel->elemento; // Recebe primeiro gosto
-
     Celula * leitorCel2 = retornaPrimeiraCelulaLista(leitores); // Recebe célula do primeiro leitor da lista 
-    Leitor * leitor2 = ((Leitor*)leitorCel->elemento); // Recebe o primeiro leitor
+    Leitor * leitor2; // Recebe o primeiro leitor
 
-    // while(leitorCel){
-    //     while(leitorCel2){
-    //         if(verificaGostoEstaNaListaLeitor(leitor2, gosto)){
+    while(leitorCel1){
+        leitor1 = leitorCel1->elemento;
 
-    //         }
-    //     }
-    // }
+        while(leitorCel2){
+            leitor2 = leitorCel2->elemento;
+            if(leitor2 != leitor1 && !verificaAfinidadeJaExiste(leitor2, leitor1)){
+                if(verificaCompatibilidade(leitor2, leitor1)){
+                    insereElemNoFimDaLista(leitor1->afinidadesDiretas, leitor2);
+                    insereElemNoFimDaLista(leitor2->afinidadesDiretas, leitor1);
+                }
+            }
+            leitorCel2 = leitorCel2->prox;
+        }
+        leitorCel2 = retornaPrimeiraCelulaLista(leitores); 
+        leitorCel1 = leitorCel1->prox;
+        
+    }
+}
+
+
+int verificaCompatibilidade(Leitor * leitor2, Leitor * leitor1){
+    Celula * gostoCel1 = retornaPrimeiraCelulaLista(leitor1->gostos); // Recebe a célula da lista de gostos, do primeiro leitor
+    char * gosto1; // Recebe primeiro gosto
+
+    Celula * gostoCel2 = retornaPrimeiraCelulaLista(leitor2->gostos); // Recebe a célula da lista de gostos, do primeiro leitor
+    char * gosto2; // Recebe primeiro gosto
+    
+    while(gostoCel1){
+        gosto1 = gostoCel1->elemento;
+
+        while(gostoCel2){
+            gosto2 = gostoCel2->elemento;
+            if(!strcmp(gosto1, gosto2)){
+                return 1;
+            }
+            gostoCel2 = gostoCel2->prox;
+        }
+        gostoCel1 = gostoCel1->prox;
+    }
+
+    return 0;
+
+}
+
+int verificaAfinidadeJaExiste(Leitor * leitor2, Leitor * leitor1){
+    Leitor * leitor = retornaElemComMesmoId(leitor1->afinidadesDiretas, leitor2 , comparaDoisLeitores);
+    return (leitor != NULL);
+}
+
+int comparaDoisLeitores(void * leitor2, void * leitor1){
+    if(leitor1 == leitor2){
+        return 1;
+    }
+    return 0;
+
+}
+
+void imprimirLeitores(Lista * leitores, FILE * saida){
+    Celula* aux = retornaPrimeiraCelulaLista(leitores);
+    Leitor * leitor;
+
+    for(; aux != NULL; aux = aux->prox){
+        leitor = aux->elemento;
+        imprimeNomeLeitor(leitor, saida);
+        //(aux->elemento, saida, SEM_ASPAS);
+        if(aux->prox != NULL){
+            fprintf(saida, ", ");
+        }
+    }
 }

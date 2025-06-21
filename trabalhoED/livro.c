@@ -19,7 +19,6 @@ struct livro{
 Livro* criaLivro(int idLivro, char* tituloLivro, char* autorLivro, char* generoLivro, int anoLivro){
     Livro* livro = malloc(sizeof(struct livro));
     if(livro == NULL){
-        printf("Erro ao alocar memoria!\n");
         exit(1);
     }
 
@@ -44,9 +43,7 @@ int retornaIdLivro(Livro* livro){
 
 void imprimeLivro(void * livro, FILE * saida){
     Livro * l = (Livro *)livro;
-
     imprimeNomeLivro(l, saida, SEM_ASPAS);
-    printf(" ");
 }
 
 void imprimeNomeLivro(Livro* livro, FILE* saida, int aspas){

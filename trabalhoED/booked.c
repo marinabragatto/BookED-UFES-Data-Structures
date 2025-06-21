@@ -44,7 +44,7 @@ void FuncionaBooked(Booked* booked){
 
     FILE* ComandosArq;
     char leComandos[1000];
-    sprintf(leComandos, "testes/test1/test1/comandos.txt");
+    sprintf(leComandos, "testes/test0/test0/comandos.txt");
 
     ComandosArq = fopen(leComandos, "r");
     if (ComandosArq == NULL) {
@@ -374,21 +374,36 @@ static void VerificaAfinidade(Booked * booked, int idLeitor1, int idLeitor2, FIL
        fprintf(saida,"Erro: Leitor com ID %d não encontrado\n", idLeitor2);
         return;
     }
+
+    // VERIFICA AFINIDADE DIRETA
+    if(verificaAfinidadeJaExiste(Leitor1, Leitor2)){
+        fprintf(saida,"Existe afinidade entre ");
+        imprimeNomeLeitor(Leitor1, saida);
+        fprintf(saida," e ");
+        imprimeNomeLeitor(Leitor2, saida);
+        fprintf(saida,"\n");
+    }
+    else{
+        fprintf(saida,"Não existe afinidade entre ");
+        imprimeNomeLeitor(Leitor1, saida);
+        fprintf(saida," e ");
+        imprimeNomeLeitor(Leitor2, saida);
+        fprintf(saida,"\n");
+    }
+
 }
 
 Lista * leArquivoLeitores(){
     Lista  * lista = criaLista();
     if(lista == NULL){
-        printf("Erro ao Alocar Memória");
         exit(1);
     }
 
     // Abre efetivamente o arquivo
     FILE * arquivoLeitores;
-    char nomeArquivo[200] = "testes/test1/test1/leitores.txt";
+    char nomeArquivo[200] = "testes/test0/test0/leitores.txt";
     arquivoLeitores = fopen(nomeArquivo, "r");
     if(arquivoLeitores == NULL){
-        printf("Erro ao Abrir arquivo Leitores");
         exit(1);
     }
 
@@ -416,7 +431,6 @@ Lista * leArquivoLeitores(){
                 else{
                     fscanf(arquivoLeitores,"%[^\n]\n", afinididade);
                 }
-                //printf("(%s)", afinididade);
                 char * pontAfinidade = strdup(afinididade);
                 insereElemNoFimDaLista(Gostos, pontAfinidade);
             }
@@ -431,7 +445,7 @@ Lista * leArquivoLeitores(){
         }
     }
     fclose(arquivoLeitores);
-    //ConectaAfinidadesDireta(lista);
+    ConectaAfinidadesDireta(lista);
 
     return lista;
 
@@ -443,7 +457,7 @@ Lista * leArquivoLivros(){
     //abrindo o arquivo pra leitura
     FILE* livrosArq;
     char lerlivro[1000];
-    sprintf(lerlivro, "testes/test1/test1/livros.txt"); //aqui eh preciso pensar como nos vamos chegar ate o livros.txt de cada caso de teste
+    sprintf(lerlivro, "testes/test0/test0/livros.txt"); //aqui eh preciso pensar como nos vamos chegar ate o livros.txt de cada caso de teste
 
     livrosArq = fopen(lerlivro, "r");
     if (livrosArq == NULL) {
