@@ -18,7 +18,7 @@ struct leitor {
     Lista * lidos;
     Lista * desejados;
     Lista * recomendacoes;
-    // ListaLeitores * afinidades;
+    Lista * afinidadesDiretas;
     Lista * gostos;
 };
 
@@ -46,6 +46,7 @@ Leitor* criaLeitor(int idleitor, char * nome, Lista * Gostos){// PASSAR COMO PAR
     leitor->recomendacoes = criaLista();
     leitor->desejados = criaLista();
     leitor->lidos = criaLista();
+    leitor->afinidadesDiretas = criaLista();
     
     
     return leitor;
@@ -169,6 +170,9 @@ void liberaleitor(void * leitor){
         }
         if(l->gostos){
             liberaLista(l->gostos, free);
+        }
+        if(l->afinidadesDiretas){
+            liberaListaParcialmente(l->afinidadesDiretas);
         }
         free(l);
     }
@@ -305,4 +309,24 @@ void ImprimeGostos(Lista * gostos, FILE* saida){
         }
     }
     printf("\n");
+}
+
+void ConectaAfinidadesDireta(Lista * leitores){
+    /*Celula * leitorCel = retornaPrimeiraCelulaLista(leitores); // Recebe célula do primeiro leitor da lista 
+    Leitor * leitor = ((Leitor*)leitorCel->elemento); // Recebe o primeiro leitor
+
+    Celula * gostoCel = retornaPrimeiraCelulaLista(leitor->gostos); // Recebe a célula da lista de gostos, do primeiro leitor
+    
+    char * gosto = gostoCel->elemento; // Recebe primeiro gosto
+
+    Celula * leitorCel2 = retornaPrimeiraCelulaLista(leitores); // Recebe célula do primeiro leitor da lista 
+    Leitor * leitor2 = ((Leitor*)leitorCel->elemento); // Recebe o primeiro leitor
+
+    while(leitorCel){
+        while(leitorCel2){
+        //    if(verificaGostoEstaNaListaLeitor(leitor2, gosto)){
+
+          //  }
+        }
+    }*/
 }

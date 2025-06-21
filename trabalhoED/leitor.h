@@ -132,5 +132,6 @@ int verificaLivroEstaNaListaLeitor(Leitor* leitor, Livro* livro, int lista);
 Lista * LivrosEmComumLeitores(Leitor * leitor1, Leitor * leitor2);
 void imprimirLivrosLeitor(Lista * lista, FILE * saida);
 void ImprimeGostos(Lista * gostos, FILE* saida);
+void ConectaAfinidadesDireta(Lista * leitores);
 
 #endif

@@ -136,3 +136,4 @@ void retiraElemLista(Lista * lista, int idLivro, int (*compara)(void *, int)){
 Celula * retornaPrimeiraCelulaLista(Lista * lista){
     return lista->prim;
 }
+

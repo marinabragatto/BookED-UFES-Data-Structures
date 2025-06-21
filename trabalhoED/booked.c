@@ -377,12 +377,6 @@ static void VerificaAfinidade(Booked * booked, int idLeitor1, int idLeitor2, FIL
 }
 
 Lista * leArquivoLeitores(){
-    /*
-    Id;nome;n_afinidades; afinidades
-    1;Alice;2;Romance; Terror
-    2;Bob;2;Terror;Mistério
-    3;Clara;1;Mistério
-    */
     Lista  * lista = criaLista();
     if(lista == NULL){
         printf("Erro ao Alocar Memória");
@@ -437,6 +431,7 @@ Lista * leArquivoLeitores(){
         }
     }
     fclose(arquivoLeitores);
+   // ConectaAfinidadesDireta(lista);
 
     return lista;
 
@@ -473,3 +468,5 @@ Lista * leArquivoLivros(){
 
     return lista;
 }
+
+
