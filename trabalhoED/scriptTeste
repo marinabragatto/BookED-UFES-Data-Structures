@@ -4,3 +4,4 @@ set -x  # mostra os comandos executados
 
 gcc -o prog *.c
 valgrind ./prog > saidas/saida1.txt
+diff saidas/saida.txt testes/test2/test2/saida.txt > saidas/diff.txt

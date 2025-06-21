@@ -1,6 +1,7 @@
 #ifndef booked_h
 #define booked_h
 
+#include "lista.h"
 #include "listaLivros.h"
 #include "listaLeitores.h"
 

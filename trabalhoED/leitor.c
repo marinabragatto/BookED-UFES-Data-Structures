@@ -116,7 +116,7 @@ Afinidades: Alice, Clara
     fprintf(saida, "Afinidades: ");
     ImprimeGostos(leitor->gostos, saida);
     //  função Marina de imprimir pessoas
-    fprintf(saida, "\n\n");
+    fprintf(saida, "\n");
 
 }
 
@@ -244,4 +244,9 @@ int verificaLivroEstaNaListaLeitor(Leitor* leitor, Livro* livro, int lista){
     }
 
     return (l != NULL);
+}
+
+ListaLivros * LivrosEmComumLeitores(Leitor * leitor1, Leitor * leitor2){
+    
+   // verificaLivroEstaNaListaLeitor(leitor2, Livro* livro, LIDOS);
 }

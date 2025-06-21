@@ -128,5 +128,6 @@ void retiraLivroDaListaLeitor(Leitor* leitor, Livro* livro);
  */
 int verificaLivroEstaNaListaLeitor(Leitor* leitor, Livro* livro, int lista);
 
+ListaLivros * LivrosEmComumLeitores(Leitor * leitor1, Leitor * leitor2);
 
 #endif

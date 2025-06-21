@@ -52,7 +52,7 @@ int retornaIdLivro(Livro* livro){
 void imprimeNomeLivro(Livro* livro, FILE* saida, int aspas){
     switch (aspas){
     case COM_ASPAS:
-        fprintf(saida, " \"%s\" ", livro->titulo);
+        fprintf(saida, "\"%s\"", livro->titulo);
     break;
     
     case SEM_ASPAS:

@@ -1,26 +1,27 @@
-Ana leu "Duna" 
-Ana leu "Fundação" 
-Bruno leu "Duna" 
-Carlos leu "Neuromancer" 
-Diana leu "Orgulho e Preconceito" 
-Eduardo leu "Como Eu Era Antes de Você" 
-Fernanda leu "Hamlet" 
-Gabriel leu "O Iluminado" 
-Helena leu "Drácula" 
-Igor leu "Psicose" 
-Júlia leu "Steve Jobs" 
-Ana deseja ler "Sapiens" 
-Diana deseja ler "Como Eu Era Antes de Você" 
-Gabriel deseja ler "A Garota no Trem" 
-Júlia deseja ler "Einstein" 
-Bruno não precisa da recomendação de "Duna" pois já leu este livro 
-Ana não precisa da recomendação de "Fundação" pois já leu este livro 
+Ana leu "Duna"
+Ana leu "Fundação"
+Bruno leu "Duna"
+Carlos leu "Neuromancer"
+Diana leu "Orgulho e Preconceito"
+Eduardo leu "Como Eu Era Antes de Você"
+Fernanda leu "Hamlet"
+Gabriel leu "O Iluminado"
+Helena leu "Drácula"
+Igor leu "Psicose"
+Júlia leu "Steve Jobs"
+Ana deseja ler "Sapiens"
+Diana deseja ler "Como Eu Era Antes de Você"
+Gabriel deseja ler "A Garota no Trem"
+Júlia deseja ler "Einstein"
+Bruno não precisa da recomendação de "Duna" pois já leu este livro
+Ana não precisa da recomendação de "Fundação" pois já leu este livro
 Diana recomenda "Orgulho e Preconceito" para Eduardo
 Gabriel recomenda "O Iluminado" para Helena
 Helena recomenda "Drácula" para Igor
-Bruno aceita recomendação "Duna" de Ana
+Bruno não possui recomendação do livro ID 1 feita por Ana
 Eduardo aceita recomendação "Orgulho e Preconceito" de Diana
 Helena aceita recomendação "O Iluminado" de Gabriel
+Erro: Leitor com ID 15 não encontrado
 Erro: Leitor com ID 99 não encontrado
 Erro: Livro com ID 99 não encontrado
 Erro: Leitor com ID 99 não encontrado
@@ -28,25 +29,31 @@ Erro: Livro com ID 99 não encontrado
 Erro: Leitor recomendador com ID 99 não encontrado
 Erro: Livro com ID 99 não encontrado
 Erro: Leitor destinatário com ID 99 não encontrado
-Erro: Leitor destinatário com ID 1 não encontrado
-Erro: Livro com ID 99 não encontrado
+Erro: Leitor com ID 99 não encontrado
+Ana não possui recomendação do livro ID 99 feita por Ana
 Erro: Leitor recomendador com ID 99 não encontrado
-Erro: Leitor destinatário com ID 99 não encontrado
-Erro: Livro com ID 99 não encontrado
+Erro: Leitor com ID 99 não encontrado
+Ana não possui recomendação do livro ID 99 feita por Ana
 Erro: Leitor recomendador com ID 99 não encontrado
+Erro: Leitor com ID 99 não encontrado
+Erro: Leitor com ID 99 não encontrado
+Erro: Leitor com ID 99 não encontrado
+Erro: Leitor com ID 99 não encontrado
+Erro: Comando 9 não reconhecido
+Erro: Comando 0 não reconhecido
+Imprime toda a BookED
+
 Leitor: Ana
 Lidos: Duna, Fundação
 Desejados: Sapiens
 Recomendacoes: 
 Afinidades: Ficção Científica, Tecnologia
 
-
 Leitor: Bruno
 Lidos: Duna
-Desejados: Duna
+Desejados: 
 Recomendacoes: 
 Afinidades: Ficção Científica
-
 
 Leitor: Carlos
 Lidos: Neuromancer
@@ -54,13 +61,11 @@ Desejados:
 Recomendacoes: 
 Afinidades: Tecnologia, Ciência
 
-
 Leitor: Diana
 Lidos: Orgulho e Preconceito
 Desejados: Como Eu Era Antes de Você
 Recomendacoes: 
 Afinidades: Romance, Drama
-
 
 Leitor: Eduardo
 Lidos: Como Eu Era Antes de Você
@@ -68,13 +73,11 @@ Desejados: Orgulho e Preconceito
 Recomendacoes: 
 Afinidades: Romance
 
-
 Leitor: Fernanda
 Lidos: Hamlet
 Desejados: 
 Recomendacoes: 
 Afinidades: Drama, Literatura
-
 
 Leitor: Gabriel
 Lidos: O Iluminado
@@ -82,13 +85,11 @@ Desejados: A Garota no Trem
 Recomendacoes: 
 Afinidades: Terror
 
-
 Leitor: Helena
 Lidos: Drácula
 Desejados: O Iluminado
 Recomendacoes: 
 Afinidades: Terror, Suspense
-
 
 Leitor: Igor
 Lidos: Psicose
@@ -96,11 +97,9 @@ Desejados:
 Recomendacoes: Drácula
 Afinidades: Suspense
 
-
 Leitor: Júlia
 Lidos: Steve Jobs
 Desejados: Einstein
 Recomendacoes: 
 Afinidades: Biografia
-
 

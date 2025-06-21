@@ -5,6 +5,8 @@
 #define ADICIONA_LIVRO_RECOMENDADO 3
 #define ACEITAR_RECOMENDACAO 4
 #define REJEITAR_RECOMENDACAO 5
+#define LIVROS_EM_COMUM 6
+#define VERIFICAR_AFINIDADE 7
 #define IMPRIME_BOOKED 8
 
 
@@ -19,6 +21,8 @@ static void AdicionaLivroDesejado(Booked * booked, int idLeitor, int idLivro, FI
 static void RecomendarUmLivro(Booked * booked, int idRec, int idDes, int idLivro, FILE* saida);
 static void  AceitarRecomendacao(Booked * booked, int idRec, int idDes, int idLivro, FILE* saida);
 static void RejeitarRecomendacao(Booked * booked, int idRec, int idDes, int idLivro, FILE* saida);
+static void DescobrirLivrosEmComum(Booked * booked, int idLeitor1, int idLeitor2, FILE * saida);
+static void VerificaAfinidade(Booked * booked, int idLeitor1, int idLeitor2, FILE * saida);
 
 Booked* InicializaBooked(){
     Booked* booked = malloc(sizeof(struct booked));
@@ -72,10 +76,6 @@ void LiberaBooked(Booked* booked){
 }
 
 void ExecutaComando(Booked* booked, int idComando, int param1, int param2, int param3, FILE* saida){
-    Leitor* leitor1 = retornaLeitorComMesmoId(booked->leitores, param1);
-    Leitor* leitor2 = retornaLeitorComMesmoId(booked->leitores, param3);
-    Livro* livro = retornaLivroComMesmoId(booked->livros, param2);
-
 
     switch (idComando){
         case ADICIONA_LIVRO_LIDO:
@@ -102,12 +102,23 @@ void ExecutaComando(Booked* booked, int idComando, int param1, int param2, int p
             ImprimeBooked(booked, saida);
         break;
 
-        default:
+        case LIVROS_EM_COMUM:
+            DescobrirLivrosEmComum(booked, param1, param3, saida);
         break;
+
+        case VERIFICAR_AFINIDADE:
+            VerificaAfinidade(booked, param1, param3, saida);
+        break;
+
+        default:
+            fprintf(saida,"Erro: Comando %d não reconhecido\n", idComando);
+        break;
+
     }
 }
 
 void ImprimeBooked(Booked* booked, FILE* saida){
+    fprintf(saida,"Imprime toda a BookED\n\n");
     imprimeLeitoresDaLista(booked->leitores, saida); //colocar o arquivo de saida aqui tbm 
 }
 
@@ -130,14 +141,14 @@ static void AdicionaLivroLido(Booked * booked, int idLeitor, int idLivro, FILE* 
 
         //PARTE DE IMPRESSÃO
         imprimeNomeLeitor(leitor, saida);
-        fprintf(saida, " leu");
+        fprintf(saida, " leu ");
         imprimeNomeLivro(livro, saida, COM_ASPAS);
         fprintf(saida, "\n");
     }
     else{
         //PARTE DE IMPRESSÃO
         imprimeNomeLeitor(leitor, saida);    
-        fprintf(saida, " já leu");
+        fprintf(saida, " já leu ");
         imprimeNomeLivro(livro, saida, COM_ASPAS);
         fprintf(saida, "\n");
     }
@@ -162,7 +173,7 @@ static void AdicionaLivroDesejado(Booked * booked, int idLeitor, int idLivro,FIL
 
         //PARTE DE IMPRESSÃO
         imprimeNomeLeitor(leitor, saida);
-        fprintf(saida, " deseja ler");
+        fprintf(saida, " deseja ler ");
         imprimeNomeLivro(livro, saida, COM_ASPAS);
         fprintf(saida, "\n");
         
@@ -170,7 +181,7 @@ static void AdicionaLivroDesejado(Booked * booked, int idLeitor, int idLivro,FIL
     else{
         //PARTE DE IMPRESSÃO
         imprimeNomeLeitor(leitor, saida);
-        fprintf(saida, " já deseja ler");
+        fprintf(saida, " já deseja ler ");
         imprimeNomeLivro(livro, saida, COM_ASPAS);
         fprintf(saida, "\n");
     }
@@ -199,24 +210,31 @@ static void RecomendarUmLivro(Booked * booked,  int idRec, int idDes, int idLivr
         return;
     }
 
-    if(!verificaLivroEstaNaListaLeitor(destinatario, livro, LIDOS)){
+
+    if(verificaLivroEstaNaListaLeitor(destinatario, livro, DESEJADOS)){
+        imprimeNomeLeitor(destinatario, saida);
+        fprintf(saida, " já deseja ler ");
+        imprimeNomeLivro(livro, saida, COM_ASPAS);
+        fprintf(saida,", recomendação desnecessária\n");
+        //Bruno já deseja ler "Dom Casmurro", recomendação desnecessária
+    }
+    else if(!verificaLivroEstaNaListaLeitor(destinatario, livro, LIDOS)){
         insereLivroNaListaLeitor(destinatario, livro, RECOMENDADOS);    
 
         //PARTE DE IMPRESSÃO
         imprimeNomeLeitor(recomendador, saida);
-        fprintf(saida, " recomenda");
+        fprintf(saida, " recomenda ");
         imprimeNomeLivro(livro, saida, COM_ASPAS);
-        fprintf(saida, "para ");
+        fprintf(saida, " para ");
         imprimeNomeLeitor(destinatario, saida);  
         fprintf(saida, "\n");      
     }
     else{
         //PARTE DE IMPRESSÃO
         imprimeNomeLeitor(destinatario, saida);
-        fprintf(saida, " não precisa da recomendação de");
+        fprintf(saida, " não precisa da recomendação de ");
         imprimeNomeLivro(livro, saida, COM_ASPAS);
-        fprintf(saida, "pois já leu este livro ");
-        fprintf(saida, "\n");
+        fprintf(saida, " pois já leu este livro\n");
     }
     
 }
@@ -231,30 +249,36 @@ static void  AceitarRecomendacao(Booked * booked, int idRec, int idDes, int idLi
         return;
     }
     if(destinatario == NULL){
-       fprintf(saida,"Erro: Leitor destinatário com ID %d não encontrado\n", idRec);
+       fprintf(saida,"Erro: Leitor com ID %d não encontrado\n", idDes);
         return;
     }
-    if(livro == NULL){
-        fprintf(saida,"Erro: Livro com ID %d não encontrado\n", idLivro);
-        return;
-    }
+    
 
     // FALTA Verificar se recomendação existe !!!!
-
-    if(1){
+    if(livro == NULL){
+        imprimeNomeLeitor(destinatario, saida);
+        fprintf(saida, " não possui recomendação do livro ID %d feita por ", idLivro);
+        imprimeNomeLeitor(recomendador, saida);
+        fprintf(saida, "\n");
+    }
+    else if(verificaLivroEstaNaListaLeitor(destinatario, livro, RECOMENDADOS)){
         insereLivroNaListaLeitor(destinatario, livro, DESEJADOS);
         retiraLivroDaListaLeitor(destinatario, livro);
 
         //PARTE DE IMPRESSÃO
         imprimeNomeLeitor(destinatario, saida);
-        fprintf(saida, " aceita recomendação");
+        fprintf(saida, " aceita recomendação ");
         imprimeNomeLivro(livro, saida, COM_ASPAS);
-        fprintf(saida, "de ");
+        fprintf(saida, " de ");
         imprimeNomeLeitor(recomendador, saida);
         fprintf(saida, "\n"); 
     }
     else{
-
+        imprimeNomeLeitor(destinatario, saida);
+        fprintf(saida, " não possui recomendação do livro ID %d feita por ", idLivro);
+        imprimeNomeLeitor(recomendador, saida);
+        fprintf(saida, "\n");
+         
     }
 
 
@@ -273,28 +297,64 @@ static void RejeitarRecomendacao(Booked * booked, int idRec, int idDes, int idLi
         return;
     }
     if(destinatario == NULL){
-       fprintf(saida,"Erro: Leitor destinatário com ID %d não encontrado\n", idDes);
+       fprintf(saida,"Erro: Leitor com ID %d não encontrado\n", idDes);
         return;
     }
-    if(livro == NULL){
-        fprintf(saida,"Erro: Livro com ID %d não encontrado\n", idLivro);
-        return;
-    }
+    
 
     // FALTA Verificar se recomendação existe !!!!
-    if(1){
+
+    if(livro == NULL){
+        imprimeNomeLeitor(destinatario, saida);
+        fprintf(saida, " não possui recomendação do livro ID %d feita por ", idLivro);
+        imprimeNomeLeitor(recomendador, saida);
+        fprintf(saida, "\n");
+    }
+    else if(verificaLivroEstaNaListaLeitor(destinatario, livro, RECOMENDADOS)){
         retiraLivroDaListaLeitor(destinatario, livro);
 
         imprimeNomeLeitor(destinatario, saida);
-        fprintf(saida, " rejeita recomendação");
+        fprintf(saida, " rejeita recomendação ");
         imprimeNomeLivro(livro, saida, COM_ASPAS);
-        fprintf(saida, "de ");
+        fprintf(saida, " de ");
         imprimeNomeLeitor(recomendador, saida);
         fprintf(saida, "\n"); 
         
     }
     else{
+        imprimeNomeLeitor(destinatario, saida);
+        fprintf(saida, " não possui recomendação do livro ID %d feita por ", idLivro);
+        imprimeNomeLeitor(recomendador, saida);
+        fprintf(saida, "\n");
+         
+      //  Marcus não possui recomendação do livro ID 4 feita por Marcus
 
     }
     
+}
+
+static void DescobrirLivrosEmComum(Booked * booked, int idLeitor1, int idLeitor2, FILE * saida){
+    Leitor* Leitor1 = retornaLeitorComMesmoId(booked->leitores, idLeitor1);
+    Leitor* Leitor2 = retornaLeitorComMesmoId(booked->leitores, idLeitor2);
+    if(Leitor1 == NULL){
+        fprintf(saida,"Erro: Leitor com ID %d não encontrado\n", idLeitor1);
+        return;
+    }
+    if(Leitor2 == NULL){
+       fprintf(saida,"Erro: Leitor com ID %d não encontrado\n", idLeitor2);
+        return;
+    }
+}
+
+static void VerificaAfinidade(Booked * booked, int idLeitor1, int idLeitor2, FILE * saida){
+    Leitor* Leitor1 = retornaLeitorComMesmoId(booked->leitores, idLeitor1);
+    Leitor* Leitor2 = retornaLeitorComMesmoId(booked->leitores, idLeitor2);
+    if(Leitor1 == NULL){
+        fprintf(saida,"Erro: Leitor com ID %d não encontrado\n", idLeitor1);
+        return;
+    }
+    if(Leitor2 == NULL){
+       fprintf(saida,"Erro: Leitor com ID %d não encontrado\n", idLeitor2);
+        return;
+    }
 }
