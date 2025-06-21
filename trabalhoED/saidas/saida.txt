@@ -1,89 +1,106 @@
-Marcus leu "O Cortiço" 
-Marcus leu "O Xangô de Baker Street" 
-Marcus leu "Senhora" 
-Lucius leu "A Hora da Estrela" 
-Lucius leu "O Caso da Estranha Fotografia" 
-Lucius leu "Iracema" 
-Julia leu "Agosto" 
-Julia leu "A Moreninha" 
-Julia leu "Incidente em Antares" 
-Gaius leu "A Grande Arte" 
-Gaius leu "Os Sertões" 
-Gaius leu "Nós" 
-Claudia leu "O Cortiço" 
-Claudia leu "O Xangô de Baker Street" 
-Claudia leu "Senhora" 
-Livia leu "A Hora da Estrela" 
-Livia leu "O Caso da Estranha Fotografia" 
-Marcus deseja ler "Agosto" 
-Marcus deseja ler "A Moreninha" 
-Marcus deseja ler "Incidente em Antares" 
-Lucius deseja ler "A Grande Arte" 
-Lucius deseja ler "Os Sertões" 
-Lucius deseja ler "Nós" 
-Julia deseja ler "O Cortiço" 
-Julia deseja ler "O Xangô de Baker Street" 
-Gaius deseja ler "Agosto" 
-Gaius deseja ler "A Moreninha" 
-Claudia deseja ler "Incidente em Antares" 
-Claudia deseja ler "A Grande Arte" 
-Livia deseja ler "Os Sertões" 
-Livia deseja ler "Nós" 
-Marcus já leu "O Cortiço" 
-Lucius já leu "A Hora da Estrela" 
-Julia já leu "Agosto" 
-Marcus já deseja ler "Agosto" 
-Lucius já deseja ler "A Grande Arte" 
-Julia já deseja ler "O Cortiço" 
-Marcus não pode recomendar livros para si mesmo
-Lucius recomenda "Senhora" para Gaius
-Lucius não precisa da recomendação de "Iracema" pois já leu este livro 
-Marcus aceita recomendação "A Hora da Estrela" de Marcus
-Gaius aceita recomendação "Senhora" de Lucius
-Lucius aceita recomendação "Iracema" de Claudia
-Lucius não precisa da recomendação de "A Hora da Estrela" pois já leu este livro 
-Lucius rejeita recomendação "A Hora da Estrela" de Marcus
-
-Leitor: Marcus
-Lidos: O Cortiço, O Xangô de Baker Street, Senhora
-Desejados: Agosto, A Moreninha, Incidente em Antares, A Hora da Estrela
+Ana leu "Duna" 
+Ana leu "Fundação" 
+Bruno leu "Duna" 
+Carlos leu "Neuromancer" 
+Diana leu "Orgulho e Preconceito" 
+Eduardo leu "Como Eu Era Antes de Você" 
+Fernanda leu "Hamlet" 
+Gabriel leu "O Iluminado" 
+Helena leu "Drácula" 
+Igor leu "Psicose" 
+Júlia leu "Steve Jobs" 
+Ana deseja ler "Sapiens" 
+Diana deseja ler "Como Eu Era Antes de Você" 
+Gabriel deseja ler "A Garota no Trem" 
+Júlia deseja ler "Einstein" 
+Bruno não precisa da recomendação de "Duna" pois já leu este livro 
+Ana não precisa da recomendação de "Fundação" pois já leu este livro 
+Diana recomenda "Orgulho e Preconceito" para Eduardo
+Gabriel recomenda "O Iluminado" para Helena
+Helena recomenda "Drácula" para Igor
+Bruno aceita recomendação "Duna" de Ana
+Eduardo aceita recomendação "Orgulho e Preconceito" de Diana
+Helena aceita recomendação "O Iluminado" de Gabriel
+Erro: Leitor com ID 99 não encontrado
+Erro: Livro com ID 99 não encontrado
+Erro: Leitor com ID 99 não encontrado
+Erro: Livro com ID 99 não encontrado
+Erro: Leitor recomendador com ID 99 não encontrado
+Erro: Livro com ID 99 não encontrado
+Erro: Leitor destinatário com ID 99 não encontrado
+Erro: Leitor destinatário com ID 1 não encontrado
+Erro: Livro com ID 99 não encontrado
+Erro: Leitor recomendador com ID 99 não encontrado
+Erro: Leitor destinatário com ID 99 não encontrado
+Erro: Livro com ID 99 não encontrado
+Erro: Leitor recomendador com ID 99 não encontrado
+Leitor: Ana
+Lidos: Duna, Fundação
+Desejados: Sapiens
 Recomendacoes: 
-Afinidades: Romance, Terror
+Afinidades: Ficção Científica, Tecnologia
 
 
-Leitor: Lucius
-Lidos: A Hora da Estrela, O Caso da Estranha Fotografia, Iracema
-Desejados: A Grande Arte, Os Sertões, Nós, Iracema
+Leitor: Bruno
+Lidos: Duna
+Desejados: Duna
 Recomendacoes: 
-Afinidades: Terror, Mistério
+Afinidades: Ficção Científica
 
 
-Leitor: Julia
-Lidos: Agosto, A Moreninha, Incidente em Antares
-Desejados: O Cortiço, O Xangô de Baker Street
+Leitor: Carlos
+Lidos: Neuromancer
+Desejados: 
 Recomendacoes: 
-Afinidades: Mistério
+Afinidades: Tecnologia, Ciência
 
 
-Leitor: Gaius
-Lidos: A Grande Arte, Os Sertões, Nós
-Desejados: Agosto, A Moreninha, Senhora
+Leitor: Diana
+Lidos: Orgulho e Preconceito
+Desejados: Como Eu Era Antes de Você
 Recomendacoes: 
-Afinidades: Romance, Terror
+Afinidades: Romance, Drama
 
 
-Leitor: Claudia
-Lidos: O Cortiço, O Xangô de Baker Street, Senhora
-Desejados: Incidente em Antares, A Grande Arte
+Leitor: Eduardo
+Lidos: Como Eu Era Antes de Você
+Desejados: Orgulho e Preconceito
 Recomendacoes: 
-Afinidades: Mistério, História
+Afinidades: Romance
 
 
-Leitor: Livia
-Lidos: A Hora da Estrela, O Caso da Estranha Fotografia
-Desejados: Os Sertões, Nós
+Leitor: Fernanda
+Lidos: Hamlet
+Desejados: 
 Recomendacoes: 
-Afinidades: História
+Afinidades: Drama, Literatura
 
+
+Leitor: Gabriel
+Lidos: O Iluminado
+Desejados: A Garota no Trem
+Recomendacoes: 
+Afinidades: Terror
+
+
+Leitor: Helena
+Lidos: Drácula
+Desejados: O Iluminado
+Recomendacoes: 
+Afinidades: Terror, Suspense
+
+
+Leitor: Igor
+Lidos: Psicose
+Desejados: 
+Recomendacoes: Drácula
+Afinidades: Suspense
+
+
+Leitor: Júlia
+Lidos: Steve Jobs
+Desejados: Einstein
+Recomendacoes: 
+Afinidades: Biografia
 
 

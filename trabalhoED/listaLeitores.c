@@ -77,7 +77,7 @@ ListaLeitores * leArquivoLeitores(){
 
     // Abre efetivamente o arquivo
     FILE * arquivoLeitores;
-    char nomeArquivo[200] = "testes/test1/test1/leitores.txt";
+    char nomeArquivo[200] = "testes/test2/test2/leitores.txt";
     arquivoLeitores = fopen(nomeArquivo, "r");
     if(arquivoLeitores == NULL){
         printf("Erro ao Abrir arquivo Leitores");
