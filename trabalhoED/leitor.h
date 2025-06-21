@@ -50,7 +50,7 @@ Leitor* criaLeitor(int idleitor, char * nome, Lista * gostos);  // PASSAR COMO P
  * @pre leitor != NULL
  * @post Retorna 0 ou 1.
  */
-int comparaIdLeitor(void * leitor, int id);
+int comparaIdLeitor(void * leitor, void * id);
 
 /**
  * @brief Retorna o ID de um leitor.

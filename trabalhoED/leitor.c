@@ -64,10 +64,9 @@ Leitor* criaLeitor(int idleitor, char * nome, Lista * Gostos){// PASSAR COMO PAR
  * @pre leitor != NULL
  * @post Retorna 0 ou 1.
  */
-int comparaIdLeitor(void * leitor, int id){
+int comparaIdLeitor(void * leitor, void * id){
 
-   
-    if( (((Leitor*)leitor)->id) == id ){
+    if( (((Leitor*)leitor)->id) == *((int*)id)){
         return 1;
     }
     return 0;
@@ -220,7 +219,8 @@ void insereLivroNaListaLeitor(Leitor* leitor, Livro* livro, int lista){
  * @post Livro inserido na lista especificada.
  */
 void retiraLivroDaListaLeitor(Leitor* leitor, Livro* livro){
-    retiraElemLista(leitor->recomendacoes, retornaIdLivro(livro), comparaIdLivro);
+    int id = retornaIdLivro(livro);
+    retiraElemLista(leitor->recomendacoes,&id , comparaIdLivro);
 }
 
 
@@ -237,17 +237,18 @@ void retiraLivroDaListaLeitor(Leitor* leitor, Livro* livro){
  */
 int verificaLivroEstaNaListaLeitor(Leitor* leitor, Livro* livro, int lista){
     Livro* l;
+    int id = retornaIdLivro(livro);
     switch (lista){
     case LIDOS:
-        l = retornaElemComMesmoId(leitor->lidos, retornaIdLivro(livro), comparaIdLivro);
+        l = retornaElemComMesmoId(leitor->lidos, &id , comparaIdLivro);
         break;
     
     case DESEJADOS:
-        l = retornaElemComMesmoId(leitor->desejados, retornaIdLivro(livro), comparaIdLivro);
+        l = retornaElemComMesmoId(leitor->desejados, &id, comparaIdLivro);
         break;
 
     case RECOMENDADOS:
-        l = retornaElemComMesmoId(leitor->recomendacoes, retornaIdLivro(livro), comparaIdLivro);
+        l = retornaElemComMesmoId(leitor->recomendacoes, &id, comparaIdLivro);
         break;
 
     default:
@@ -312,7 +313,7 @@ void ImprimeGostos(Lista * gostos, FILE* saida){
 }
 
 void ConectaAfinidadesDireta(Lista * leitores){
-    /*Celula * leitorCel = retornaPrimeiraCelulaLista(leitores); // Recebe célula do primeiro leitor da lista 
+    Celula * leitorCel = retornaPrimeiraCelulaLista(leitores); // Recebe célula do primeiro leitor da lista 
     Leitor * leitor = ((Leitor*)leitorCel->elemento); // Recebe o primeiro leitor
 
     Celula * gostoCel = retornaPrimeiraCelulaLista(leitor->gostos); // Recebe a célula da lista de gostos, do primeiro leitor
@@ -322,11 +323,11 @@ void ConectaAfinidadesDireta(Lista * leitores){
     Celula * leitorCel2 = retornaPrimeiraCelulaLista(leitores); // Recebe célula do primeiro leitor da lista 
     Leitor * leitor2 = ((Leitor*)leitorCel->elemento); // Recebe o primeiro leitor
 
-    while(leitorCel){
-        while(leitorCel2){
-        //    if(verificaGostoEstaNaListaLeitor(leitor2, gosto)){
+    // while(leitorCel){
+    //     while(leitorCel2){
+    //         if(verificaGostoEstaNaListaLeitor(leitor2, gosto)){
 
-          //  }
-        }
-    }*/
+    //         }
+    //     }
+    // }
 }

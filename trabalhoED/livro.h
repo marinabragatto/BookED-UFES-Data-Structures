@@ -35,7 +35,7 @@ Livro* criaLivro(int idLivro, char* tituloLivro, char* autorLivro, char* generoL
  * pre-condicao: livro passado como parametro deve existir
  * pos-condicao: deve retornar um inteiro
  */
-int comparaIdLivro(void * livro, int id);
+int comparaIdLivro(void * livro, void * id);
 
 /**Retorna o id do livro passado como parametro
  * inputs: livro

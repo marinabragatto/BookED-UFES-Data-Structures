@@ -123,8 +123,8 @@ void ImprimeBooked(Booked* booked, FILE* saida){
 }
 
 static void AdicionaLivroLido(Booked * booked, int idLeitor, int idLivro, FILE* saida){
-    Leitor* leitor = retornaElemComMesmoId(booked->leitores, idLeitor, comparaIdLeitor);
-    Livro* livro = retornaElemComMesmoId(booked->livros, idLivro, comparaIdLivro);
+    Leitor* leitor = retornaElemComMesmoId(booked->leitores, &idLeitor, comparaIdLeitor);
+    Livro* livro = retornaElemComMesmoId(booked->livros, &idLivro, comparaIdLivro);
 
     if(leitor == NULL){
         fprintf(saida,"Erro: Leitor com ID %d não encontrado\n", idLeitor);
@@ -156,8 +156,8 @@ static void AdicionaLivroLido(Booked * booked, int idLeitor, int idLivro, FILE* 
 }
 
 static void AdicionaLivroDesejado(Booked * booked, int idLeitor, int idLivro,FILE* saida){
-    Leitor* leitor = retornaElemComMesmoId(booked->leitores, idLeitor, comparaIdLeitor);
-    Livro* livro = retornaElemComMesmoId(booked->livros, idLivro, comparaIdLivro);
+    Leitor* leitor = retornaElemComMesmoId(booked->leitores, &idLeitor, comparaIdLeitor);
+    Livro* livro = retornaElemComMesmoId(booked->livros, &idLivro, comparaIdLivro);
 
     if(leitor == NULL){
         fprintf(saida,"Erro: Leitor com ID %d não encontrado\n", idLeitor);
@@ -188,9 +188,9 @@ static void AdicionaLivroDesejado(Booked * booked, int idLeitor, int idLivro,FIL
 }
 
 static void RecomendarUmLivro(Booked * booked,  int idRec, int idDes, int idLivro, FILE* saida){
-    Leitor* recomendador = retornaElemComMesmoId(booked->leitores, idRec, comparaIdLeitor);
-    Leitor* destinatario = retornaElemComMesmoId(booked->leitores, idDes, comparaIdLeitor);
-    Livro* livro = retornaElemComMesmoId(booked->livros, idLivro, comparaIdLivro);
+    Leitor* recomendador = retornaElemComMesmoId(booked->leitores, &idRec, comparaIdLeitor);
+    Leitor* destinatario = retornaElemComMesmoId(booked->leitores, &idDes, comparaIdLeitor);
+    Livro* livro = retornaElemComMesmoId(booked->livros, &idLivro, comparaIdLivro);
 
     if(recomendador == NULL){
         fprintf(saida,"Erro: Leitor recomendador com ID %d não encontrado\n", idRec);
@@ -240,9 +240,9 @@ static void RecomendarUmLivro(Booked * booked,  int idRec, int idDes, int idLivr
 }
 
 static void  AceitarRecomendacao(Booked * booked, int idRec, int idDes, int idLivro,FILE* saida){
-    Leitor* recomendador = retornaElemComMesmoId(booked->leitores, idRec, comparaIdLeitor);
-    Leitor* destinatario = retornaElemComMesmoId(booked->leitores, idDes, comparaIdLeitor);
-    Livro* livro = retornaElemComMesmoId(booked->livros, idLivro, comparaIdLivro);
+    Leitor* recomendador = retornaElemComMesmoId(booked->leitores, &idRec, comparaIdLeitor);
+    Leitor* destinatario = retornaElemComMesmoId(booked->leitores, &idDes, comparaIdLeitor);
+    Livro* livro = retornaElemComMesmoId(booked->livros, &idLivro, comparaIdLivro);
 
     if(recomendador == NULL){
         fprintf(saida,"Erro: Leitor recomendador com ID %d não encontrado\n", idRec);
@@ -288,9 +288,9 @@ static void  AceitarRecomendacao(Booked * booked, int idRec, int idDes, int idLi
 } 
 
 static void RejeitarRecomendacao(Booked * booked, int idRec, int idDes, int idLivro,FILE* saida){
-    Leitor* recomendador = retornaElemComMesmoId(booked->leitores, idRec, comparaIdLeitor);
-    Leitor* destinatario = retornaElemComMesmoId(booked->leitores, idDes, comparaIdLeitor);
-    Livro* livro = retornaElemComMesmoId(booked->livros, idLivro, comparaIdLivro);
+    Leitor* recomendador = retornaElemComMesmoId(booked->leitores, &idRec, comparaIdLeitor);
+    Leitor* destinatario = retornaElemComMesmoId(booked->leitores, &idDes, comparaIdLeitor);
+    Livro* livro = retornaElemComMesmoId(booked->livros, &idLivro, comparaIdLivro);
 
     if(recomendador == NULL){
         fprintf(saida,"Erro: Leitor recomendador com ID %d não encontrado\n", idRec);
@@ -334,8 +334,8 @@ static void RejeitarRecomendacao(Booked * booked, int idRec, int idDes, int idLi
 }
 
 static void DescobrirLivrosEmComum(Booked * booked, int idLeitor1, int idLeitor2, FILE * saida){
-    Leitor* Leitor1 = retornaElemComMesmoId(booked->leitores, idLeitor1, comparaIdLeitor);
-    Leitor* Leitor2 = retornaElemComMesmoId(booked->leitores, idLeitor2, comparaIdLeitor);
+    Leitor* Leitor1 = retornaElemComMesmoId(booked->leitores, &idLeitor1, comparaIdLeitor);
+    Leitor* Leitor2 = retornaElemComMesmoId(booked->leitores, &idLeitor2, comparaIdLeitor);
     if(Leitor1 == NULL){
         fprintf(saida,"Erro: Leitor com ID %d não encontrado\n", idLeitor1);
         return;
@@ -364,8 +364,8 @@ static void DescobrirLivrosEmComum(Booked * booked, int idLeitor1, int idLeitor2
 }
 
 static void VerificaAfinidade(Booked * booked, int idLeitor1, int idLeitor2, FILE * saida){
-    Leitor* Leitor1 = retornaElemComMesmoId(booked->leitores, idLeitor1, comparaIdLeitor);
-    Leitor* Leitor2 = retornaElemComMesmoId(booked->leitores, idLeitor2,comparaIdLeitor);
+    Leitor* Leitor1 = retornaElemComMesmoId(booked->leitores, &idLeitor1, comparaIdLeitor);
+    Leitor* Leitor2 = retornaElemComMesmoId(booked->leitores, &idLeitor2,comparaIdLeitor);
     if(Leitor1 == NULL){
         fprintf(saida,"Erro: Leitor com ID %d não encontrado\n", idLeitor1);
         return;
@@ -431,7 +431,7 @@ Lista * leArquivoLeitores(){
         }
     }
     fclose(arquivoLeitores);
-   // ConectaAfinidadesDireta(lista);
+    //ConectaAfinidadesDireta(lista);
 
     return lista;
 

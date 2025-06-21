@@ -32,10 +32,10 @@ Livro* criaLivro(int idLivro, char* tituloLivro, char* autorLivro, char* generoL
     return livro;
 }
 
-int comparaIdLivro(void * livro, int id){
+int comparaIdLivro(void * livro, void * id){
     Livro * l = (Livro*)livro;
 
-    return (retornaIdLivro(l) == id);
+    return (retornaIdLivro(l) == *((int*)id));
 }
 
 int retornaIdLivro(Livro* livro){

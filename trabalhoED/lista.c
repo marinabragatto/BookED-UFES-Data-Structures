@@ -88,11 +88,11 @@ void imprimeLista(Lista * lista, void (*imprime)(void*, FILE*), FILE* saida){
     }
 }
 
-void * retornaElemComMesmoId(Lista* lista, int id, int (*compara)(void *, int)){
+void * retornaElemComMesmoId(Lista* lista, void * chave, int (*compara)(void *, void *)){
     Celula* celula;
 
     for(celula = lista->prim; celula != NULL; celula = celula->prox){
-        if(compara(celula->elemento, id)){
+        if(compara(celula->elemento, chave)){
             return celula->elemento;
         }
     }

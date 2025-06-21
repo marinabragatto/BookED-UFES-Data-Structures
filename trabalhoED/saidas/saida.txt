@@ -41,44 +41,4 @@ Lucius já deseja ler "A Grande Arte"
 Julia já deseja ler "O Cortiço"
 Marcus não pode recomendar livros para si mesmo
 Lucius recomenda "Senhora" para Gaius
-Lucius não precisa da recomendação de "Iracema" pois já leu este livro
-Marcus não possui recomendação do livro ID 4 feita por Marcus
-Gaius aceita recomendação "Senhora" de Lucius
-Lucius não possui recomendação do livro ID 6 feita por Claudia
-Lucius não precisa da recomendação de "A Hora da Estrela" pois já leu este livro
-Lucius não possui recomendação do livro ID 4 feita por Marcus
-Livros em comum entre Marcus e Gaius: Nenhum livro em comum
-Livros em comum entre Lucius e Julia: Nenhum livro em comum
-Livros em comum entre Claudia e Livia: Nenhum livro em comum
-Imprime toda a BookED
-
-Leitor: Marcus
-Lidos: O Cortiço, O Xangô de Baker Street, Senhora
-Desejados: Agosto, A Moreninha, Incidente em Antares
-Recomendacoes: 
-Afinidades: Romance, Terror
-Leitor: Lucius
-Lidos: A Hora da Estrela, O Caso da Estranha Fotografia, Iracema
-Desejados: A Grande Arte, Os Sertões, Nós
-Recomendacoes: 
-Afinidades: Terror, Mistério
-Leitor: Julia
-Lidos: Agosto, A Moreninha, Incidente em Antares
-Desejados: O Cortiço, O Xangô de Baker Street
-Recomendacoes: 
-Afinidades: Mistério
-Leitor: Gaius
-Lidos: A Grande Arte, Os Sertões, Nós
-Desejados: Agosto, A Moreninha, Senhora
-Recomendacoes: 
-Afinidades: Romance, Terror
-Leitor: Claudia
-Lidos: O Cortiço, O Xangô de Baker Street, Senhora
-Desejados: Incidente em Antares, A Grande Arte
-Recomendacoes: 
-Afinidades: Mistério, História
-Leitor: Livia
-Lidos: A Hora da Estrela, O Caso da Estranha Fotografia
-Desejados: Os Sertões, Nós
-Recomendacoes: 
-Afinidades: História
+Lucius não precisa da recomendação de "Iracema" pois já 

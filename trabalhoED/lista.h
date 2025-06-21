@@ -23,7 +23,7 @@ void liberaListaParcialmente(Lista * lista);
 
 void imprimeLista(Lista * lista, void (*imprime)(void*, FILE*), FILE* saida);
 
-void * retornaElemComMesmoId(Lista* lista, int id, int (*compara)(void *, int));
+void * retornaElemComMesmoId(Lista* lista, void * chave, int (*compara)(void *, void *));
 
 void retiraElemLista(Lista * lista, int idLivro, int (*compara)(void *, int));
 
