@@ -26,13 +26,12 @@ static void VerificaAfinidade(Booked * booked, int idLeitor1, int idLeitor2, FIL
 
 Booked* InicializaBooked(){
     Booked* booked = malloc(sizeof(struct booked));
-    if(booked == NULL){
-       // fprintf(saida,"Erro ao alocar memoria!");
+    if(booked == NULL){;
         exit(1);
     }
     
-    booked->livros = leArquivoLivros();
-    booked->leitores = leArquivoLeitores();   
+    booked->livros = leArquivoLivros();         // Inicia Lista Livros
+    booked->leitores = leArquivoLeitores();    // Inicia Lista Leitores
 
     return booked;
 }
@@ -44,7 +43,7 @@ void FuncionaBooked(Booked* booked){
 
     FILE* ComandosArq;
     char leComandos[1000];
-    sprintf(leComandos, "testes/test0/test0/comandos.txt");
+    sprintf(leComandos, "testes/test1/test1/comandos.txt");
 
     ComandosArq = fopen(leComandos, "r");
     if (ComandosArq == NULL) {
@@ -57,6 +56,7 @@ void FuncionaBooked(Booked* booked){
     while(1){
         int idComando, param1, param2, param3;
         
+        // Leitura do Comando
         int resultado = fscanf(ComandosArq, "%d;%d;%d;%d\n", &idComando, &param1, &param2, &param3); 
         if (resultado != 4) break;
 
@@ -155,7 +155,7 @@ static void AdicionaLivroLido(Booked * booked, int idLeitor, int idLivro, FILE* 
 
 }
 
-static void AdicionaLivroDesejado(Booked * booked, int idLeitor, int idLivro,FILE* saida){
+static void AdicionaLivroDesejado(Booked * booked, int idLeitor, int idLivro, FILE* saida){
     Leitor* leitor = retornaElemComMesmoId(booked->leitores, &idLeitor, comparaIdLeitor);
     Livro* livro = retornaElemComMesmoId(booked->livros, &idLivro, comparaIdLivro);
 
@@ -212,11 +212,11 @@ static void RecomendarUmLivro(Booked * booked,  int idRec, int idDes, int idLivr
 
 
     if(verificaLivroEstaNaListaLeitor(destinatario, livro, DESEJADOS)){
+        //PARTE DE IMPRESSÃO
         imprimeNomeLeitor(destinatario, saida);
         fprintf(saida, " já deseja ler ");
         imprimeNomeLivro(livro, saida, COM_ASPAS);
         fprintf(saida,", recomendação desnecessária\n");
-        //Bruno já deseja ler "Dom Casmurro", recomendação desnecessária
     }
     else if(!verificaLivroEstaNaListaLeitor(destinatario, livro, LIDOS)){
         insereLivroNaListaLeitor(destinatario, livro, RECOMENDADOS);    
@@ -254,7 +254,7 @@ static void  AceitarRecomendacao(Booked * booked, int idRec, int idDes, int idLi
     }
     
 
-    // FALTA Verificar se recomendação existe !!!!
+    // Verifica se livro existe
     if(livro == NULL){
         imprimeNomeLeitor(destinatario, saida);
         fprintf(saida, " não possui recomendação do livro ID %d feita por ", idLivro);
@@ -280,10 +280,6 @@ static void  AceitarRecomendacao(Booked * booked, int idRec, int idDes, int idLi
         fprintf(saida, "\n");
          
     }
-
-
-
-
 
 } 
 
@@ -375,21 +371,39 @@ static void VerificaAfinidade(Booked * booked, int idLeitor1, int idLeitor2, FIL
         return;
     }
 
-    // VERIFICA AFINIDADE DIRETA
-    if(verificaAfinidadeJaExiste(Leitor1, Leitor2)){
+    Lista * visitados = criaLista();
+    int afinidade = ConectaAfinidadesIndireta(Leitor1, Leitor2, visitados);
+    liberaListaParcialmente(visitados);
+    if(afinidade){
         fprintf(saida,"Existe afinidade entre ");
         imprimeNomeLeitor(Leitor1, saida);
         fprintf(saida," e ");
         imprimeNomeLeitor(Leitor2, saida);
         fprintf(saida,"\n");
     }
-    else{
+    else {
         fprintf(saida,"Não existe afinidade entre ");
         imprimeNomeLeitor(Leitor1, saida);
         fprintf(saida," e ");
         imprimeNomeLeitor(Leitor2, saida);
         fprintf(saida,"\n");
-    }
+    }    
+
+    // VERIFICA AFINIDADE DIRETA
+    // if(verificaAfinidadeJaExiste(Leitor1, Leitor2)){
+    //     fprintf(saida,"Existe afinidade entre ");
+    //     imprimeNomeLeitor(Leitor1, saida);
+    //     fprintf(saida," e ");
+    //     imprimeNomeLeitor(Leitor2, saida);
+    //     fprintf(saida,"\n");
+    // }
+    // else{
+    //     fprintf(saida,"Não existe afinidade entre ");
+    //     imprimeNomeLeitor(Leitor1, saida);
+    //     fprintf(saida," e ");
+    //     imprimeNomeLeitor(Leitor2, saida);
+    //     fprintf(saida,"\n");
+    // }
 
 }
 
@@ -401,7 +415,7 @@ Lista * leArquivoLeitores(){
 
     // Abre efetivamente o arquivo
     FILE * arquivoLeitores;
-    char nomeArquivo[200] = "testes/test0/test0/leitores.txt";
+    char nomeArquivo[200] = "testes/test1/test1/leitores.txt";
     arquivoLeitores = fopen(nomeArquivo, "r");
     if(arquivoLeitores == NULL){
         exit(1);
@@ -457,7 +471,7 @@ Lista * leArquivoLivros(){
     //abrindo o arquivo pra leitura
     FILE* livrosArq;
     char lerlivro[1000];
-    sprintf(lerlivro, "testes/test0/test0/livros.txt"); //aqui eh preciso pensar como nos vamos chegar ate o livros.txt de cada caso de teste
+    sprintf(lerlivro, "testes/test1/test1/livros.txt"); //aqui eh preciso pensar como nos vamos chegar ate o livros.txt de cada caso de teste
 
     livrosArq = fopen(lerlivro, "r");
     if (livrosArq == NULL) {

@@ -135,7 +135,8 @@ void ImprimeGostos(Lista * gostos, FILE* saida);
 void ConectaAfinidadesDireta(Lista * leitores);
 void imprimirLeitores(Lista * leitores, FILE * saida);
 int comparaDoisLeitores(void * leitor2, void * leitor1);
-int verificaAfinidadeJaExiste(Leitor * leitor2, Leitor * leitor1);
+int verificaAfinidadeJaExiste(Leitor * leitor1, Leitor * leitor2);
 int verificaCompatibilidade(Leitor * leitor2, Leitor * leitor1);
+int ConectaAfinidadesIndireta(Leitor * origem, Leitor * destino, Lista * visitados);
 
 #endif

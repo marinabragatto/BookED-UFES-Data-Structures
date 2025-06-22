@@ -1,4 +1,12 @@
-19c19
-< Não existe afinidade entre Alice e Clara
+74c74
+< Afinidades: Gaius, Lucius
 ---
-> Existe afinidade entre Alice e Clara
+> Afinidades: Lucius, Gaius
+80c80
+< Afinidades: Marcus, Gaius, Julia, Claudia
+---
+> Afinidades: Marcus, Julia, Gaius, Claudia
+98c98
+< Afinidades: Julia, Lucius, Livia
+---
+> Afinidades: Lucius, Julia, Livia

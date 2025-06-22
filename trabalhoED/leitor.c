@@ -35,7 +35,7 @@ struct leitor {
  * @pre idleitor >= 0, nome != NULL
  * @post Leitor criado e inicializado.
  */
-Leitor* criaLeitor(int idleitor, char * nome, Lista * Gostos){// PASSAR COMO PARAMETRO TAMBEM A LISTA CHAR DE AFINIDADES?
+Leitor* criaLeitor(int idleitor, char * nome, Lista * Gostos){
 
     Leitor * leitor = (Leitor*)malloc(sizeof(Leitor));
     leitor->id = idleitor;
@@ -93,15 +93,6 @@ int retornaIdleitor(Leitor * leitor){
  * @pre leitor != NULL
  */
 void imprimeleitor(void * leitor, FILE* saida){
-/*
-Leitor: Bob
-Lidos: O Nome da Rosa, Garota Exemplar
-Desejados: Drácula
-Recomendacoes: O Iluminado, A Culpa é das Estrelas
-Afinidades: Alice, Clara
-*/
-
-    // VAI SER PARA PRINTAR EM UM ARQUIVO... a implementar
     Leitor * l = (Leitor*)leitor;
 
     fprintf(saida, "Leitor: %s\n", l->nome);
@@ -121,7 +112,7 @@ Afinidades: Alice, Clara
     fprintf(saida, "Afinidades: ");
     imprimirLeitores(l->afinidadesDiretas, saida);
     fprintf(saida, "\n");
-   // ImprimeGostos(l->gostos, saida);
+//ImprimeGostos(l->gostos, saida);
     fprintf(saida, "\n");
 
 }
@@ -136,7 +127,6 @@ Afinidades: Alice, Clara
  * @pre leitor != NULL
  */
 void imprimeNomeLeitor(Leitor * leitor, FILE* saida){
-
     fprintf(saida, "%s", leitor->nome);
 }
 
@@ -286,8 +276,6 @@ Lista* LivrosEmComumLeitores(Leitor * leitor1, Leitor * leitor2){
     liberaListaParcialmente(comum);
     return NULL;
     
-    
-   // verificaLivroEstaNaListaLeitor(leitor2, Livro* livro, LIDOS);
 }
 
 void imprimirLivrosLeitor(Lista * lista, FILE * saida){
@@ -329,14 +317,17 @@ void ConectaAfinidadesDireta(Lista * leitores){
         while(leitorCel2){
             leitor2 = leitorCel2->elemento;
             if(leitor2 != leitor1 && !verificaAfinidadeJaExiste(leitor2, leitor1)){
+                printf("comparando %s com %s\n", leitor1->nome, leitor2->nome);
                 if(verificaCompatibilidade(leitor2, leitor1)){
+                printf("existe %s com %s\n", leitor1->nome, leitor2->nome);
                     insereElemNoFimDaLista(leitor1->afinidadesDiretas, leitor2);
                     insereElemNoFimDaLista(leitor2->afinidadesDiretas, leitor1);
                 }
             }
             leitorCel2 = leitorCel2->prox;
         }
-        leitorCel2 = retornaPrimeiraCelulaLista(leitores); 
+        
+        leitorCel2 = retornaPrimeiraCelulaLista(leitores);
         leitorCel1 = leitorCel1->prox;
         
     }
@@ -367,11 +358,12 @@ int verificaCompatibilidade(Leitor * leitor2, Leitor * leitor1){
 
 }
 
-int verificaAfinidadeJaExiste(Leitor * leitor2, Leitor * leitor1){
-    Leitor * leitor = retornaElemComMesmoId(leitor1->afinidadesDiretas, leitor2 , comparaDoisLeitores);
+int verificaAfinidadeJaExiste(Leitor * leitor1, Leitor * leitor2){
+    Leitor * leitor = retornaElemComMesmoId(leitor1->afinidadesDiretas, leitor2, comparaDoisLeitores);
     return (leitor != NULL);
 }
 
+//Compara dois leitores por meio da verificação de ponteiros iguais
 int comparaDoisLeitores(void * leitor2, void * leitor1){
     if(leitor1 == leitor2){
         return 1;
@@ -380,6 +372,7 @@ int comparaDoisLeitores(void * leitor2, void * leitor1){
 
 }
 
+//Imprime o nome de cada leitor separado por vírgulas
 void imprimirLeitores(Lista * leitores, FILE * saida){
     Celula* aux = retornaPrimeiraCelulaLista(leitores);
     Leitor * leitor;
@@ -387,9 +380,34 @@ void imprimirLeitores(Lista * leitores, FILE * saida){
     for(; aux != NULL; aux = aux->prox){
         leitor = aux->elemento;
         imprimeNomeLeitor(leitor, saida);
-        //(aux->elemento, saida, SEM_ASPAS);
         if(aux->prox != NULL){
             fprintf(saida, ", ");
         }
     }
+}
+
+int ConectaAfinidadesIndireta(Leitor * origem, Leitor * destino, Lista * visitados){
+    insereElemNoFimDaLista(visitados, origem);
+
+    if(verificaAfinidadeJaExiste(origem, destino)){
+        return 1;
+    }
+    else{
+        Celula * celulaAfinidade = retornaPrimeiraCelulaLista(origem->afinidadesDiretas);
+        Leitor * leitor;
+        
+        while(celulaAfinidade){
+            leitor = celulaAfinidade->elemento;
+
+            if(!retornaElemComMesmoId(visitados,leitor, comparaDoisLeitores)){
+                if(ConectaAfinidadesIndireta(leitor,destino,visitados)){
+                    return 1;
+                }
+            }
+
+            celulaAfinidade = celulaAfinidade->prox;
+        }
+    }
+
+    return 0;
 }
