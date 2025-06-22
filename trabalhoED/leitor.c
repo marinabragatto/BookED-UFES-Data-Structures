@@ -317,9 +317,7 @@ void ConectaAfinidadesDireta(Lista * leitores){
         while(leitorCel2){
             leitor2 = leitorCel2->elemento;
             if(leitor2 != leitor1 && !verificaAfinidadeJaExiste(leitor2, leitor1)){
-                printf("comparando %s com %s\n", leitor1->nome, leitor2->nome);
                 if(verificaCompatibilidade(leitor2, leitor1)){
-                printf("existe %s com %s\n", leitor1->nome, leitor2->nome);
                     insereElemNoFimDaLista(leitor1->afinidadesDiretas, leitor2);
                     insereElemNoFimDaLista(leitor2->afinidadesDiretas, leitor1);
                 }
@@ -343,7 +341,7 @@ int verificaCompatibilidade(Leitor * leitor2, Leitor * leitor1){
     
     while(gostoCel1){
         gosto1 = gostoCel1->elemento;
-
+        
         while(gostoCel2){
             gosto2 = gostoCel2->elemento;
             if(!strcmp(gosto1, gosto2)){
@@ -351,6 +349,7 @@ int verificaCompatibilidade(Leitor * leitor2, Leitor * leitor1){
             }
             gostoCel2 = gostoCel2->prox;
         }
+        gostoCel2 = retornaPrimeiraCelulaLista(leitor2->gostos);
         gostoCel1 = gostoCel1->prox;
     }
 

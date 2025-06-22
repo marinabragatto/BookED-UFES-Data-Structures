@@ -43,7 +43,7 @@ void FuncionaBooked(Booked* booked){
 
     FILE* ComandosArq;
     char leComandos[1000];
-    sprintf(leComandos, "testes/test1/test1/comandos.txt");
+    sprintf(leComandos, "testes/test3/test3/comandos.txt");
 
     ComandosArq = fopen(leComandos, "r");
     if (ComandosArq == NULL) {
@@ -415,7 +415,7 @@ Lista * leArquivoLeitores(){
 
     // Abre efetivamente o arquivo
     FILE * arquivoLeitores;
-    char nomeArquivo[200] = "testes/test1/test1/leitores.txt";
+    char nomeArquivo[200] = "testes/test3/test3/leitores.txt";
     arquivoLeitores = fopen(nomeArquivo, "r");
     if(arquivoLeitores == NULL){
         exit(1);
@@ -471,7 +471,7 @@ Lista * leArquivoLivros(){
     //abrindo o arquivo pra leitura
     FILE* livrosArq;
     char lerlivro[1000];
-    sprintf(lerlivro, "testes/test1/test1/livros.txt"); //aqui eh preciso pensar como nos vamos chegar ate o livros.txt de cada caso de teste
+    sprintf(lerlivro, "testes/test3/test3/livros.txt"); //aqui eh preciso pensar como nos vamos chegar ate o livros.txt de cada caso de teste
 
     livrosArq = fopen(lerlivro, "r");
     if (livrosArq == NULL) {
