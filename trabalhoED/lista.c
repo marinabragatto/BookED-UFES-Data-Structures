@@ -10,6 +10,7 @@ struct lista{
 };
 
 
+
 Lista * criaLista(){
     Lista * lista = (Lista*)malloc(sizeof(Lista));
     lista->ult = NULL;
@@ -17,6 +18,8 @@ Lista * criaLista(){
 
     return lista;
 }
+
+
 
 void insereElemNoFimDaLista(Lista * lista, void * elemNovo){
     // CASOS
@@ -44,6 +47,8 @@ void insereElemNoFimDaLista(Lista * lista, void * elemNovo){
 
 }
 
+
+
 void liberaLista(Lista * lista, void (*libera)(void*)){
 
     if(lista){
@@ -61,6 +66,8 @@ void liberaLista(Lista * lista, void (*libera)(void*)){
     }
 }
 
+
+
 void liberaListaParcialmente(Lista * lista){
     Celula* atual = lista->prim;
     Celula* seguinte;
@@ -76,6 +83,8 @@ void liberaListaParcialmente(Lista * lista){
 
 }
 
+
+
 void imprimeLista(Lista * lista, void (*imprime)(void*, FILE*), FILE* saida){
     // VAI SER EM ARQUIVO
     Celula * atual;
@@ -86,6 +95,8 @@ void imprimeLista(Lista * lista, void (*imprime)(void*, FILE*), FILE* saida){
         atual = atual->prox;
     }
 }
+
+
 
 void * retornaElemComMesmoId(Lista* lista, void * chave, int (*compara)(void *, void *)){
     Celula* celula;
@@ -98,6 +109,8 @@ void * retornaElemComMesmoId(Lista* lista, void * chave, int (*compara)(void *, 
   
     return NULL;
 }
+
+
 
 void retiraElemLista(Lista * lista, void * chave, int (*compara)(void *, void *)){
     Celula* aux;
@@ -131,6 +144,8 @@ void retiraElemLista(Lista * lista, void * chave, int (*compara)(void *, void *)
     aux->ant->prox = aux->prox;
     free(aux);
 }
+
+
 
 Celula * retornaPrimeiraCelulaLista(Lista * lista){
     return lista->prim;
