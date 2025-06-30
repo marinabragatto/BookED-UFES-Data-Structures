@@ -1,3 +1,15 @@
+/**
+ * @file lista.h
+ * @brief Interface do módulo de lista.
+ *
+ * Define o tipo abstrato Lista e funções relacionadas à criação,
+ * manipulação e liberação de listas.
+ * 
+ * @author Marina Bragatto
+ * @author Thais Brandão
+ * @date 09/06/2025
+ */
+
 #ifndef LISTA_H
 #define LISTA_H
 

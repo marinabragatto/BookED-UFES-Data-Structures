@@ -1,3 +1,15 @@
+/**
+ * @file lista.c
+ * @brief Implementação das funções relacionadas ao tipo Lista.
+ *
+ * Este arquivo contém a implementação das funções para criação, manipulação
+ * e liberação de listas no sistema.
+ *
+ * @author Marina Bragatto
+ * @author Thais Brandão
+ * @date 09/06/2025
+ */
+
 #include "lista.h"
 #include <stdio.h>
 #include <string.h>
