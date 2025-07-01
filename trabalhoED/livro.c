@@ -1,8 +1,14 @@
-//
-// Autoria de Marina Bragatto e Thais Brandao
-//
-// Realizado dia 02/06/2025
-//
+/**
+ * @file livro.c
+ * @brief Implementação das funções relacionadas ao tipo Livro.
+ *
+ * Este arquivo contém a implementação das funções para criação, manipulação
+ * e liberação de livros no sistema.
+ *
+ * @author Marina Bragatto
+ * @author Thais Brandão
+ * @date 09/06/2025
+ */
 
 #include "livro.h"
 
@@ -58,7 +64,6 @@ void imprimeNomeLivro(Livro* livro, FILE* saida, int aspas){
     default:
         break;
     }
-    // tenho que imprimir no arquivo
 }
 
 void liberaLivro(void * livro){

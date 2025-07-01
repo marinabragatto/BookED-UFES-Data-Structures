@@ -1,8 +1,14 @@
-//
-// Autoria de Marina Bragatto e Thais Brandao
-//
-// Realizado dia 02/06/2025
-//
+/**
+ * @file livro.h
+ * @brief Interface do módulo de livro.
+ *
+ * Define o tipo abstrato Livro e funções relacionadas à criação,
+ * manipulação e liberação de livros.
+ * 
+ * @author Marina Bragatto
+ * @author Thais Brandão
+ * @date 09/06/2025
+ */
 
 #ifndef livro_h
 #define livro_h
@@ -21,46 +27,84 @@
 
 typedef struct livro Livro;
 
-/**Cria novo livro atribuindo os argumentos passados por parametro
- * inputs: idLivro, tituloLivro, autorLivro, generoLivro e anoLivro
- * output: tipo livro inicializado
- * pre-condicao: parametros devem ser passados
- * pos-condicao: tipo livro deve existir e estar inicializado
+
+
+/**
+ * @brief Cria novo livro atribuindo os argumentos passados por parametro.
+ * 
+ * @param idLivro id do livro.
+ * @param tituloLivro string contendo o nome do livro.
+ * @param autorLivro string contendo o nome do autor do livro.
+ * @param generoLivro string contendo o genero do livro.
+ * @param anoLivro ano do livro.
+ *
+ * @return tipo livro inicializado.
+ * 
+ * @pre parametros devem ser passados.
+ * @post tipo livro deve existir e estar inicializado.
  */
 Livro* criaLivro(int idLivro, char* tituloLivro, char* autorLivro, char* generoLivro, int anoLivro);
 
-/**Compara se um id pertence a um livro
- * inputs: livro e id 
- * output: 1 se o id pertence ao livro, 0, caso contrario
- * pre-condicao: livro passado como parametro deve existir
- * pos-condicao: deve retornar um inteiro
+
+
+/**
+ * @brief Compara se um id pertence a um livro.
+ * 
+ * @param livro livro a ser comparado.
+ * @param id id a ser comparado.
+ *
+ * @return 1 caso sejam iguais, zero caso contrario.
+ * 
+ * @pre livro != NULL
  */
 int comparaIdLivro(void * livro, void * id);
 
-/**Retorna o id do livro passado como parametro
- * inputs: livro
- * output: um inteiro representando o id do livro 
- * pre-condicao: livro passado como parametro deve existir
- * pos-condicao: deve retornar um inteiro
+
+
+/**
+ * @brief Retorna o id do livro passado como parametro.
+ * 
+ * @param livro livro a ter o id retornado.
+ *
+ * @return um inteiro representando o id do livro.
+ * 
+ * @pre livro != NULL
  */
 int retornaIdLivro(Livro* livro);
 
-//imprime todas as informacoes de um livro (nao sera utilizada)
+
+
+/**
+ * @brief Imprime um livro, decide a forma de impressao, com ou sem aspas.
+ * 
+ * @param livro livro a ser impresso.
+ * @param saida arquivo de saida.
+ * 
+ * @pre livro != NULL
+ */
 void imprimeLivro(void * livro, FILE * saida);
 
-/**Imprime o nome do livro passado como parametro
- * inputs: livro
- * output: nenhum 
- * pre-condicao: livro passado como parametro deve existir
- * pos-condicao: titulo do livro deve ser impresso no arquivo de saida
+
+
+/**
+ * @brief Imprime o nome de um livro.
+ * 
+ * @param livro livro a ser impresso.
+ * @param saida arquivo de saida.
+ * @param aspas com ou sem aspas.
+ * 
+ * @pre livro != NULL
  */
 void imprimeNomeLivro(Livro* livro, FILE* saida, int aspas);
 
-/**Libera o livro passado como parametro
- * inputs: livro
- * output: nenhum 
- * pre-condicao: livro passado como parametro deve existir
- * pos-condicao: tipo livro deve ser liberado
+
+
+/**
+ * @brief Libera um livro, caso esse nao seja NULL.
+ * 
+ * @param livro livro a ser liberado.
+ * 
+ * @post livro liberado.
  */
 void liberaLivro(void * livro);
 
