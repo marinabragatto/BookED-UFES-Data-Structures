@@ -31,33 +31,16 @@ typedef struct recomendacao Recomendacao;
 Recomendacao * criaRecomendacao(int recomendador, Livro* livro);
 
 
-
-/**
- * @brief Compara dois livros pelo id.
- *
- * @param rec recomendacao.
- * @param livro livro cujo id sera comparado. 
- * 
- * @return 1 caso sejam iguais, 0 caso contrario.
- * 
- * @pre leitor != NULL, rec != NULL
- */
-//int comparaLivrosRecomendados(void* rec, void* livro);
-
-
-
 /**
  * @brief Compara duas recomendacoes.
  *
  * @param rec recomendacao.
- * @param livro livro cujo id sera comparado. 
- * @param idRecomendador id do leitor recomendador.
+ * @param comp recomendacao a ser comparada. 
  * 
  * @return 1 caso sejam iguais, 0 caso contrario.
  * 
  * @pre leitor != NULL, rec != NULL
  */
-//int comparaRecomendacao(Recomendacao* rec, Livro* livro, int idRecomendador);
 int comparaRecomendacao(void* rec, void* comp);
 
 
