@@ -4,7 +4,7 @@
 #include "lista.h"
 #include "leitor.h"
 #include "livro.h"
-
+#include "recomendacao.h"
 
 typedef struct booked Booked;
 

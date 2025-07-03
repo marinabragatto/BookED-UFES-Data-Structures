@@ -24,6 +24,13 @@ static void RejeitarRecomendacao(Booked * booked, int idRec, int idDes, int idLi
 static void DescobrirLivrosEmComum(Booked * booked, int idLeitor1, int idLeitor2, FILE * saida);
 static void VerificaAfinidade(Booked * booked, int idLeitor1, int idLeitor2, FILE * saida);
 
+
+
+/**
+ * @brief Inicializa a booked e le os arquivos de entrada, criando as listas de livros e leitores.
+ * 
+ * @return struct booked inicializada.
+ */
 Booked* InicializaBooked(){
     Booked* booked = malloc(sizeof(struct booked));
     if(booked == NULL){;
@@ -36,6 +43,15 @@ Booked* InicializaBooked(){
     return booked;
 }
 
+
+/**
+ * @brief Funcao que le e executa os comandos e abre o arquivo de saida para a impressao.
+ *
+ * @param booked struct booked inicializada.
+ * 
+ * @pre booked != NULL
+ * @post comandos lidos e executados.
+ */
 void FuncionaBooked(Booked* booked){
     FILE* saida;
 
@@ -67,6 +83,15 @@ void FuncionaBooked(Booked* booked){
     fclose(saida);
 }
 
+
+
+/**
+ * @brief Libera a booked e suas listas de livros e leitores.
+ *
+ * @param booked struct booked a ser liberada.
+ * 
+ * @post booked liberada.
+ */
 void LiberaBooked(Booked* booked){
     if(booked != NULL){
         liberaLista(booked->leitores, liberaleitor);
@@ -75,6 +100,21 @@ void LiberaBooked(Booked* booked){
     }
 }
 
+
+
+/**
+ * @brief Funcao que chama as funcoes de execucao dos comandos de acordo com seus ids.
+ *
+ * @param booked struct booked inicializada.
+ * @param idComando id do comando a ser realizado.
+ * @param param1 id leitor.
+ * @param param2 id livro.
+ * @param param3 id leitor.
+ * @param saida arquivo de saida.
+ * 
+ * @pre booked != NULL
+ * @post comando executado.
+ */
 void ExecutaComando(Booked* booked, int idComando, int param1, int param2, int param3, FILE* saida){
 
     switch (idComando){
@@ -117,11 +157,36 @@ void ExecutaComando(Booked* booked, int idComando, int param1, int param2, int p
     }
 }
 
+
+
+/**
+ * @brief Imprime a lista de leitores e todas as suas informacoes (sublistas).
+ *
+ * @param booked struct booked inicializada.
+ * @param saida arquivo de saida.
+ * 
+ * @pre booked != NULL
+ * @post leitores e suas informacoes impressos no arquivo de saida.
+ */
 void ImprimeBooked(Booked* booked, FILE* saida){
     fprintf(saida,"Imprime toda a BookED\n\n");
     imprimeLista(booked->leitores, imprimeleitor, saida); //colocar o arquivo de saida aqui tbm 
 }
 
+
+
+/**
+ * @brief Adiciona um livro a lista de lidos de um leitor, caso ele ja nao o 
+ * tenha lido e tanto livro como o leitor tenham ids validos.
+ *
+ * @param booked struct booked inicializada.
+ * @param idLeitor id leitor que tera livro adicionado a sua lista de lidos.
+ * @param idLivro id livro que sera adicionado.
+ * @param saida arquivo de saida.
+ * 
+ * @pre booked != NULL
+ * @post livro adicionado a lista de lidos do leitor.
+ */
 static void AdicionaLivroLido(Booked * booked, int idLeitor, int idLivro, FILE* saida){
     Leitor* leitor = retornaElemComMesmoId(booked->leitores, &idLeitor, comparaIdLeitor);
     Livro* livro = retornaElemComMesmoId(booked->livros, &idLivro, comparaIdLivro);
@@ -155,6 +220,19 @@ static void AdicionaLivroLido(Booked * booked, int idLeitor, int idLivro, FILE* 
 
 }
 
+
+/**
+ * @brief Adiciona um livro a lista de desejados de um leitor, caso ele ja nao o 
+ * tenha desejado e tanto livro como o leitor tenham ids validos.
+ *
+ * @param booked struct booked inicializada.
+ * @param idLeitor id leitor que tera livro adicionado a sua lista de desejados.
+ * @param idLivro id livro que sera adicionado.
+ * @param saida arquivo de saida.
+ * 
+ * @pre booked != NULL
+ * @post livro adicionado a lista de desejados do leitor.
+ */
 static void AdicionaLivroDesejado(Booked * booked, int idLeitor, int idLivro, FILE* saida){
     Leitor* leitor = retornaElemComMesmoId(booked->leitores, &idLeitor, comparaIdLeitor);
     Livro* livro = retornaElemComMesmoId(booked->livros, &idLivro, comparaIdLivro);
@@ -187,6 +265,21 @@ static void AdicionaLivroDesejado(Booked * booked, int idLeitor, int idLivro, FI
     }
 }
 
+
+
+/**
+ * @brief Adiciona um livro a lista de recomandacoes de um leitor, caso ele ja nao o 
+ * tenha lido ou deseje o ler, e tanto livro como o leitor tenham ids validos.
+ *
+ * @param booked struct booked inicializada.
+ * @param idDes id leitor que tera livro adicionado a sua lista de recomendacoes.
+ * @param idDes id leitor que fez a recomendacao.
+ * @param idLivro id livro que sera adicionado.
+ * @param saida arquivo de saida.
+ * 
+ * @pre booked != NULL
+ * @post livro adicionado a lista de recomendacoes do leitor.
+ */
 static void RecomendarUmLivro(Booked * booked,  int idRec, int idDes, int idLivro, FILE* saida){
     Leitor* recomendador = retornaElemComMesmoId(booked->leitores, &idRec, comparaIdLeitor);
     Leitor* destinatario = retornaElemComMesmoId(booked->leitores, &idDes, comparaIdLeitor);
@@ -219,7 +312,9 @@ static void RecomendarUmLivro(Booked * booked,  int idRec, int idDes, int idLivr
         fprintf(saida,", recomendação desnecessária\n");
     }
     else if(!verificaLivroEstaNaListaLeitor(destinatario, livro, LIDOS)){
-        insereLivroNaListaLeitor(destinatario, livro, RECOMENDADOS);    
+        Recomendacao* recomendacao = criaRecomendacao(idRec, livro);
+        insereRecomendacaoNaListaLeitor(destinatario, recomendacao);
+        //insereLivroNaListaLeitor(destinatario, livro, RECOMENDADOS);    
 
         //PARTE DE IMPRESSÃO
         imprimeNomeLeitor(recomendador, saida);
@@ -239,7 +334,22 @@ static void RecomendarUmLivro(Booked * booked,  int idRec, int idDes, int idLivr
     
 }
 
-static void  AceitarRecomendacao(Booked * booked, int idRec, int idDes, int idLivro,FILE* saida){
+
+
+/**
+ * @brief Adiciona um livro recomendado a lista de desejados de um leitor caso a recomendacao exista
+ *  e tanto livro como o leitor tenham ids validos.
+ *
+ * @param booked struct booked inicializada.
+ * @param idDes id leitor que tera livro adicionado a sua lista de desejados.
+ * @param idDes id leitor que fez a recomendacao.
+ * @param idLivro id livro que sera adicionado.
+ * @param saida arquivo de saida.
+ * 
+ * @pre booked != NULL
+ * @post livro adicionado a lista de desejados e retirado da lista de recomendacoes do leitor.
+ */
+static void  AceitarRecomendacao(Booked * booked, int idRec, int idDes, int idLivro, FILE* saida){
     Leitor* recomendador = retornaElemComMesmoId(booked->leitores, &idRec, comparaIdLeitor);
     Leitor* destinatario = retornaElemComMesmoId(booked->leitores, &idDes, comparaIdLeitor);
     Livro* livro = retornaElemComMesmoId(booked->livros, &idLivro, comparaIdLivro);
@@ -261,9 +371,9 @@ static void  AceitarRecomendacao(Booked * booked, int idRec, int idDes, int idLi
         imprimeNomeLeitor(recomendador, saida);
         fprintf(saida, "\n");
     }
-    else if(verificaLivroEstaNaListaLeitor(destinatario, livro, RECOMENDADOS)){
+    else if(verfificaRecomendacaoExiste(destinatario, livro, idRec)){
         insereLivroNaListaLeitor(destinatario, livro, DESEJADOS);
-        retiraLivroDaListaLeitor(destinatario, livro);
+        retiraRecomendacaoLeitor(destinatario, livro);
 
         //PARTE DE IMPRESSÃO
         imprimeNomeLeitor(destinatario, saida);
@@ -283,6 +393,21 @@ static void  AceitarRecomendacao(Booked * booked, int idRec, int idDes, int idLi
 
 } 
 
+
+
+/**
+ * @brief Retira um livro recomendado da lista de recomendacoes de um leitor caso a recomendacao exista
+ *  e tanto livro como o leitor tenham ids validos.
+ *
+ * @param booked struct booked inicializada.
+ * @param idDes id leitor que tera livro retirado da sua lista de recomendacoes.
+ * @param idDes id leitor que fez a recomendacao.
+ * @param idLivro id livro que sera retirado.
+ * @param saida arquivo de saida.
+ * 
+ * @pre booked != NULL
+ * @post livro retirado da lista de recomendacoes do leitor.
+ */
 static void RejeitarRecomendacao(Booked * booked, int idRec, int idDes, int idLivro,FILE* saida){
     Leitor* recomendador = retornaElemComMesmoId(booked->leitores, &idRec, comparaIdLeitor);
     Leitor* destinatario = retornaElemComMesmoId(booked->leitores, &idDes, comparaIdLeitor);
@@ -306,8 +431,8 @@ static void RejeitarRecomendacao(Booked * booked, int idRec, int idDes, int idLi
         imprimeNomeLeitor(recomendador, saida);
         fprintf(saida, "\n");
     }
-    else if(verificaLivroEstaNaListaLeitor(destinatario, livro, RECOMENDADOS)){
-        retiraLivroDaListaLeitor(destinatario, livro);
+    else if(verfificaRecomendacaoExiste(destinatario, livro, idRec)){
+        retiraRecomendacaoLeitor(destinatario, livro);
 
         imprimeNomeLeitor(destinatario, saida);
         fprintf(saida, " rejeita recomendação ");
@@ -315,20 +440,28 @@ static void RejeitarRecomendacao(Booked * booked, int idRec, int idDes, int idLi
         fprintf(saida, " de ");
         imprimeNomeLeitor(recomendador, saida);
         fprintf(saida, "\n"); 
-        
     }
     else{
         imprimeNomeLeitor(destinatario, saida);
         fprintf(saida, " não possui recomendação do livro ID %d feita por ", idLivro);
         imprimeNomeLeitor(recomendador, saida);
         fprintf(saida, "\n");
-         
-      //  Marcus não possui recomendação do livro ID 4 feita por Marcus
-
     }
     
 }
 
+
+/**
+ * @brief Imprime os livros em comum entre dois leitores.
+ *
+ * @param booked struct booked inicializada.
+ * @param idLeitor1 id leitor.
+ * @param idLeitor2 id leitor.
+ * @param saida arquivo de saida.
+ * 
+ * @pre booked != NULL
+ * @post livros em comum entre dois leitores.
+ */
 static void DescobrirLivrosEmComum(Booked * booked, int idLeitor1, int idLeitor2, FILE * saida){
     Leitor* Leitor1 = retornaElemComMesmoId(booked->leitores, &idLeitor1, comparaIdLeitor);
     Leitor* Leitor2 = retornaElemComMesmoId(booked->leitores, &idLeitor2, comparaIdLeitor);
@@ -359,6 +492,19 @@ static void DescobrirLivrosEmComum(Booked * booked, int idLeitor1, int idLeitor2
     
 }
 
+
+
+/**
+ * @brief Verifica se ha afinidade (direta ou indireta) entre dois leitores.
+ *
+ * @param booked struct booked inicializada.
+ * @param idLeitor1 id leitor.
+ * @param idLeitor2 id leitor.
+ * @param saida arquivo de saida.
+ * 
+ * @pre booked != NULL
+ * @post afinidades entre dois leitores.
+ */
 static void VerificaAfinidade(Booked * booked, int idLeitor1, int idLeitor2, FILE * saida){
     Leitor* Leitor1 = retornaElemComMesmoId(booked->leitores, &idLeitor1, comparaIdLeitor);
     Leitor* Leitor2 = retornaElemComMesmoId(booked->leitores, &idLeitor2,comparaIdLeitor);
@@ -388,25 +534,16 @@ static void VerificaAfinidade(Booked * booked, int idLeitor1, int idLeitor2, FIL
         imprimeNomeLeitor(Leitor2, saida);
         fprintf(saida,"\n");
     }    
-
-    // VERIFICA AFINIDADE DIRETA
-    // if(verificaAfinidadeJaExiste(Leitor1, Leitor2)){
-    //     fprintf(saida,"Existe afinidade entre ");
-    //     imprimeNomeLeitor(Leitor1, saida);
-    //     fprintf(saida," e ");
-    //     imprimeNomeLeitor(Leitor2, saida);
-    //     fprintf(saida,"\n");
-    // }
-    // else{
-    //     fprintf(saida,"Não existe afinidade entre ");
-    //     imprimeNomeLeitor(Leitor1, saida);
-    //     fprintf(saida," e ");
-    //     imprimeNomeLeitor(Leitor2, saida);
-    //     fprintf(saida,"\n");
-    // }
-
 }
 
+
+
+/**
+ * @brief Le o arquivo que contem as informacoes sobre cada leitor.
+ * 
+ * @return lista de leitores inicializada e com as afinidades diretas ja conectadas a partir dos gostos de cada leitor.
+ * 
+ */
 Lista * leArquivoLeitores(){
     Lista  * lista = criaLista();
     if(lista == NULL){
@@ -449,9 +586,7 @@ Lista * leArquivoLeitores(){
                 insereElemNoFimDaLista(Gostos, pontAfinidade);
             }
             
-             // Descarta TEMPORARIAMENTE as afinidades
             novo = criaLeitor(id, nome, Gostos);
-            //imprimeleitor(novo);
             insereElemNoFimDaLista(lista, novo);
         }
         else{ 
@@ -465,13 +600,21 @@ Lista * leArquivoLeitores(){
 
 }
 
+
+
+/**
+ * @brief Le o arquivo que contem as informacoes sobre cada livro.
+ * 
+ * @return lista de livros inicializada.
+ * 
+ */
 Lista * leArquivoLivros(){
     Lista * lista = criaLista(); //cria a lista de livros
 
     //abrindo o arquivo pra leitura
     FILE* livrosArq;
     char lerlivro[1000];
-    sprintf(lerlivro, "testes/test3/test3/livros.txt"); //aqui eh preciso pensar como nos vamos chegar ate o livros.txt de cada caso de teste
+    sprintf(lerlivro, "testes/test3/test3/livros.txt"); 
 
     livrosArq = fopen(lerlivro, "r");
     if (livrosArq == NULL) {
@@ -485,7 +628,7 @@ Lista * leArquivoLivros(){
         char titulo[100], autor[100], genero[100];
         int id, ano;
         
-        int resultado = fscanf(livrosArq, "%d;%[^;];%[^;];%[^;];%d\n", &id, titulo, autor, genero, &ano); //da pra ler isso de forma mais eficiente tbm
+        int resultado = fscanf(livrosArq, "%d;%[^;];%[^;];%[^;];%d\n", &id, titulo, autor, genero, &ano); 
         if (resultado != 5) break;
 
         Livro* novoLivro = criaLivro(id, titulo, autor, genero, ano);

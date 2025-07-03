@@ -11,10 +11,6 @@
  */
 
 #include "lista.h"
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-
 
 struct lista{
     Celula * prim;      ///< Ponteiro para a primeira célula

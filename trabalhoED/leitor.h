@@ -17,7 +17,7 @@
 
 #include "lista.h"
 #include "livro.h"
-
+#include "recomendacao.h"
 
 /// Tipo opaco Leitor.
 typedef struct leitor Leitor;
@@ -111,6 +111,20 @@ void insereLivroNaListaLeitor(Leitor* leitor, Livro* livro, int lista);
 
 
 /**
+ * @brief Insere uma recomendacao na lista de recomendacoes do leitor.
+ *
+ * @param leitor Ponteiro para o leitor.
+ * @param recomendacao Ponteiro para a recomendacao (livro e id do recomendador). 
+ * 
+ * @pre leitor != NULL, recomendacao != NULL
+ * @post recomendacao inserida na lista.
+ */
+void insereRecomendacaoNaListaLeitor(Leitor* leitor, Recomendacao* recomendacao);
+int verfificaRecomendacaoExiste(Leitor* leitor, Livro* livro, int idRecomendador);
+void retiraRecomendacaoLeitor(Leitor* leitor, Livro* livro);
+
+
+/**
  * @brief Retira um livro de uma lista de recomendacoes do leitor.
  *
  * @param leitor Ponteiro para o leitor.
@@ -160,6 +174,18 @@ Lista * LivrosEmComumLeitores(Leitor * leitor1, Leitor * leitor2);
  * @pre gostos != NULL
  */
 void imprimirLivrosLeitor(Lista * lista, FILE * saida);
+
+
+/**
+ * @brief Imprime os livros da lista de recomendacoes.
+ * 
+ * @param recomendacoes lista a ser percorrida.
+ * @param saida arquivo de saida.
+ * 
+ * @pre recomendacoes != NULL
+ * @post nomes dos livros impressos no arquivo de saida.
+ */
+void imprimeRecomendacoes(Lista* recomendacoes, FILE* saida);
 
 
 /**
