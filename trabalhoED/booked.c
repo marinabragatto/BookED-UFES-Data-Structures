@@ -371,9 +371,9 @@ static void  AceitarRecomendacao(Booked * booked, int idRec, int idDes, int idLi
         imprimeNomeLeitor(recomendador, saida);
         fprintf(saida, "\n");
     }
-    else if(verfificaRecomendacaoExiste(destinatario, livro, idRec)){
+    else if(verfificaRecomendacaoExiste(destinatario, livro, idRec) && !(verificaLivroEstaNaListaLeitor(destinatario, livro, DESEJADOS))){
         insereLivroNaListaLeitor(destinatario, livro, DESEJADOS);
-        retiraRecomendacaoLeitor(destinatario, livro);
+        retiraRecomendacaoLeitor(destinatario, livro, idRec);
 
         //PARTE DE IMPRESSÃO
         imprimeNomeLeitor(destinatario, saida);
@@ -432,7 +432,7 @@ static void RejeitarRecomendacao(Booked * booked, int idRec, int idDes, int idLi
         fprintf(saida, "\n");
     }
     else if(verfificaRecomendacaoExiste(destinatario, livro, idRec)){
-        retiraRecomendacaoLeitor(destinatario, livro);
+        retiraRecomendacaoLeitor(destinatario, livro, idRec);
 
         imprimeNomeLeitor(destinatario, saida);
         fprintf(saida, " rejeita recomendação ");

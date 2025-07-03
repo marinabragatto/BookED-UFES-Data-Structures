@@ -120,8 +120,32 @@ void insereLivroNaListaLeitor(Leitor* leitor, Livro* livro, int lista);
  * @post recomendacao inserida na lista.
  */
 void insereRecomendacaoNaListaLeitor(Leitor* leitor, Recomendacao* recomendacao);
+
+
+/**
+ * @brief Verifica se uma recomendacao feita pelo leitor cujo id eh passado como parametro existe.
+ *
+ * @param leitor Ponteiro para o leitor.
+ * @param livro livro a ser comparado.
+ * @param idRecomendador id do leitor que fez a recomendacao. 
+ * 
+ * @return 1 caso exista, 0 caso contrario.
+ * 
+ * @pre leitor != NULL, livro != NULL
+ */
 int verfificaRecomendacaoExiste(Leitor* leitor, Livro* livro, int idRecomendador);
-void retiraRecomendacaoLeitor(Leitor* leitor, Livro* livro);
+
+
+/**
+ * @brief Retira uma recomendacao da lista de recomendacoes do leitor.
+ *
+ * @param leitor Ponteiro para o leitor.
+ * @param livro livro cuja recomendacao sera retirada da lista. 
+ * 
+ * @pre leitor != NULL, livro != NULL
+ * @post recomendacao retirada da lista.
+ */
+void retiraRecomendacaoLeitor(Leitor* leitor, Livro* livro, int idRecomendador);
 
 
 /**

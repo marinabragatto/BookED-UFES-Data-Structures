@@ -29,22 +29,31 @@ Recomendacao * criaRecomendacao(int recomendador, Livro* livro){
 
 
 
-int comparaLivrosRecomendados(void* rec, void* livro){
-    Recomendacao * recomendacao = (Recomendacao*)rec;
-    Livro * l = (Livro*)livro;
+// int comparaLivrosRecomendados(void* rec, void* livro){
+//     Recomendacao * recomendacao = (Recomendacao*)rec;
+//     Livro * l = (Livro*)livro;
 
-    return ((retornaIdLivro(recomendacao->livro) == retornaIdLivro(l)));
-}
+//     return ((retornaIdLivro(recomendacao->livro) == retornaIdLivro(l)));
+// }
 
 
 
-int comparaRecomendacao(Recomendacao* rec, Livro* livro, int idRecomendador){
-    if(comparaLivrosRecomendados(rec, livro)){
-        if(rec->recomendador == idRecomendador) return 1;
+// int comparaRecomendacao(Recomendacao* rec, Livro* livro, int idRecomendador){
+//     if(comparaLivrosRecomendados(rec, livro)){
+//         if(rec->recomendador == idRecomendador) return 1;
+//     }
+//     return 0;
+// }
+
+int comparaRecomendacao(void* rec, void* comp){
+    Recomendacao * recomendacao = retornaRecomendacao(rec);
+    Recomendacao * comparacao = retornaRecomendacao(comp);
+
+    if ((retornaIdLivro(recomendacao->livro) == retornaIdLivro(comparacao->livro))){
+        if(recomendacao->recomendador == comparacao->recomendador) return 1;
     }
     return 0;
 }
-
 
 
 void liberaRec(void* recomendacao){

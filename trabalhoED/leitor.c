@@ -110,7 +110,6 @@ void liberaleitor(void * leitor){
         }
         if(l->recomendacoes){
             // funçao thais de liberar parcialmente uma lista
-            //liberaRecomendacoes(l->recomendacoes);
             liberaLista(l->recomendacoes, liberaRec);
         }
         if(l->gostos){
@@ -135,10 +134,6 @@ void insereLivroNaListaLeitor(Leitor* leitor, Livro* livro, int lista){
         insereElemNoFimDaLista(leitor->desejados, livro);
         break;
 
-    // case RECOMENDADOS:
-    //     insereElemNoFimDaLista(leitor->recomendacoes, livro);
-    //     break;
-
     default:
         break;
     }
@@ -149,10 +144,15 @@ void insereRecomendacaoNaListaLeitor(Leitor* leitor, Recomendacao* recomendacao)
 }
 
 int verfificaRecomendacaoExiste(Leitor* leitor, Livro* livro, int idRecomendador){
+    Recomendacao* comparacao = criaRecomendacao(idRecomendador, livro);
     Celula* aux = retornaPrimeiraCelulaLista(leitor->recomendacoes);
     for(aux; aux != NULL; aux = aux->prox){
-        if(comparaRecomendacao(aux->elemento, livro, idRecomendador)) return 1;
+        if(comparaRecomendacao(aux->elemento, comparacao)){
+            liberaRec(comparacao);
+            return 1;
+        }
     }
+    liberaRec(comparacao);
     return 0;
 }
 
@@ -161,18 +161,34 @@ void retiraLivroDaListaLeitor(Leitor* leitor, Livro* livro){
     retiraElemLista(leitor->recomendacoes, &id , comparaIdLivro);
 }
 
-void retiraRecomendacaoLeitor(Leitor* leitor, Livro* livro){
+// void retiraRecomendacaoLeitor(Leitor* leitor, Livro* livro, int idRecomendador){
+//     Recomendacao* comparacaraco = criaRecomendacao(idRecomendador, livro);
+//     Celula* aux = retornaPrimeiraCelulaLista(leitor->recomendacoes);
+
+//     Recomendacao* rec;
+//     for(aux; aux != NULL; aux = aux->prox){
+//         if(comparaLivrosRecomendados(aux->elemento, livro))
+//         rec = retornaRecomendacao(aux->elemento);  
+//         break;
+//     }
+//     retiraElemLista(leitor->recomendacoes, livro, comparaLivrosRecomendados);
+//     liberaRec(rec);
+// }
+
+void retiraRecomendacaoLeitor(Leitor* leitor, Livro* livro, int idRecomendador){
+    Recomendacao* comparacao = criaRecomendacao(idRecomendador, livro);
     Celula* aux = retornaPrimeiraCelulaLista(leitor->recomendacoes);
+    
     Recomendacao* rec;
     for(aux; aux != NULL; aux = aux->prox){
-        if(comparaLivrosRecomendados(aux->elemento, livro))
+        if(comparaRecomendacao(aux->elemento, comparacao))
         rec = retornaRecomendacao(aux->elemento);  
         break;
     }
-    retiraElemLista(leitor->recomendacoes, livro, comparaLivrosRecomendados);
+    retiraElemLista(leitor->recomendacoes, rec, comparaRecomendacao);
     liberaRec(rec);
+    liberaRec(comparacao);
 }
-
 
 
 int verificaLivroEstaNaListaLeitor(Leitor* leitor, Livro* livro, int lista){
@@ -186,10 +202,6 @@ int verificaLivroEstaNaListaLeitor(Leitor* leitor, Livro* livro, int lista){
     case DESEJADOS:
         l = retornaElemComMesmoId(leitor->desejados, &id, comparaIdLivro);
         break;
-
-    // case RECOMENDADOS:
-    //     l = retornaElemComMesmoId(leitor->recomendacoes, &id, comparaIdLivro);
-    //     break;
 
     default:
         break;
@@ -241,6 +253,8 @@ void imprimirLivrosLeitor(Lista * lista, FILE * saida){
     }
 }
 
+
+
 void imprimeRecomendacoes(Lista* recomendacoes, FILE* saida){
     Celula* aux = retornaPrimeiraCelulaLista(recomendacoes);
 
@@ -251,6 +265,8 @@ void imprimeRecomendacoes(Lista* recomendacoes, FILE* saida){
         }
     }
 }
+
+
 
 
 void ImprimeGostos(Lista * gostos, FILE* saida){ 

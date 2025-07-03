@@ -42,7 +42,7 @@ Recomendacao * criaRecomendacao(int recomendador, Livro* livro);
  * 
  * @pre leitor != NULL, rec != NULL
  */
-int comparaLivrosRecomendados(void* rec, void* livro);
+//int comparaLivrosRecomendados(void* rec, void* livro);
 
 
 
@@ -57,7 +57,8 @@ int comparaLivrosRecomendados(void* rec, void* livro);
  * 
  * @pre leitor != NULL, rec != NULL
  */
-int comparaRecomendacao(Recomendacao* rec, Livro* livro, int idRecomendador);
+//int comparaRecomendacao(Recomendacao* rec, Livro* livro, int idRecomendador);
+int comparaRecomendacao(void* rec, void* comp);
 
 
 
