@@ -79,7 +79,6 @@ void imprimeleitor(void * leitor, FILE* saida){
     fprintf(saida, "Afinidades: ");
     imprimirLeitores(l->afinidadesDiretas, saida);
     fprintf(saida, "\n");
-//ImprimeGostos(l->gostos, saida);
     fprintf(saida, "\n");
 
 }
@@ -101,15 +100,12 @@ void liberaleitor(void * leitor){
             free(l->nome);
         }
         if(l->desejados){
-            // funçao thais de liberar parcialmente uma lista
             liberaListaParcialmente(l->desejados);
         }
         if(l->lidos){
-            // funçao thais de liberar parcialmente uma lista
             liberaListaParcialmente(l->lidos);
         }
         if(l->recomendacoes){
-            // funçao thais de liberar parcialmente uma lista
             liberaLista(l->recomendacoes, liberaRec);
         }
         if(l->gostos){
@@ -269,7 +265,6 @@ void ImprimeGostos(Lista * gostos, FILE* saida){
 
     for(; aux != NULL; aux = aux->prox){
         fprintf(saida,"%s", (char*)aux->elemento);
-        //(aux->elemento, saida, SEM_ASPAS);
         if(aux->prox != NULL){
             fprintf(saida, ", ");
         }

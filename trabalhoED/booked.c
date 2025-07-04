@@ -346,7 +346,6 @@ static void RecomendarUmLivro(Booked * booked,  int idRec, int idDes, int idLivr
     else if(!verificaLivroEstaNaListaLeitor(destinatario, livro, LIDOS)){
         Recomendacao* recomendacao = criaRecomendacao(idRec, livro);
         insereRecomendacaoNaListaLeitor(destinatario, recomendacao);
-        //insereLivroNaListaLeitor(destinatario, livro, RECOMENDADOS);    
 
         //PARTE DE IMPRESSÃO
         imprimeNomeLeitor(recomendador, saida);
@@ -428,8 +427,6 @@ static void RejeitarRecomendacao(Booked * booked, int idRec, int idDes, int idLi
         return;
     }
     
-
-    // FALTA Verificar se recomendação existe !!!!
 
     if(livro == NULL){
         imprimeNomeLeitor(destinatario, saida);

@@ -82,7 +82,6 @@ void liberaListaParcialmente(Lista * lista){
 
     while (atual != NULL) {
         seguinte = atual->prox;
-        //liberaLivro(atual->livro); //Não Libera o Livro em si
         free(atual);
         atual = seguinte;
     }
@@ -94,7 +93,6 @@ void liberaListaParcialmente(Lista * lista){
 
 
 void imprimeLista(Lista * lista, void (*imprime)(void*, FILE*), FILE* saida){
-    // VAI SER EM ARQUIVO
     Celula * atual;
     atual = lista->prim;
 
