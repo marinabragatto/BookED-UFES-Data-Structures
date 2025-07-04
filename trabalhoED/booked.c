@@ -152,11 +152,11 @@ Booked* InicializaBooked(){
 void FuncionaBooked(Booked* booked){
     FILE* saida;
 
-    saida = fopen("saidas/saida.txt", "w");
+    saida = fopen("saida.txt", "w");
 
     FILE* ComandosArq;
     char leComandos[1000];
-    sprintf(leComandos, "testes/test2/test2/comandos.txt");
+    sprintf(leComandos, "comandos.txt");
 
     ComandosArq = fopen(leComandos, "r");
     if (ComandosArq == NULL) {
@@ -528,7 +528,7 @@ Lista * leArquivoLeitores(){
 
     // Abre efetivamente o arquivo
     FILE * arquivoLeitores;
-    char nomeArquivo[200] = "testes/test2/test2/leitores.txt";
+    char nomeArquivo[200] = "leitores.txt";
     arquivoLeitores = fopen(nomeArquivo, "r");
     if(arquivoLeitores == NULL){
         exit(1);
@@ -584,7 +584,7 @@ Lista * leArquivoLivros(){
     //abrindo o arquivo pra leitura
     FILE* livrosArq;
     char lerlivro[1000];
-    sprintf(lerlivro, "testes/test2/test2/livros.txt"); 
+    sprintf(lerlivro, "livros.txt"); 
 
     livrosArq = fopen(lerlivro, "r");
     if (livrosArq == NULL) {

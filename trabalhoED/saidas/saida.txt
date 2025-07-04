@@ -1,116 +1,39 @@
-Ana leu "Duna"
-Ana leu "Fundação"
-Bruno leu "Duna"
-Carlos leu "Neuromancer"
-Diana leu "Orgulho e Preconceito"
-Eduardo leu "Como Eu Era Antes de Você"
-Fernanda leu "Hamlet"
-Gabriel leu "O Iluminado"
-Helena leu "Drácula"
-Igor leu "Psicose"
-Júlia leu "Steve Jobs"
-Ana deseja ler "Sapiens"
-Diana deseja ler "Como Eu Era Antes de Você"
-Gabriel deseja ler "A Garota no Trem"
-Júlia deseja ler "Einstein"
-Bruno não precisa da recomendação de "Duna" pois já leu este livro
-Ana não precisa da recomendação de "Fundação" pois já leu este livro
-Diana recomenda "Orgulho e Preconceito" para Eduardo
-Gabriel recomenda "O Iluminado" para Helena
-Helena recomenda "Drácula" para Igor
-Bruno não possui recomendação do livro ID 1 feita por Ana
-Eduardo aceita recomendação "Orgulho e Preconceito" de Diana
-Helena aceita recomendação "O Iluminado" de Gabriel
-Livros em comum entre Ana e Bruno: Duna
-Livros em comum entre Diana e Eduardo: Nenhum livro em comum
-Livros em comum entre Gabriel e Helena: Nenhum livro em comum
-Livros em comum entre Ana e Diana: Nenhum livro em comum
-Erro: Leitor com ID 15 não encontrado
-Existe afinidade entre Ana e Bruno
-Existe afinidade entre Diana e Eduardo
-Existe afinidade entre Gabriel e Helena
-Não existe afinidade entre Ana e Diana
-Não existe afinidade entre Ana e Júlia
-Não existe afinidade entre Diana e Gabriel
-Não existe afinidade entre Bruno e Helena
-Erro: Leitor com ID 99 não encontrado
-Erro: Livro com ID 99 não encontrado
-Erro: Leitor com ID 99 não encontrado
-Erro: Livro com ID 99 não encontrado
-Erro: Leitor recomendador com ID 99 não encontrado
-Erro: Livro com ID 99 não encontrado
-Erro: Leitor destinatário com ID 99 não encontrado
-Erro: Leitor com ID 99 não encontrado
-Ana não possui recomendação do livro ID 99 feita por Ana
-Erro: Leitor recomendador com ID 99 não encontrado
-Erro: Leitor com ID 99 não encontrado
-Ana não possui recomendação do livro ID 99 feita por Ana
-Erro: Leitor recomendador com ID 99 não encontrado
-Erro: Leitor com ID 99 não encontrado
-Erro: Leitor com ID 99 não encontrado
-Erro: Leitor com ID 99 não encontrado
-Erro: Leitor com ID 99 não encontrado
-Erro: Comando 9 não reconhecido
-Erro: Comando 0 não reconhecido
+Alice leu "O Iluminado"
+Alice leu "Garota Exemplar"
+Bob leu "O Nome da Rosa"
+Bob leu "Garota Exemplar"
+Clara leu "Drácula"
+Clara deseja ler "Assassinato no Expresso Oriente"
+Alice deseja ler "Orgulho e Preconceito"
+Bob deseja ler "Drácula"
+Alice recomenda "O Iluminado" para Bob
+Bob recomenda "O Nome da Rosa" para Alice
+Bob recomenda "O Senhor dos Anéis: A Sociedade do Anel" para Clara
+Clara recomenda "A Culpa é das Estrelas" para Bob
+Clara aceita recomendação "O Senhor dos Anéis: A Sociedade do Anel" de Bob
+Alice rejeita recomendação "O Nome da Rosa" de Bob
+Livros em comum entre Alice e Bob: Garota Exemplar
+Livros em comum entre Alice e Clara: Nenhum livro em comum
+Livros em comum entre Bob e Clara: Nenhum livro em comum
+Existe afinidade entre Bob e Clara
+Existe afinidade entre Alice e Clara
 Imprime toda a BookED
 
-Leitor: Ana
-Lidos: Duna, Fundação
-Desejados: Sapiens
-Recomendacoes: 
-Afinidades: Bruno, Carlos
-
-Leitor: Bruno
-Lidos: Duna
-Desejados: 
-Recomendacoes: 
-Afinidades: Ana
-
-Leitor: Carlos
-Lidos: Neuromancer
-Desejados: 
-Recomendacoes: 
-Afinidades: Ana
-
-Leitor: Diana
-Lidos: Orgulho e Preconceito
-Desejados: Como Eu Era Antes de Você
-Recomendacoes: 
-Afinidades: Eduardo, Fernanda
-
-Leitor: Eduardo
-Lidos: Como Eu Era Antes de Você
+Leitor: Alice
+Lidos: O Iluminado, Garota Exemplar
 Desejados: Orgulho e Preconceito
 Recomendacoes: 
-Afinidades: Diana
+Afinidades: Bob
 
-Leitor: Fernanda
-Lidos: Hamlet
-Desejados: 
-Recomendacoes: 
-Afinidades: Diana
+Leitor: Bob
+Lidos: O Nome da Rosa, Garota Exemplar
+Desejados: Drácula
+Recomendacoes: O Iluminado, A Culpa é das Estrelas
+Afinidades: Alice, Clara
 
-Leitor: Gabriel
-Lidos: O Iluminado
-Desejados: A Garota no Trem
-Recomendacoes: 
-Afinidades: Helena
-
-Leitor: Helena
+Leitor: Clara
 Lidos: Drácula
-Desejados: O Iluminado
+Desejados: Assassinato no Expresso Oriente, O Senhor dos Anéis: A Sociedade do Anel
 Recomendacoes: 
-Afinidades: Gabriel, Igor
-
-Leitor: Igor
-Lidos: Psicose
-Desejados: 
-Recomendacoes: Drácula
-Afinidades: Helena
-
-Leitor: Júlia
-Lidos: Steve Jobs
-Desejados: Einstein
-Recomendacoes: 
-Afinidades: 
+Afinidades: Bob
 
