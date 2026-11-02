@@ -369,6 +369,7 @@ int ConectaAfinidadesIndireta(Leitor * origem, Leitor * destino, Lista * visitad
     if(verificaAfinidadeJaExiste(origem, destino)){
         return 1;
     }
+    
     else{
         Celula * celulaAfinidade = retornaPrimeiraCelulaLista(origem->afinidadesDiretas);
         Leitor * leitor;
